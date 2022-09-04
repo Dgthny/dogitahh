@@ -18,7 +18,7 @@ packgems = 20000              --harga packnya
 
 packitemid = {242}  --item id dari packnya misal WL itu 242
 
-dropitems = "false" 
+dropitems = "true" 
 
 amount = 200    ---200 or 4000
 owner ="dgstr" --akun owner/yg mau dipake buat control
@@ -30,7 +30,7 @@ botname,botpassword = "dgtown4","baga1234@"       --botname pasword
 
 --------------WEBHOOK-------------------
 tittlr = "AUTO ROTATION" --Tittle webhook
-webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB"
+webhook = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq"
  --webhook url
 YourDiscordid= "991204570380382218" --id diskord
 thumbnail = "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"  --Thumbnail url
