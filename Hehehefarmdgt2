@@ -30,7 +30,7 @@ botname,botpassword = "dgtbabu6","baga1234@"       --botname pasword
 
 --------------WEBHOOK-------------------
 tittlr = "AUTO ROTATION" --Tittle webhook
-webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
+webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB"
  --webhook url
 YourDiscordid= "991204570380382218" --id diskord
 thumbnail = "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"  --Thumbnail url
