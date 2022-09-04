@@ -2,7 +2,7 @@
 
 seedid,fgorbg,blockordif = 5667,"fg","no"   --write seed id , like if lgrid seed write 5667 and if item block write fg if item background write bg
 
-worlds = {"scqwt","bhgbt",("xpcfc","gtweu"}   --rotasi world, kalo mau add tinggal tambah ,"nameworld"
+worlds = {"scqwt","bhgbt","xpcfc","gtweu"}   --rotasi world, kalo mau add tinggal tambah ,"nameworld"
 
 JoinWorldWithID,worldsdoorid = "false","x" --ganti jadi true kalo mau masuk pake id
 
