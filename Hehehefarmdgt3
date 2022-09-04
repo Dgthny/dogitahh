@@ -18,7 +18,7 @@ packgems = 20000              --harga packnya
 
 packitemid = {242}  --item id dari packnya misal WL itu 242
 
-dropitems = "false" 
+dropitems = "true" 
 
 amount = 200    ---200 or 4000
 owner ="dgstr" --akun owner/yg mau dipake buat control
