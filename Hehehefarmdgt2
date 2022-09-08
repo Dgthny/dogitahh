@@ -9,7 +9,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"farm1"
+			"ofory"
 		},
 		farm_world_id = "1",
 	},
