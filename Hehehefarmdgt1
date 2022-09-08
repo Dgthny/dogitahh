@@ -31,10 +31,10 @@ CONFIG = {
 		break_world_id = "xxx",
 		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
 		tile = 1,
-		delay_break = 100, -- millisecond
-		delay_put = 100, -- millisecond
+		delay_break = 200, -- millisecond
+		delay_put = 200, -- millisecond
 		auto_ban_joined = true, -- you need access world lock if wanna auto-ban-joined
-		owner = "xxx", -- when autobanjoined true, whitelist this growid
+		owner = "dgstr", -- when autobanjoined true, whitelist this growid
 	},
 	Hook_setting = {
 		-- if you set bool_use_addhook false, in webhook discord you can see level of bot
@@ -44,7 +44,7 @@ CONFIG = {
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
-		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. more faster if use payy-webhook
+		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. more faster if use payy-webhook
 		short_webhook = false,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
