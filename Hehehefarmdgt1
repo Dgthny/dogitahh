@@ -38,12 +38,12 @@ CONFIG = {
 	},
 	Hook_setting = {
 		-- if you set bool_use_addhook false, in webhook discord you can see level of bot
-		bool_use_addhook = false,
+		bool_use_addhook = true,
 		remove_bot_when_restart = false,
 	},
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq",
+		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
 		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. more faster if use payy-webhook
 		short_webhook = false,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
