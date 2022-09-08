@@ -38,7 +38,7 @@ CONFIG = {
 	},
 	Hook_setting = {
 		-- if you set bool_use_addhook false, in webhook discord you can see level of bot
-		bool_use_addhook = true,
+	
 		remove_bot_when_restart = false,
 	},
 	Other_setting = {
