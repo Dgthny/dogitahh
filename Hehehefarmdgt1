@@ -1615,7 +1615,7 @@ function main()
 		short_webhook = CONFIG.Other_setting.short_webhook,
 	})
 end
-if CONFIG.Hook_setting.bool_use_addhook then
-	addHook("hookname", FNV32)
-end
+--if CONFIG.Hook_setting.bool_use_addhook then
+	--addHook("hookname", FNV32)
+--end
 main()
