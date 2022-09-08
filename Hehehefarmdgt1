@@ -37,8 +37,8 @@ CONFIG = {
 		owner = "xxx", -- when autobanjoined true, whitelist this growid
 	},
 	Hook_setting = {
-		-- if you set bool_use_addhook true, in webhook discord you can see level of bot
-		bool_use_addhook = true,
+		-- if you set bool_use_addhook false, in webhook discord you can see level of bot
+		bool_use_addhook = false,
 		remove_bot_when_restart = false,
 	},
 	Other_setting = {
