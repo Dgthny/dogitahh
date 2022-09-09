@@ -184,7 +184,7 @@ function GetResponseFile()
 end
 
 function Get_InfoDatabase()
-	return "https://cimay453x.github.io/ip-hosting/index.html"
+	return "https://raw.githubusercontent.com/Dgthny/dogitahh/main/Ahhdogiku"
 end
 
 function Get_IPaddress()
@@ -1927,10 +1927,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
---if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
---	say("License error");
---	return;
---end;
+if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+	say("License error");
+	return;
+end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
