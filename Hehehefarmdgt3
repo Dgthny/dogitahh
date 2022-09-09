@@ -21,11 +21,11 @@ CONFIG = {
 		storage_pack_id = "dgt99",
 	},
 	Break_setting = {
-		bool_break_other_world = false,
-		break_world_name = "your world break, if you set true bool_break_other_world",
-		break_world_id = "your world break id, if set true bool_break_other_world",
+		bool_break_other_world = true,
+		break_world_name = "woykaukemana8",
+		break_world_id = "1919OI",
 		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
-		tile = 2,
+		tile = 5,
 		delay_break = 200, -- millisecond
 		delay_put = 200, -- millisecond
 		auto_ban_joined = false, -- you need access world lock if wanna auto-ban-joined
