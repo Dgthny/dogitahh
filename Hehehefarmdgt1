@@ -1925,12 +1925,12 @@ function Get_UUIDFromDatabase(l)
 	RunPowershell(p)
 	return GetResponseFile()
 end
-l = Get_IP_RDP()
+--l = Get_IP_RDP()
 
-if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+--if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
 	say("License error");
 	return;
-end;
+--end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
