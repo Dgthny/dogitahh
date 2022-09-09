@@ -1421,7 +1421,7 @@ function p.rotationFarm(l)
 					"World Lock",
 				},
 				item_id = {
-					242,
+					242,1058,1094,1096,1098,1828,3870,7058
 				},
 				gems = 20000,
 			},
