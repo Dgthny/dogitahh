@@ -9,7 +9,8 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"ofory"
+			"Yyhke","hwqwx","ntsik"
+
 		},
 		farm_world_id = "1",
 	},
@@ -33,8 +34,8 @@ CONFIG = {
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
-		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
-		short_webhook = false,
+		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
