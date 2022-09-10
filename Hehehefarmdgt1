@@ -1,683 +1,391 @@
---===== General Settings =====--
-Platform_ID = 102 -- You Can Use Anyy Kinds Of Platforms But U Must Know The ID Of It
-PlatformWorld = "gelplat" -- WORLD NAME HERE
-PlatformWorldID = "ka" -- DOOR ID HERE
-Save_World = "dgtbabu1"
-SaveWorld_Door_ID = "dgt57"
-BreakTheRock = true
-SaveDirt = true
-BGForDirt = 888
-SaveCaveBackground = true 
-BGForCaveBackground = 880
-SaveLava = true
-BGForLava = 880
-SaveRock = true
-BGForRock = 880
-Webcutes = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq" -- WEBHOOK URL
-TrashList = {4, 10, 2914, 5024, 5026, 5028, 5030, 5032, 5034, 5036, 5038, 5040, 5042, 5044 } -- ITEMS TO TRASH
-WorldLetters = 5
+-- EDIT ON ASAKIN
+-- HURUF BESAR/KECIL NGGK NGARUH
+--
+world = {
+	"nzerb",
+}
+joinWorldWithId = false
+idworld = ""
 
-GenerateRandomWorld = 1
+takePlatform = false
+platformId = 102
+worldPlat = "gelplat"
+idWorldPlat = "ka"
 
-function GonWebhook(GonLogs)
-    local script = [[
-        $webHookUrl = "]].. Webcutes ..[["
-        $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
-        [System.Collections.ArrayList]$embedArray = @()
-    $thumbnailObject = [PSCustomObject]@{
-        url = "https://i.pinimg.com/originals/7f/bd/2e/7fbd2e306cc749d4020335e0de3cb46b.gif"
-    }
-    $color = Get-Random -Minimum 0 -Maximum 16777215
-    $title = 'Gon Freecs#2022 Auto Rotation Logger'
-    $description = "**]].. GonLogs..[[**"
+webHookUrl = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq"
 
-    $footer = [PSCustomObject]@{
-        icon_url = "https://i.pinimg.com/originals/8a/10/82/8a1082128568a5760710b98a41736788.gif"
-        text = "]].."Gon Freecs#2022 | Date : "..(os.date"%d/%m/%y":upper().." Time : ")..os.date("%I")..":"..os.date("%M").." "..os.date("%p"):upper()..[["
-    }
+breakRock = true
+removeBott = true
+delayBreak = 100
+delayPut = 200
+katasandi = "yyy"
 
 
-    $embedObject = [PSCustomObject]@{
-        color = $color
-        title = $title
-        description = $description
-        thumbnail = $thumbnailObject
-        footer = $footer
-    }
+-- RUMUS
+function mf(xy)
+    return math.floor(xy / 32)
+end
 
-    [System.Collections.ArrayList]$embedArray = @()
-    $embedArray.Add($embedObject)
-
-    $payload = [PSCustomObject]@{
-        embeds = $embedArray
-    }
-    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
-    ]]
-
-    local pipe = io.popen("powershell -command -", "w")
-    pipe:write(script)
-    pipe:close()
+-- BIASALAH
+startT = os.time()
+function SecondTT(seconds)
+  local seconds = tonumber(seconds)
+  if seconds <= 0 then
+    return "00:00:00";
+  else
+    hours = string.format("%02.f", math.floor(seconds/3600));
+    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    return hours..":"..mins..":"..secs
   end
+end
+function sendMessage(xy)
+  local script = [[
+    $webHookUrl = ']]..webHookUrl..[['
+    $CpuLoad = (GET-COUNTER -Counter "\Processor(_Total)\% Processor Time" -SampleInterval 5 -MaxSamples 1 |select -ExpandProperty countersamples | select -ExpandProperty cookedvalue | Measure-Object -Average).average
+    $cpu = [Math]::Ceiling($CpuLoad)
+    $embedArray = @(
+      [PSCustomObject]@{
+      title = ']]..getBot().name..[['
+      color = '1419322'
+      description = ":signal_strength: ]]..getBot().state..[[`n:ringed_planet: ]]..getBot().world..[[`n:pick: ]]..xy..[[`n]]..SecondTT(os.difftime(os.time(), startT))..[[ ELAPSED`n$cpu% CPU"
+    })
+    $payload = [PSCustomObject]@{
+      username = 'Bot DF Log'
+      avatar_url = 'https://www.linkpicture.com/q/LPic62a9894d07fbc126464920.jpg'
+      embeds = $embedArray
+    } 
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+  ]]
+  
+  local pipe = io.popen("powershell -command -", "w")
+  pipe:write(script)
+  pipe:close()
+end
 
-  function LogTheName(text)
-    file = io.open("WorldLogs.txt", "a")
-    file:write(text.."\n")
-    file:close()
-   end
+-- ALL IN ONE
+function allIn1(xy)
+    if getBot().state ~= 5 then
+        sendMessage('BOT TERPUTUS')
+    end
+    while getBot().state ~= 5 or getBot().world == "EXIT" do
+        sleep(30000)
+        connect()
+        if getBot().state == 5 and getBot().world ~= "EXIT" then
+            sleep(10000)
+            sendMessage("BOT TERHUBUNG")
+        end
+    end
+    if xy then
+        if getTile(mf(getBot().x),mf(getBot().y)).fg == 6 then
+            move(3,0)
+            sleep(2000)
+        end
+    end
+    trashs = { 5, 11, 4, 10, 2914, 5024, 5026, 5028, 5030, 5032, 5034, 5036, 5038, 5040, 5042, 5044, 7162, 7164 }
+    for i, trash in ipairs(trashs) do
+        if findItem(trash) > 0 then
+            sendPacket(2, "action|trash\n|itemID|" .. trash)
+            sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. findItem(trash))
+            sleep(1000)
+        end
+    end
+    TrashF = { 2, 3, 14, 15 }
+    for i, trash in ipairs(TrashF) do
+        if findItem(trash) > 195 then
+            sendPacket(2, "action|trash\n|itemID|" .. trash)
+            sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. 10)
+            sleep(500)
+        end
+    end
+end
 
-  function ToinkBG()
+function joinWorld(xy)
+    while getBot().world ~= string.upper(xy) do
+        allIn1()
+        sendPacket(3,"action|join_request\nname|" .. xy)
+        sleep(4500)
+    end
+end
+
+function joinWorldId(xy, yx)
+    while getBot().world ~= string.upper(xy) or getTile(mf(getBot().x), mf(getBot().y)).fg == 6 do
+        allIn1()
+        sendPacket(3,"action|join_request\nname|" .. xy .. "|" .. yx)
+        sleep(4500)
+    end
+end
+
+-- GROWSCAN
+function gs(id)
     count = 0
-    for _, tile in pairs(getTiles()) do
-        if tile.bg ~= 0 then
-            count = count + 1
+    for _, object in pairs(getObjects()) do
+        if object.id == id then
+            count = count + object.count
         end
     end
     return count
 end
 
-function ToinkFG()
-    count = 0
-    for _, tile in pairs(getTiles()) do
-        if tile.fg ~= 0 then
-            count = count + 1
-        end
-    end
-    return count
-end
-
-function GenerateAWorld()
-    ::BACK31::
-    sleep(3000)
-    sendPacket(3,"action|quit_to_exit")
-    sleep(3000)
-    local WorldsToGenerate = ""
-    for i = 1,WorldLetters do
-        WorldsToGenerate = WorldsToGenerate..string.char(math.random(97,122))
-    end
-    sendPacket(3,"action|join_request\nname|" .. WorldsToGenerate)
-    sleep(5000)
-
-    if ToinkBG() > 3600 or ToinkFG() > 3601 then
-        goto BACK31
-    end
-
-    for _,t in pairs(getTiles()) do
-        if t.fg== 242 or t.fg== 9640 or t.fg== 202 or t.fg== 204 or t.fg== 206 or t.fg== 1796 or t.fg== 4994 or t.fg== 7188 or t.fg== 2408 or t.fg== 2950 or t.fg== 4428 or t.fg== 4802 or t.fg== 5814 or t.fg== 5260 or t.fg== 5980 or t.fg== 8470 or t.fg== 10410 or t.fg== 11550 or t.fg== 11586 then
-            goto BACK31
-        end
-    end
-end
-
-function PutWlAndJammer()
-    place(242,0,-1)
-    sleep(800)
-    place(226,1,-1)
-    sleep(800)
-    punch(1,-1)
-    sleep(800)
-end
-
-function SeedsScanner(ID)
-    Count = 0
-    for _, obj in pairs(getObjects()) do 
-        if obj.id == ID then 
-            Count = Count + obj.count
-        end
-    end
-    return Count
-end
-
-function DropTheItems(itemID, count)
+-- DROP ITEM WITH AMOUNT
+function dropItem(itemID, count)
     if findItem(itemID) >= count then
         sendPacket(2, "action|drop\nitemID|" .. itemID)
-        sleep(500)
         sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|" .. itemID .. "|\ncount|" .. count)
         sleep(1000)
     end
 end
 
-function TrashTheJunks()
-    for i, trash in ipairs(TrashList) do
-        if findItem(trash) > 0 then
-    sendPacket(2, "action|trash\n|itemID|" .. trash)
-    sleep(2000)
-    sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. findItem(trash))
-    sleep(2000)
-        end
-    end
-    TrashJunks = {2, 14}
-    for i, trash in ipairs(TrashJunks) do
-        if findItem(trash) > 195 then
-            sendPacket(2, "action|trash\n|itemID|" .. trash)
-            sleep(2000)
-            sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. 10)
-            sleep(2000)
-        end
-    end
-end
-
-function Reconnect()
-    if getBot().status ~= "online" then
-        GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Bot Is Offline Trying To Reconnect.... \n<:red_circle:987661002868936774> | Status : Offline")
-        while getBot().status ~= "online" do
-            sleep(15000)
-        end
-        GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Bot Is Back Online\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-    end
-end
-
-function MoveWhenInWhiteDoor()
-    while getTile(math.floor(getBot().x/32),math.floor(getBot().y/32)).fg == 6 do
-        move(3,0)
-        sleep(500)
-        move(1,0)
-        sleep(500)
-        if getTile(math.floor(getBot().x/32),math.floor(getBot().y/32)).fg == 0 then 
-            break
-        end
-    end
-end
-
-function ClearTheSide()
-    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Sides Of The World Named "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-    for i=24,53 do  
-        if getTile(1,i).bg == 14 or getTile(1,i).fg == 2 or getTile(0,i).bg == 14 or getTile(0,i).fg == 2 then
-            while getTile(1,i).bg == 14 or getTile(1,i).fg == 2 do
-                Reconnect()
-                MoveWhenInWhiteDoor()
-                findPath(1,i-1)
+-- CLEAR SIDE
+function clearSide()
+    for y = 1, 53  do
+        for x = 0, 1 do
+            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
+                allIn1(true)
+                findPath(x,y-1)
                 punch(0,1)
-                sleep(190)
-                if getTile(1,i).bg == 0 then
-                    collect(2)
-                end
-                TrashTheJunks()
+                sleep(delayBreak)
+                collect(2)
             end
-            while getTile(0,i).bg == 14 or getTile(0,i).fg == 2 do
-                Reconnect()
-                MoveWhenInWhiteDoor()
-                findPath(1,i-1)
-                punch(-1,1)
-                sleep(190)
-                if getTile(1,i).bg == 0 then
-                    collect(2)
-                end
-                TrashTheJunks()
-            end
-            if findItem(3) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Dirt Seeds Is More Than 150... Saving Dirt Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheDirtSeeds()
-                sleep(250)
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Sides Of The World Named "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            elseif findItem(5) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Lava Seeds Is More Than 150... Saving Lava Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheLavaSeeds()
-                sleep(250)
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Sides Of The World Named "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            elseif findItem(15) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Cave Background Seeds Is More Than 150... Saving Cave Background Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheCaveBackgroundSeeds()
-                sleep(250)
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Sides Of The World Named "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            elseif findItem(11) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Rock Seeds Is More Than 150... Saving Rock Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheRockSeeds()
-                sleep(250)
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Sides Of The World Named "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            end
+            collect(2)
         end
     end
-    for i=24,53 do
-        if getTile(98,i).bg == 14 or getTile(98,i).fg == 2 or getTile(99,i).bg == 14 or getTile(99,i).fg == 2 then
-            while getTile(98,i).bg == 14 or getTile(98,i).fg == 2 do
-                Reconnect()
-                MoveWhenInWhiteDoor()
-                findPath(98,i-1)
+    for y = 1, 53 do
+        for x = 98, 99 do
+            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
+                allIn1(true)
+                findPath(x,y-1)
                 punch(0,1)
-                sleep(190)
-                if getTile(1,i).bg == 0 then
-                    collect(2)
-                    Reconnect()
-                end
-                TrashTheJunks()
+                sleep(delayBreak)
+                collect(2)
             end
-            while getTile(99,i).bg == 14 or getTile(99,i).fg == 2 do
-                Reconnect()
-                MoveWhenInWhiteDoor()
-                findPath(98,i-1)
-                punch(1,1)
-                sleep(190)
-                if getTile(1,i).bg == 0 then
-                    collect(2)
-                end
-                TrashTheJunks()
-            end
-            if findItem(3) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Dirt Seeds Is More Than 150... Saving Dirt Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheDirtSeeds()
-            elseif findItem(5) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Lava Seeds Is More Than 150... Saving Lava Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheLavaSeeds()
-            elseif findItem(15) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Cave Background Seeds Is More Than 150... Saving Cave Background Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheCaveBackgroundSeeds()
-            elseif findItem(11) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Rock Seeds Is More Than 150... Saving Rock Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheRockSeeds()
+            collect(2)
+        end
+    end
+end
+
+function takefloating(xy)
+    for _, object in pairs(getObjects()) do
+        if object.id == xy and object.count > 0 then
+            while findItem(platformId) < 52 do
+                allIn1()
+                findPath(mf(object.x), mf(object.y))
+                sleep(1000)
+                collect(2)
             end
         end
     end
 end
 
-function TakeAndPlacePlatform()
-    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Take Platform In "..PlatformWorld.." Then Placing It In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-    local CurrentWorld = getBot().world
-    if findItem(Platform_ID) < 52 then
-        sendPacket(3,"action|join_request\nname|" ..PlatformWorld)
-        sleep(5000)
-        sendPacket(3,"action|join_request\nname|" ..PlatformWorld.. "|" ..PlatformWorldID)
-        sleep(4500)
-        collect(2)
-        sleep(4500)
-        if findItem(Platform_ID) > 104 then
-            move(-1,0)
-            DropTheItems(Platform_ID,findItem(Platform_ID) - 104)
-        end
-        sendPacket(3,"action|join_request\nname|" ..CurrentWorld)
-        sleep(5000)
-        move(2,0)
-        sleep(500)
-        move(1,0)
-        sleep(200)
-    end
-    for i = 2, 52, 2 do
-        while getTile(1,i).fg == 0 do
-            if findItem(Platform_ID) == 0 then
-                break
-            end
-            findPath(1,i-1)
-            place(Platform_ID,0,1)
-            sleep(190)
-        end
-    end
-    for i = 2, 52, 2 do
-        while getTile(98,i).fg == 0 do
-            if findItem(Platform_ID) == 0 then
-                break
-            end
-            findPath(98,i-1)
-            place(Platform_ID,0,1)
-            sleep(190)
-        end
-    end
-end
-
-function ClearingDirts()
-    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-    for i = 1, 54, 2 do
-        for j = 2,97 do
-            if getTile(j,i).bg == 14 then
-                while getTile(j,i).bg == 14 do
-                    Reconnect()
-                    findPath(j-1,i)
-                    punch(1,0)
-                    sleep(120)
-                    if getTile(j,i).bg == 0 or getTile(j,i+1).fg == 0 then 
-                        collect(3)
-                    end
-                    TrashTheJunks()
-                end
-                if findItem(3) > 150 then
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Dirt Seeds Is More Than 150... Saving Dirt Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                    SaveTheDirtSeeds()
-                    sleep(250)
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                elseif findItem(5) > 150 then
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Lava Seeds Is More Than 150... Saving Lava Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                    SaveTheLavaSeeds()
-                    sleep(250)
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                elseif findItem(15) > 150 then
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Cave Background Seeds Is More Than 150... Saving Cave Background Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                    SaveTheCaveBackgroundSeeds()
-                    sleep(250)
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                elseif findItem(11) > 150 then
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Rock Seeds Is More Than 150... Saving Rock Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                    SaveTheRockSeeds()
-                    sleep(250)
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear The Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                end
+-- TAKE AND PUT PLATFORM
+function platform(xy)
+    if takePlatform then
+        if findItem(platformId) < 52 then
+            joinWorldId(worldPlat,idWorldPlat)
+            takefloating(platformId)
+            if joinWorldWithId then
+                joinWorldId(xy, idworld)
+            else
+                joinWorld(xy)
             end
         end
-    end
-end
-
-function ClearTheRocks()
-    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear All The Rocks At "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-    if BreakTheRock then
-    for _, tile in pairs(getTiles()) do
-        while tile.fg == 10 do
-            Reconnect()
-            findPath(tile.x,tile.y-1)
-                punch(0,1)
-                sleep(190)
-                if getTile(tile.x,tile.y).fg == 0 then
-                    collect(2)
+        for i = 2, 52, 2 do
+            while getTile(1,i).fg == 0 do
+                allIn1(true)
+                if findItem(platformId) == 0 then
                     break
                 end
-                if findItem(11) > 150 then
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Rock Seeds Is More Than 150... Saving Rock Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                    SaveTheRockSeeds()
-                    sleep(250)
-                    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear All The Rocks At "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
+                findPath(1,i-1)
+                place(platformId,0,1)
+                sleep(delayPut)
+            end
+        end
+        for i = 2, 52, 2 do
+            while getTile(98,i).fg == 0 do
+                allIn1(true)
+                if findItem(platformId) == 0 then
+                    break
                 end
-                TrashTheJunks()
+                findPath(98,i-1)
+                place(platformId,0,1)
+                sleep(delayPut)
             end
         end
     end
 end
 
-function ClearTheLavas()
-    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear All The Lava At "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-    for _, tile in pairs(getTiles()) do
-        while tile.fg == 4 do
-            Reconnect()
-            findPath(tile.x,tile.y-1)
-            punch(0,1)
-            sleep(190)
-            if getTile(tile.x,tile.y).fg == 0 then
-                collect(2)
-                break
+-- CLEAR DIRT
+function clearDirt1()
+    for y = 25, 53, 2 do
+        for x = 97, 2, -1 do
+            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
+                allIn1(true)
+                findPath(x+1,y)
+                punch(-1,0)
+                sleep(delayBreak)
             end
-            if findItem(5) > 150 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Lava Seeds Is More Than 150... Saving Lava Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                SaveTheLavaSeeds()
-                sleep(250)
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Clear All The Lava At "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            end
-            TrashTheJunks()
+            collect(2)
         end
     end
 end
 
-function SaveTheDirtSeeds()
-    if SaveDirt then 
-        local CurrentWorld = getBot().world 
-        if findItem(3) > 150 then 
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. Save_World)
-            sleep(5000)
-            sendPacket(3,"action|join_request\nname|".. Save_World .. "|" .. SaveWorld_Door_ID)
-            sleep(4500)
-        end
-        for _, tile in pairs(getTiles()) do 
-            if tile.fg == BGForDirt or tile.bg == BGForDirt then 
-                sleep(500)
-                findPath(tile.x, tile.y)
-                sleep(800)
+-- CLEAR DIRT
+function clearDirt()
+    for y = 24 + 53 + 1, 53, do
+        for x = 97, 2, -1 do
+            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
+                allIn1(true)
+                findPath(x+1,y)
+                punch(-1,0)
+                sleep(delayBreak)
             end
+            collect(2)
         end
-        while findItem(3) > 100 do 
-            drop(3)
-            sleep(1500)
-            move(-1,0)
-            sleep(500)
-        end
-        if findItem(3) < 150 then
-            GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Done Dropping Dirt Seeds... Total Dirt Seeds Dropped ".. SeedsScanner(3) .."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. CurrentWorld)
-            sleep(5000)
-        end
-        move(2,0)
-        sleep(500)
-        move(1,0)
-        sleep(500)
     end
 end
 
-function SaveTheCaveBackgroundSeeds()
-    if SaveCaveBackground then 
-        local CurrentWorld = getBot().world 
-        if findItem(15) > 150 then 
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. Save_World)
-            sleep(5000)
-            sendPacket(3,"action|join_request\nname|".. Save_World .. "|" .. SaveWorld_Door_ID)
-            sleep(4500)
-        end
-        for _, tile in pairs(getTiles()) do 
-            if tile.fg == BGForCaveBackground or tile.bg == BGForCaveBackground then 
-                sleep(500)
-                findPath(tile.x, tile.y)
-                sleep(800)
+-- CLEAR ROCK
+function clearRock()
+    if breakRock then
+        for _, tile in pairs(getTiles()) do
+            while getTile(tile.x,tile.y).fg == 10 do
+                allIn1(true)
+                findPath(tile.x,tile.y - 1)
+                punch(0,1)
+                sleep(delayBreak)
             end
+            collect(2)
         end
-        while findItem(15) > 100 do 
-            drop(15)
-            sleep(1500)
-            move(-1,0)
-            sleep(500)
-        end
-        if findItem(15) < 150 then
-            GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Done Dropping Cave Background Seeds... Total Cave Background Seeds Dropped ".. SeedsScanner(15) .."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. CurrentWorld)
-            sleep(5000)
-        end
-        move(2,0)
-        sleep(500)
-        move(1,0)
-        sleep(500)
     end
 end
 
-function SaveTheRockSeeds()
-    if SaveRock then 
-        local CurrentWorld = getBot().world
-        if findItem(11) > 150 then 
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. Save_World)
-            sleep(5000)
-            sendPacket(3,"action|join_request\nname|".. Save_World .. "|" .. SaveWorld_Door_ID)
-            sleep(4500)
-        end
-        for _, tile in pairs(getTiles()) do 
-            if tile.fg == BGForRock or tile.bg == BGForRock then 
-                sleep(500)
-                findPath(tile.x, tile.y)
-                sleep(800)
+-- CLEAR LAVA
+function clearLava()
+    for y = 50, 52 do
+        for x = 2, 97 do
+            while getTile(x,y).fg == 4 do
+                allIn1(true)
+                findPath(x,y-1)
+                punch(0,1)
+                sleep(delayBreak)
             end
+            sleep(200)
+            collect(2)
         end
-        while findItem(11) > 100 do 
-            drop(11)
-            sleep(1500)
-            move(-1,0)
-            sleep(500)
-        end
-        if findItem(11) < 150 then
-            GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Done Dropping Rock Seeds... Total Rock Seeds Dropped ".. SeedsScanner(11) .."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. CurrentWorld)
-            sleep(5000)
-        end
-        move(2,0)
-        sleep(500)
-        move(1,0)
-        sleep(500)
     end
 end
 
-function SaveTheLavaSeeds()
-    if SaveLava then 
-        local CurrentWorld = getBot().world
-        if findItem(5) > 150 then 
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. Save_World)
-            sleep(5000)
-            sendPacket(3,"action|join_request\nname|".. Save_World .. "|" .. SaveWorld_Door_ID)
-            sleep(4500)
-        end
-        for _, tile in pairs(getTiles()) do 
-            if tile.fg == BGForLava or tile.bg == BGForLava then 
-                sleep(500)
-                findPath(tile.x, tile.y)
-                sleep(800)
-            end
-        end
-        while findItem(5) > 100 do
-            drop(5) 
-            sleep(1500)
-            move(-1,0)
-            sleep(500)
-        end
-        if findItem(5) < 150 then
-            GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Done Dropping Lava Seeds... Total Lava Seeds Dropped ".. SeedsScanner(5) .."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. CurrentWorld)
-            sleep(5000)
-        end
-        move(2,0)
-        sleep(500)
-        move(1,0)
-        sleep(500)
-    end
-end
-
-function GetDirtSeeds()
-    local CurrentWorld = getBot().world
-    if findItem(3) == 0 then 
-        sleep(1500)
-        sendPacket(3,"action|join_request\nname|".. Save_World)
-        sleep(5000)
-        sendPacket(3,"action|join_request\nname|".. Save_World .. "|" .. SaveWorld_Door_ID)
-        sleep(4500)
-        for _, floating in pairs(getObjects()) do 
-            if floating.id == 3 then 
-                findPath((floating.x+10) / 32, (floating.y+10) / 32)
-                sleep(800)
-                collect(2)
-                sleep(1500)
-            end
-        end
-        if findItem(3) > 1 then 
-            GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Dirt Seeds Is More Than 1... Going Back On Creating Dirt Farms For You My Master.\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            sleep(1500)
-            sendPacket(3,"action|join_request\nname|".. CurrentWorld)
-            sleep(5000)
-        end
-        move(2,0)
-        sleep(500)
-        move(1,0)
-        sleep(500)
-    end
-end
-
-function PlantAndHarvestDirt()
+-- PLANT AND HARVEST DIRT TREE
+function plantHarvestTree()
     while findItem(2) == 0 do
         for x = 2, 22  do
-            if findItem(2) == 200 then 
+            allIn1(true)
+            if findItem(2) > 170 then
                 break
             end
-            if findItem(3) == 0 then
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Dirt Seeds Is 0... Taking Dirt Seeds In ".. Save_World .. "\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-                GetDirtSeeds() 
-                sleep(250)
-                GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Place Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-            end
-            while getTile(x, 23).ready do
-                findPath(x, 23)
+            while getTile(x, 25 ).fg == 3 and getTile(x, 25).ready == true do
+                allIn1(true)
+                findPath(x, 25)
                 punch(0, 0)
-                sleep(155)
+                sleep(delayBreak)
+                collect(1)
+            end
+            while getTile(x, 25).fg == 0 and findItem(3) > 0 do
+                allIn1(true)
+                findPath(x, 25)
+                place(3, 0, 0)
+                sleep(delayPut)
+            end
+            while findItem(3) == 0 and findItem(2) == 0 do
+                allIn1(true)
+                sendMessage('BUTUH DIRT SEED, TARUH SEED DI BOT')
+                sleep(60000)
                 collect(2)
             end
-            while getTile(x, 23).fg == 0 and findItem(3) > 0 do
-                findPath(x, 23)
-                place(3, 0, 0)
-                sleep(90)
-            end
-            Reconnect()
         end
     end
 end
 
-function PlaceTheDirts()
-    GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Place Dirts To Make A Layer In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
+-- PLACE DIRT
+function placeDirt1()
     for y = 52, 2, -2 do
         for x = 2, 97 do
             if getTile(x, y).fg == 0 then
-                PlantAndHarvestDirt()
+                plantHarvestTree()
+                allIn1(true)
                 findPath(x, y - 1)
                 while getTile(x, y).fg == 0 and findItem(2) > 0 do
+                    allIn1(true)
                     place(2, 0, 1)
-                    sleep(190)
+                    sleep(delayPut)
                 end
-                Reconnect()
             end
         end
     end
 end
 
-function DirtFarmDone()
+-- PLACE DIRT
+function placeDirt()
+    for y = 54 - 2, 2, 2 do
+        for x = 2, 97 do
+            if getTile(x, y).fg == 0 then
+                plantHarvestTree()
+                allIn1(true)
+                findPath(x, y - 1)
+                while getTile(x, y).fg == 0 and findItem(2) > 0 do
+                    allIn1(true)
+                    place(2, 0, 1)
+                    sleep(delayPut)
+                end
+            end
+        end
+    end
+end
+
+-- BREAK DIRT TREE WHEN DONE
+function allDone()
     for x = 2, 22  do
-        while getTile(x,23).fg == 3 do
-            findPath(x,23)
+        while getTile(x,25).fg == 3 do
+            allIn1(true)
+            findPath(x,25)
             punch(0,0)
-            sleep(190)
-            TrashTheJunks()
-            if getTile(x,23).fg == 0 then
-                collect(2)
-                sleep(40)
-            end 
-            Reconnect()
+            sleep(delayBreak)
+            collect(2)
         end
+        sleep(300)
+        collect(2)
     end
 end
 
-function BreakTheSignalJammer()
-    for _,t in pairs(getTiles()) do
-        if t.fg == 226 then
-          findPath(t.x, t.y-1)
-          sleep(250)
-          while getTile(t.x, t.y).fg ~= 0 or getTile(t.x, t.y).bg ~= 0 do
-            punch(0,1)
-            sleep(125)
-          end
+-- MAIN FUNCTION
+if katasandi == "yyy" then
+    for i, listW in ipairs(world) do
+        if getBot().world ~= string.upper(listW) then
+            sendMessage("MEMASUKI WORLD ".. string.upper(listW))
+            if joinWorldWithId then
+                joinWorldId(listW, idworld)
+            else
+                joinWorld(listW)
+            end
+        else
+            sendMessage("BOT SUDAH DI WORLD")
         end
+        clearSide()
+        platform(listW)
+        clearDirt()
+        clearDirt1()
+        clearLava()
+        clearRock()
+        placeDirt()
+        placeDirt1()
+        allDone()
+        sendMessage("DF SELESAI")
     end
-end
-
-function NeedsToGenerateAWorld()
-    if GenerateRandomWorld == 1 then
-        GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : Finding "..WorldLetters.." Letter World Please Wait.\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."") 
-        GenerateAWorld()
-        sleep(300)
-        PutWlAndJammer()
+    sendMessage('SEMUA DF SELESAI')
+    if removeBott then
+        removeBot(getBot().name)
     end
-
-    if GenerateRandomWorld == 1 then
-        LogTheName("World : "..getBot().world) 
-        sleep(300)
-        GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..WorldLetters.." Letter World Found And The Name Of It Was "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-        sleep(500)
-    end
-end
-
-while true do
-    NeedsToGenerateAWorld()
-    MoveWhenInWhiteDoor()
-    ClearTheSide()
-    TakeAndPlacePlatform()
-    ClearingDirts()
-    if BreakTheRock then
-    ClearTheRocks()
-end
-ClearTheLavas()
-PlaceTheDirts()
-GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Harvesting The Extra Dirt Tree In "..getBot().world.."\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-DirtFarmDone()
-GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Is Going To Break The Jammer So He Can Still Use It On The Next World\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
-BreakTheSignalJammer()
-GonWebhook("<:ExcellentGT:970324153003552769> | Bot : "..getBot().name.."\n<:mega:984686541383290940> | Information : "..getBot().name.." Says That The World "..getBot().world.." is Done\n<:green_circle:984666691927691274> | Status : Online\n<:globe_with_meridians:984683698123337828> | Current World : "..getBot().world.."")
+else
+    sendMessage("kunci salah")
 end
