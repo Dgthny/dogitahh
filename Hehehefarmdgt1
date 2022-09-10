@@ -20,14 +20,6 @@ delayBreak = 100
 delayPut = 200
 katasandi = "yyy"
 
-jumlahBot = 0
-for i, bot in pairs(getBots()) do    
-    if bot.name == getBot().name then
-        nomor = i * 2
-    end
-    jumlahBot = jumlahBot + 1        
-end
-
 -- RUMUS
 function mf(xy)
     return math.floor(xy / 32)
@@ -239,7 +231,8 @@ end
 
 -- CLEAR DIRT
 function clearDirt()
-    for y = 24 + nomor + 1, 53, jumlahBot * 2 do
+    function clearDirt()
+    for y = 25, 53, 2 do
         for x = 97, 2, -1 do
             while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
                 allIn1(true)
