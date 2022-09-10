@@ -1,10 +1,8 @@
 -- EDIT ON ASAKIN
 -- HURUF BESAR/KECIL NGGK NGARUH
---
+
 world = {
-	"a",
-	"b"
-	"c"
+	"Nzerf"
 }
 joinWorldWithId = false
 idworld = "os"
