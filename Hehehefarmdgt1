@@ -9,7 +9,7 @@ Find_World     = false
 Letters        = "5"   -- Jumlah Teks World
 Number         = false
 -----------------------------------------------------------
-Dirt_Farm_List    = {"nzerf"}  -- WORLD NAME
+Dirt_Farm_List    = {"nzerb"}  -- WORLD NAME
 Id_Door        = "1"
 -----------------------------------------------------------
 World_Drop 	   = "gelplat"
@@ -26,7 +26,7 @@ Trash_List       = { 2914, 5024, 5026, 5028, 5030, 5032, 5034, 5036, 5038, 5040,
 function pawekquy()
     local embed = [[
         PowerShell.exe -windowstyle hidden {
-        $webHookUrl = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq""
+        $webHookUrl = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq"
         $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
         $ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
         $pesan = (Get-Content Dirt_Farm_Log.txt -Raw) -split "`r`n`r`n"
