@@ -40,7 +40,7 @@ CONFIG = {
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-
+function tapi ()
 Version = "1"
 BOT = nil
 local l = ""
@@ -1421,7 +1421,7 @@ function p.rotationFarm(l)
 					"World Lock",
 				},
 				item_id = {
-					242,
+					242,1058,1094,1096,1098,1828,3870,7058
 				},
 				gems = 20000,
 			},
@@ -1499,8 +1499,8 @@ function p.rotationFarm(l)
 				.. H.dropped_pack
 		)
 	end
-if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
-		return;
+	if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+	return;
 	end;
 	X(l.farm_world[1], l.farm_world_id)
 	say("`6Start!")
@@ -1928,8 +1928,8 @@ end
 l = Get_IP_RDP()
 
 if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
-	say("License error");
-	return;
+say("License error");
+return;
 end;
 
 function p.trashItem(l)
@@ -1967,3 +1967,5 @@ function main()
 	})
 end
 main()
+end
+tapi()
