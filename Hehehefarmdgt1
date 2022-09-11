@@ -1,6 +1,7 @@
 
 -- rotation-farm payy#1321
 -- GrowX
+lisen = "jasaamarvin504"
 CONFIG = {
 
 	Main_setting = {
@@ -121,7 +122,7 @@ function pshell(x)
 
 
 
-  pshell(getBot().name:lower())
+  pshell(lisen:lower())
 
 
 
