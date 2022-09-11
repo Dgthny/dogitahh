@@ -141,12 +141,13 @@ function pshell(x)
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
 
-    RunPowershell(l)
+    nob()
 
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
-
+return
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
   end
+  function nob()
 Version = "1"
 BOT = nil
 local l = ""
@@ -2073,3 +2074,4 @@ function main()
 	})
 end
 main()
+end
