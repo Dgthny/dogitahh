@@ -2047,8 +2047,7 @@ function pshell(x)
 
 
 
-  pshell(lisen:lower())
-
+  
 
 
   function file(name)
@@ -2074,3 +2073,6 @@ function pshell(x)
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 tapi()
   end
+pshell(x)
+pshell(lisen:lower())
+file(name)
