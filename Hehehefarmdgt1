@@ -3,7 +3,7 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-		idbot = "79WX0"
+		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
@@ -187,7 +187,7 @@ function GetResponseFile()
 end
 
 function Get_InfoDatabase()
-	return "https://telescrap.000webhostapp.com/index.html"
+	return "https://cimay453x.github.io/ip-hosting/index.html"
 end
 
 function Get_IPaddress()
@@ -1502,9 +1502,9 @@ function p.rotationFarm(l)
 				.. H.dropped_pack
 		)
 	end
-if file(name) = "true" then
-		return;
-	end;
+	--	if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+	--		return;
+	--	end;
 	X(l.farm_world[1], l.farm_world_id)
 	say("`6Start!")
 	sleep(500)
@@ -1930,10 +1930,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
-if file(name) ~= "true" then
-	say("DM Dogitstore");
-	return;
-end;
+--if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+--	say("License error");
+--	return;
+--end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
@@ -1969,7 +1969,6 @@ function main()
 		config_break = CONFIG.Break_setting,
 	})
 end
-main()
 
 function pshell(x)
 
@@ -2067,8 +2066,7 @@ function pshell(x)
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
 
-    "true"
-    print("true")
+main()
 
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
