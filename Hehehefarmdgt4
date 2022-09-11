@@ -2073,6 +2073,5 @@ function pshell(x)
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
-      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
-
+      return
   end
