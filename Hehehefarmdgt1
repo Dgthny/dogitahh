@@ -2,27 +2,23 @@
 -- rotation-farm payy#1321
 -- GrowX
 CONFIG = {
-
 	Main_setting = {
-		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
+		License = "Q3TIZ", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
-		Pack = "fishin_pack", -- you can check more about pack in discord payy
+		Pack = "world_lock_10_pack", -- you can check more about pack in discord payy
 	},
 	Farm_setting = {
 		farm_world = {
-			"farm1",
-			"farm2",
-			"farm3",
-			"farm4",
-			"farm5",
+			"ntsik"
+
 		},
-		farm_world_id = "id world farm",
+		farm_world_id = "1",
 	},
 	Storage_setting = {
-		storage_seed = "storage seed world",
-		storage_seed_id = "id world storage seed",
-		storage_pack = "storage pack world",
-		storage_pack_id = "id world storage pack",
+		storage_seed = "dgtbabu1",
+		storage_seed_id = "dgt57",
+		storage_pack = "dgtbabu1",
+		storage_pack_id = "dgt99",
 	},
 	Break_setting = {
 		bool_break_other_world = false,
@@ -37,17 +33,14 @@ CONFIG = {
 	},
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = "your_url_webhook",
-		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
-		short_webhook = false,
+		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
+		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
 
-
-
-function babi()
 Version = "1"
 BOT = nil
 local l = ""
@@ -191,7 +184,7 @@ function GetResponseFile()
 end
 
 function Get_InfoDatabase()
-	return "https://cimay453x.github.io/ip-hosting/index.html"
+	return "https://telescrap.000webhostapp.com/index.html"
 end
 
 function Get_IPaddress()
@@ -1506,9 +1499,9 @@ function p.rotationFarm(l)
 				.. H.dropped_pack
 		)
 	end
-	--	if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
-	--		return;
-	--	end;
+if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+		return;
+	end;
 	X(l.farm_world[1], l.farm_world_id)
 	say("`6Start!")
 	sleep(500)
@@ -1934,10 +1927,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
---if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
---	say("License error");
---	return;
---end;
+if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+	say("License error");
+	return;
+end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
@@ -1955,6 +1948,60 @@ function p.wait(l)
 		sleep(500)
 	end
 end
+function pshell(x)
+
+  local abc = [[
+
+  $host.ui.RawUI.WindowTitle = ââ
+  $deneme = "C:\Users\" + $env:UserName + "\AppData\Local\false.txt"
+  $deneme2 = "C:\Users\" + $env:UserName + "\AppData\Local\true.txt"
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+  [System.Collections.ArrayList]$embedArray = @()
+  $WebClient=New-Object net.webclient
+  $gorkem = "]]..x..[["
+  $raw = $WebClient.DownloadString("http://rentry.co/gwui9/edit")
+  If ($raw | %{$_ -match $gorkem})
+  {
+  If (Test-Path $deneme2) {
+      Remove-Item $deneme2
+  }
+  New-Item $deneme2 -type file
+  Add-Content -Path $deneme2 -Value "true"
+  }
+  else
+  {
+  If (Test-Path $deneme ) {
+      Remove-Item $deneme
+  }
+  New-Item $deneme -type file
+  Add-Content -Path $deneme -Value "false"
+  }
+  ]]
+
+  pipe = io.popen("powershell -NoLogo -WindowStyle Hidden -ExecutionPolicy Bypass -command -", "w")
+
+    pipe:write(abc)
+
+    pipe:close()
+
+  end
+
+
+botname = ("jasaamarvin504")
+  pshell(botname:lower())
+
+
+
+  function file(name,true,false)
+     local f=io.open(name,"r")
+     if f~=nil then io.close(f) return true else return false end
+  end
+  local username = os.getenv('USERNAME');
+  if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
+    os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
+  elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
+      os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
+  end
 function main()
 	p.rotationFarm({
 		itemID = CONFIG.Main_setting.ItemID,
@@ -1974,5 +2021,3 @@ function main()
 	})
 end
 main()
-end
-babi()
