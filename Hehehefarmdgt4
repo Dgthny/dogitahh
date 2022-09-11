@@ -2056,4 +2056,6 @@ function pshell(x)
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 tapi()
   end
+
 pshell (lisen)
+file (name)
