@@ -1930,10 +1930,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
---if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
---	say("License error");
---	return;
---end;
+if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+	say("License error");
+	return;
+end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
