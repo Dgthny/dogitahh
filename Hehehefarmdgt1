@@ -3,7 +3,7 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-		idbot = "jasaamarvin504", -- lock hwid, 1 license 3 device. For more info join discord payy
+		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
@@ -1930,10 +1930,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
---if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
---	say("License error");
---	return;
---end;
+if file(name) ~= "true" then
+say("License error");
+return;
+end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
@@ -1968,9 +1968,7 @@ function main()
 		owner = CONFIG.Break_setting.owner,
 		config_break = CONFIG.Break_setting,
 	})
-end
-
-function pshell(11234)
+	function pshell(x)
 
   local abc = [[
 
@@ -1992,7 +1990,7 @@ function pshell(11234)
 
   $WebClient=New-Object net.webclient
 
-  $gorkem = 11234
+  $gorkem = "]]..x..[["
 
   $raw = $WebClient.DownloadString("http://rentry.co/gwui9/edit")
 
@@ -2046,7 +2044,7 @@ function pshell(11234)
 
 
 
-  pshell(idbot)
+  pshell(getBot().name:lower())
 
 
 
@@ -2065,13 +2063,13 @@ function pshell(11234)
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-
-main()
-
+"true"
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
-      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+      return
 
   end
+end
+main()
