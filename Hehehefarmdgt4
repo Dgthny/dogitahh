@@ -1,4 +1,4 @@
-lisen = ("jasaamarvin504")
+
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -38,7 +38,8 @@ CONFIG = {
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-url_webhook=webhook
+botname = ("jasaamarvin504")
+url_webhook = webhook
 function powershell(celek)
 
   local script = [[
@@ -2047,25 +2048,26 @@ end
 main()
 end
 function botstarts()
-
   powershell("Script Start")
-  if getBot().status ~= "online" then
+
+  if getBot().state ~= 5 then
+
     powershell("Disconnected")
-    while getBot().status ~= "online" do
+
+    while getBot().state ~= 5 do
+
       sleep(10000)
+
     end
+
     powershell("Reconnected")
+
     sleep(2000)
- end
   end
+end
 function pshell(x)
-
   local abc = [[
-
   $host.ui.RawUI.WindowTitle = ââ
-
-  
-
   $deneme = "C:\Users\" + $env:UserName + "\AppData\Local\false.txt"
 
   $deneme2 = "C:\Users\" + $env:UserName + "\AppData\Local\true.txt"
@@ -2131,20 +2133,27 @@ function pshell(x)
     pipe:close()
 
   end
-  pshell(lisen:lower())
+  pshell(botname:lower())
   function file(name)
 
      local f=io.open(name,"r")
 
      if f~=nil then io.close(f) return true else return false end
-
   end
   local username = os.getenv('USERNAME');
+
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
+
     botstarts()
+
+  
+
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
-      os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt"
+
+      os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
+
       powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+
   end
