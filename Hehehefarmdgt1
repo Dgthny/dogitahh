@@ -3,7 +3,7 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-		License = "79WX0", -- lock hwid, 1 license 3 device. For more info join discord payy
+		License = "Q3TIZ", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
