@@ -121,7 +121,7 @@ function pshell(x)
 
 
 
-  pshell(License:lower())
+  pshell(License)
 
 
 
