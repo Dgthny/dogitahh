@@ -167,7 +167,6 @@ function Get_IP_RDP()
 	return l
 end
 function Get_UsageSystem()
-	local l = GetFileName(true)
 	local d = '        $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n        $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n        $availMem = (Get-Counter \'MemoryAvailable Bytes\').CounterSamples.CookedValue / 1GB\n        $c = $totalRam - $availMem\n        $ram=(104857600 * $c / $totalRam).ToString("#,0")\n        $a = $ram\n        $first,$last = ($a.tolower()).Split(" ")\n        $b = $first[0]+$first[1]\n        $all = $cpu.ToString() + "|" + $b\n        $all\n        $all | Out-File -FilePath \''
 		.. l
 		.. "'\n    "
