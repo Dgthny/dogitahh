@@ -1966,7 +1966,7 @@ function main()
 		config_break = CONFIG.Break_setting,
 	})
 end
-main()
+
 function pshell(x)
 
   local abc = [[
