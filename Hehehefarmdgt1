@@ -1502,9 +1502,9 @@ function p.rotationFarm(l)
 				.. H.dropped_pack
 		)
 	end
---	if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
---			return;
---		end;
+if file(name) = "true" then
+		return;
+	end;
 	X(l.farm_world[1], l.farm_world_id)
 	say("`6Start!")
 	sleep(500)
