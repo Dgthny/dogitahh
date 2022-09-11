@@ -1,7 +1,7 @@
 
 -- rotation-farm payy#1321
 -- GrowX
-botname = jasaamarvin504
+
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -44,7 +44,7 @@ CONFIG = {
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-
+botname = jasaamarvin504
 function pshell(x)
 
   local abc = [[
@@ -142,8 +142,9 @@ function pshell(x)
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
 
     kontolodon()
+
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
-remove getBot().name
+return
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
   end
