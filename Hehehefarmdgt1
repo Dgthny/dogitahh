@@ -1,6 +1,7 @@
 
 -- rotation-farm payy#1321
 -- GrowX
+lisen = jasaamarvin504
 CONFIG = {
 	Main_setting = {
 		License = "jasaamarvin504", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -121,7 +122,7 @@ function pshell(x)
 
 
 
-  pshell(License)
+  pshell(lisen)
 
 
 
