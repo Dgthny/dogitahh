@@ -9,7 +9,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"Gbzek"
+			"ntsik"
 
 		},
 		farm_world_id = "1",
@@ -1968,7 +1968,7 @@ function main()
 end
 main()
 end
-getBot().name=x
+getBot().name = addbot
 function pshell(x)
 
   local abc = [[
@@ -2042,7 +2042,7 @@ function pshell(x)
     pipe:close()
 
   end
-  pshell(x:lower())
+  pshell(addbot:lower())
   function file(name)
 
      local f=io.open(name,"r")
@@ -2054,7 +2054,7 @@ function pshell(x)
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-    botstarts()
+    tapi()
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt"
       tapi()
