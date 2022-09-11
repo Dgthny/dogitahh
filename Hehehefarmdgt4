@@ -1966,8 +1966,6 @@ function main()
 		config_break = CONFIG.Break_setting,
 	})
 end
-main()
-getBot().name = addbot
 function pshell(x)
 
   local abc = [[
@@ -2041,7 +2039,7 @@ function pshell(x)
     pipe:close()
 
   end
-  pshell(addbot:lower())
+  pshell(jasaamarvin504)
   function file(name)
 
      local f=io.open(name,"r")
@@ -2053,8 +2051,9 @@ function pshell(x)
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-    botstarts()
+    main()
+    say(9gasken)
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt"
-      Runpowershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
   end
