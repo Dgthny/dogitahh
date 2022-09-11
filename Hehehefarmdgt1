@@ -3,17 +3,13 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-		License = "79WX0", -- lock hwid, 1 license 3 device. For more info join discord payy
-		ItemID = 5666,
+	ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
 	Farm_setting = {
 		farm_world = {
-			"farm1",
-			"farm2",
-			"farm3",
-			"farm4",
-			"farm5",
+			"fszyy",
+
 		},
 		farm_world_id = "id world farm",
 	},
@@ -2047,7 +2043,7 @@ function pshell(x)
 
 
 
-  pshell(License)
+  pshell(getBot().name)
 
 
 
@@ -2069,12 +2065,10 @@ function pshell(x)
 
     main()
 
-  
-
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
-      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+      say("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
 
   end
