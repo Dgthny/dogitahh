@@ -186,7 +186,7 @@ function GetResponseFile()
 	return RemovePatternPowershell(d)
 end
 
-function Get_InfoDatabase()
+function Get_InfoDatabase(x)
 	local abc = [[
 
   $host.ui.RawUI.WindowTitle = ââ
