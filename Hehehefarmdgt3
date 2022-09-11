@@ -40,7 +40,7 @@ CONFIG = {
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-
+function tapi ()
 Version = "1"
 BOT = nil
 local l = ""
@@ -1967,3 +1967,5 @@ function main()
 	})
 end
 main()
+end 
+tapi()
