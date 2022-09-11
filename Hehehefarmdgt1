@@ -1968,6 +1968,7 @@ function main()
 end
 main()
 end
+
 function pshell(x)
 
   local abc = [[
@@ -2012,15 +2013,27 @@ botname = ("jasaamarvin504")
 
 
 
-  function file(name,true,false)
+  function file(name)
      local f=io.open(name,"r")
+
      if f~=nil then io.close(f) return true else return false end
+
   end
+
+
+
   local username = os.getenv('USERNAME');
+
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
+
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-nooob()
+
+    nooob()
+
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
+
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
-      say("noooob")
+
+      say("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+
   end
