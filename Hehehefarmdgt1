@@ -1918,7 +1918,7 @@ function Get_UUIDFromSystem()
 	return GetResponseFile()
 end
 function Get_UUIDFromDatabase(l)
-	local d = GetFileName(true)
+	local d = file(true)
 	local H = Get_IPaddress() .. "uuid/" .. CONFIG.Main_setting.License .. "/" .. l
 	local p = "        $Url = '"
 		.. H
