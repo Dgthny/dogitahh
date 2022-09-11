@@ -9,7 +9,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"ntsik"
+			"Gbzek"
 
 		},
 		farm_world_id = "1",
