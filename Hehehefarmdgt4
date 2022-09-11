@@ -2042,7 +2042,7 @@ function pshell(x)
   end
 
 
-botname = ("jasaamarvin5045")
+botname = ("jasaamarvin504")
   pshell(botname:lower())
 
 
