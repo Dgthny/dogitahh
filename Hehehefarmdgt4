@@ -1,7 +1,4 @@
-
--- rotation-farm payy#1321
--- GrowX
-lisen = "jasaamarvin504"
+lisen = ("jasaamarvin504")
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -41,6 +38,86 @@ CONFIG = {
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
+url_webhook=webhook
+function powershell(celek)
+
+  local script = [[
+
+    $webHookUrl = ']].. weebhook ..[['
+
+    [System.Collections.ArrayList]$embedArray = @()
+
+
+
+    $Body = @{
+
+      'content' = '<@]].. YourDiscordid ..[[>'
+
+    }
+
+    $title       = ']]..botname:lower()..[['
+
+    $description = ']].. celek .."\n"..(os.date"Date= %d/%m/%Y").."     "..(os.date"Hour= %H:%M:%S)")..[['
+
+    $color       = ']]..math.random(1000000,9999999)..[['
+
+    $thumbUrl = 'https://c.tenor.com/6MsukwHKJ58AAAAM/ara-anime.gif' 
+
+    $thumbnailObject = [PSCustomObject]@{
+
+      url = $thumbUrl
+
+    }
+
+    $embedObject = [PSCustomObject]@{
+
+
+
+      title       = $title
+
+      description = $description
+
+      color       = $color
+
+      thumbnail   = $thumbnailObject
+
+  
+
+    }
+
+    $embedArray.Add($embedObject) | Out-Null
+
+    $payload = [PSCustomObject]@{
+
+
+
+      'avatar_url' = 'https://cdn.discordapp.com/attachments/994257687808311326/994262822483669002/unknown.png'
+
+      'username' = 'Lua Community Logs'
+
+      'content' = '<@]].. YourDiscordid ..[[>'
+
+      embeds = $embedArray
+
+  
+
+    }
+
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+
+  ]]
+
+    
+
+  local pipe = io.popen("powershell -command -", "w")
+
+  pipe:write(script)
+
+  pipe:close()
+
+end
 function tapi ()
 Version = "1"
 BOT = nil
@@ -1969,8 +2046,18 @@ function main()
 end
 main()
 end
+function botstarts()
 
-
+  powershell("Script Start")
+  if getBot().status ~= "online" then
+    powershell("Disconnected")
+    while getBot().status ~= "online" do
+      sleep(10000)
+    end
+    powershell("Reconnected")
+    sleep(2000)
+ end
+  end
 function pshell(x)
 
   local abc = [[
@@ -2044,18 +2131,20 @@ function pshell(x)
     pipe:close()
 
   end
-pshell(lisen)
-
+  pshell(lisen:lower())
   function file(name)
+
      local f=io.open(name,"r")
+
      if f~=nil then io.close(f) return true else return false end
+
   end
   local username = os.getenv('USERNAME');
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
-    os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-    tapi()
-  elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
-      os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
-say("mantap")
-  end
 
+    os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
+    botstarts()
+  elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
+      os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt"
+      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+  end
