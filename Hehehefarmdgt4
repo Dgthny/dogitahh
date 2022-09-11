@@ -2072,6 +2072,6 @@ function pshell(x)
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
+Runpowershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
 
-  
   end
