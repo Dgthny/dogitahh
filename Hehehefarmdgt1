@@ -3,13 +3,17 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-	ItemID = 5666,
+		idbot = "79WX0"
+		ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
 	Farm_setting = {
 		farm_world = {
-			"fszyy",
-
+			"farm1",
+			"farm2",
+			"farm3",
+			"farm4",
+			"farm5",
 		},
 		farm_world_id = "id world farm",
 	},
@@ -1926,10 +1930,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
---if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
---	say("License error");
---	return;
---end;
+if kontolz ~= "true" then
+	say("DM Dogitstore");
+	return;
+end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
@@ -2043,11 +2047,11 @@ function pshell(x)
 
 
 
-  pshell(getBot().name)
+  pshell(idbot)
 
 
 
-  function file(name)
+  function kontolz(name)
 
      local f=io.open(name,"r")
 
@@ -2063,12 +2067,13 @@ function pshell(x)
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
 
-    main()
+    "true"
+    print("true")
 
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
-      say("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
 
   end
