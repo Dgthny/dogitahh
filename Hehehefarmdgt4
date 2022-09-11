@@ -9,7 +9,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"Btfxc",
+			"gbzek",
 
 		},
 		farm_world_id = "1",
@@ -2042,7 +2042,7 @@ function pshell(x)
   end
 
 
-botname = ("jasaamarvin504")
+botname = ("jasaamarvin5045")
   pshell(botname:lower())
 
 
