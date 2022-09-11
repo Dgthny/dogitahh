@@ -1930,6 +1930,11 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
+--if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+--	say("License error");
+--	return;
+--end;
+
 function p.trashItem(l)
 	if type(l) ~= "number" then
 		return
@@ -2058,7 +2063,6 @@ function main()
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-"true"
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
