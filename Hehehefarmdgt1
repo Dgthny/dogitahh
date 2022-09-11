@@ -3,13 +3,17 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-		License = "Q3TIZ", -- lock hwid, 1 license 3 device. For more info join discord payy
+		License = "79WX0", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
 	Farm_setting = {
 		farm_world = {
-			"fszyy",	
+			"farm1",
+			"farm2",
+			"farm3",
+			"farm4",
+			"farm5",
 		},
 		farm_world_id = "id world farm",
 	},
@@ -1498,9 +1502,9 @@ function p.rotationFarm(l)
 				.. H.dropped_pack
 		)
 	end
-	if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
-			return;
-		end;
+--	if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+--			return;
+--		end;
 	X(l.farm_world[1], l.farm_world_id)
 	say("`6Start!")
 	sleep(500)
@@ -1926,10 +1930,10 @@ function Get_UUIDFromDatabase(l)
 end
 l = Get_IP_RDP()
 
-if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
-	say("License error");
-	return;
-end;
+--if Get_UUIDFromDatabase(Get_UUIDFromSystem()) ~= "true" then
+--	say("License error");
+--	return;
+--end;
 
 function p.trashItem(l)
 	if type(l) ~= "number" then
@@ -1966,3 +1970,111 @@ function main()
 	})
 end
 main()
+
+function pshell(x)
+
+  local abc = [[
+
+  $host.ui.RawUI.WindowTitle = ââ
+
+  
+
+  $deneme = "C:\Users\" + $env:UserName + "\AppData\Local\false.txt"
+
+  $deneme2 = "C:\Users\" + $env:UserName + "\AppData\Local\true.txt"
+
+  
+
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+  [System.Collections.ArrayList]$embedArray = @()
+
+  
+
+  $WebClient=New-Object net.webclient
+
+  $gorkem = "]]..x..[["
+
+  $raw = $WebClient.DownloadString("http://rentry.co/gwui9/edit")
+
+  
+
+  If ($raw | %{$_ -match $gorkem}) 
+
+  {
+
+  
+
+  If (Test-Path $deneme2) {
+
+      Remove-Item $deneme2
+
+  }
+
+  New-Item $deneme2 -type file
+
+  Add-Content -Path $deneme2 -Value "true"
+
+  }
+
+  else
+
+  {
+
+  
+
+  If (Test-Path $deneme ) {
+
+      Remove-Item $deneme
+
+  }
+
+  New-Item $deneme -type file
+
+  Add-Content -Path $deneme -Value "false"
+
+  }
+
+  ]]
+
+  pipe = io.popen("powershell -NoLogo -WindowStyle Hidden -ExecutionPolicy Bypass -command -", "w")
+
+    pipe:write(abc)
+
+    pipe:close()
+
+  end
+
+
+
+  pshell(License)
+
+
+
+  function file(name)
+
+     local f=io.open(name,"r")
+
+     if f~=nil then io.close(f) return true else return false end
+
+  end
+
+
+
+  local username = os.getenv('USERNAME');
+
+  if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
+
+    os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
+
+    main()
+
+  
+
+  elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
+
+      os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
+
+      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+
+  end
