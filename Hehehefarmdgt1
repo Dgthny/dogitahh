@@ -3,7 +3,7 @@
 -- GrowX
 CONFIG = {
 	Main_setting = {
-		Lisense = "jasaamarvin504", -- lock hwid, 1 license 3 device. For more info join discord payy
+		lisensi = "jasaamarvin504", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
 		Pack = "fishin_pack", -- you can check more about pack in discord payy
 	},
@@ -121,7 +121,7 @@ function pshell(x)
 
 
 
-  pshell(getBot().name:lower())
+  pshell(lisensi)
 
 
 
