@@ -1968,7 +1968,6 @@ function main()
 end
 main()
 end
-tapi()
 getBot().name=x
 function pshell(x)
 
@@ -2058,5 +2057,5 @@ function pshell(x)
     botstarts()
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt"
-      say(lol)
+      tapi()
   end
