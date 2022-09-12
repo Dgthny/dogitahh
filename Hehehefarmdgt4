@@ -1,5 +1,7 @@
---rotasi growx
 
+-- rotation-farm payy#1321
+-- GrowX
+lisen = "jasaamarvin504"
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -8,7 +10,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"Btfxc",
+			"gbzek",
 
 		},
 		farm_world_id = "1",
@@ -39,62 +41,6 @@ CONFIG = {
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-
-botname,botpassword = "jasaamarvin504","botmarvin123#"       --botname pasword
-
---------------WEBHOOK-------------------
-tittlr = "AUTO ROTATION" --Tittle webhook
-webhook = CONFIG.Other_setting.url_webhook
- --webhook url
-YourDiscordid= "991204570380382218" --id diskord
-thumbnail = "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"  --Thumbnail url
-warna = "3333333" --Colour embed
-----------------------------------------
-
-function powershell(message)
-local script = [[
-$webHookUrl = ']] ..webhook.. [['
-
-$host.ui.RawUI.WindowTitle = ""
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-[System.Collections.ArrayList]$embedArray = @()
-$title       = ']] .. tittlr .. [['
-$description = ']] .. message .. "\n"..(os.date"<:onbutton:873152812454903839> Date= %d/%m/%Y").."     "..(os.date"\n<:offbutton:873152764279144458> Hour= %H:%M:%S")..[['
-$color       = ']] .. warna .. [['
-$thumbUrl = ']] .. thumbnail .. [[' 
-$cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
-$ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
-$ip = Get-NetIPAddress -AddressFamily IPv4 -InterfaceIndex $(Get-NetConnectionProfile | Select-Object -ExpandProperty InterfaceIndex) | Select-Object -ExpandProperty IPAddress
-$thumbnailObject = [PSCustomObject]@{
-    url = $thumbUrl
-}
-
-$embedObject = [PSCustomObject]@{
-    title       = $title
-    description = "$description`r`n<a:warningbxb:974487949238485072> | Cpu :$cpu%`n<a:warningbxb:974487949238485072> | Ram : $ram MB`n<a:warningbxb:974487949238485072> | Ip : $ip"
-    color       = $color
-    thumbnail   = $thumbnailObject
-
-}
-
-$embedArray.Add($embedObject) | Out-Null
-$payload = [PSCustomObject]@{
-      'avatar_url' = 'https://cdn.discordapp.com/attachments/994257687808311326/994262822483669002/unknown.png'
-      'username' = 'Dogit logs'
-            'content' = '<@]].. YourDiscordid ..[[>'
-    embeds = $embedArray
-
-}
-
-Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
-]]
-
-local pipe = io.popen("powershell -command -", "w")
-  pipe:write(script)
-  pipe:close()
-end
-
-
 function mainn()
 Version = "1"
 BOT = nil
@@ -2022,35 +1968,7 @@ function main()
 	})
 end
 main()
-end
-
-function botstarts()
-
-addBot(botname,botpassword)
-
-  powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Script Start \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
-  sleep(10000)
-
-
-  if getBot().state ~= 5 then
-
-    powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Disconnected \n<:offbutton:873152764279144458> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
-
-    while getBot().state ~= 5 do
-
-      sleep(10000)
-
-    end
-
-    powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Reconnected \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
-
-    sleep(2000)
-
-  end
-end
-
-
-
+end 
 function pshell(x)
 
   local abc = [[
@@ -2127,7 +2045,7 @@ function pshell(x)
 
 
 
-  pshell(botname:lower())
+  pshell(lisen)
 
 
 
@@ -2147,7 +2065,7 @@ function pshell(x)
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
 
-    botstarts()
+    mainn()
 
   
 
@@ -2155,6 +2073,6 @@ function pshell(x)
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
-      powershell("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
+      say("Akunnya Belom TerDaftar!, Contact : https://chat.whatsapp.com/BILpPb4zm5kFVIBzseXvZt")
 
   end
