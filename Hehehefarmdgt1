@@ -4,7 +4,6 @@
 lisen = getBot().name:lower()
 CONFIG = {
 	Main_setting = {
-		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
 		Pack = "world_lock_10_pack", -- you can check more about pack in discord payy
 	},
@@ -1917,7 +1916,7 @@ function Get_UUIDFromSystem()
 end
 function Get_UUIDFromDatabase(l)
 	local d = GetFileName(true)
-	local H = Get_IPaddress() .. "uuid/" .. CONFIG.Main_setting.License .. "/" .. l
+	local H = Get_IPaddress() .. "uuid/"  "/" .. l
 	local p = "        $Url = '"
 		.. H
 		.. '\'\n        $Http = new-object -com "WinHttp.WinHttpRequest.5.1"\n        $Http.open("GET", $Url, $false)\n        $Http.send()\n        $Body = $Http.responseText\n        $Body.substring(1,$Body.length-2) | Out-File -FilePath \''
