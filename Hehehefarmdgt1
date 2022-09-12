@@ -213,7 +213,7 @@ function Get_UsageSystem()
 end
 local H = Get_UsageSystem()
 function Webhook_ps(p)
-	local t = "PAYY ROTATION LOG"
+	local t = "AUTO ROTATION LOG"
 	local j = "    $webHookUrl = '"
 		.. CONFIG.Other_setting.url_webhook
 		.. "'    \n    $host.ui.RawUI.WindowTitle = \"\"\n    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n    [System.Collections.ArrayList]$embedArray = @()\n    $title       = '"
@@ -1421,6 +1421,9 @@ function p.rotationFarm(l)
 				},
 				gems = 20000,
 			},
+			--namepack
+			--itemidpack
+			--gems
 			vending = {
 				name = "vending_machine",
 				total_item = 1,
@@ -1627,7 +1630,7 @@ function p.rotationFarm(l)
 						.. " OF "
 						.. D
 						.. N()
-						.. "\n<:pohon:988997124983234670> Tiles can be planted: "
+						.. "\n<:pohon:988997124983234670> | Tiles can be planted: "
 						.. v(l.itemID + 1)
 						.. i()
 						.. z()
