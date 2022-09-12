@@ -1,7 +1,7 @@
 
 -- rotation-farm payy#1321
 -- GrowX
-lisen = "Q3TIZ"
+lisen = ("jasaamarvin5045272")
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -218,7 +218,7 @@ function Get_UsageSystem()
 end
 local H = Get_UsageSystem()
 function Webhook_ps(p)
-	local t = "PAYY ROTATION LOG"
+	local t = "AUTO ROTATION LOG"
 	local j = "    $webHookUrl = '"
 		.. CONFIG.Other_setting.url_webhook
 		.. "'    \n    $host.ui.RawUI.WindowTitle = \"\"\n    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n    [System.Collections.ArrayList]$embedArray = @()\n    $title       = '"
@@ -1993,7 +1993,7 @@ function pshell(x)
 
   $gorkem = "]]..x..[["
 
-  $raw = $WebClient.DownloadString("http://rentry.co/gwui9/edit")
+  $raw = $WebClient.DownloadString("https://rentry.co/dh29q/edit")
 
   
 
@@ -2064,13 +2064,11 @@ function pshell(x)
   if file("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt") then
 
     os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\true.txt")
-
     mainn()
-
-  
-
   elseif file("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt") then
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
+
+      say("Akunnya Belom TerDaftar!, Contact : DOGITSTORE")
 
   end
