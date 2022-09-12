@@ -284,6 +284,17 @@ function Webhook_ps(p)
 		os.remove(d)
 	end
 end
+local function fossil(id)
+
+      local m=0
+
+      for _,til in pairs(getTiles()) do
+          if til.fg == id then 
+          m = m + 1
+          end
+      end
+      return m
+    end
 local p = {}
 function p.rotationFarm(l)
 	local d = true
@@ -1586,12 +1597,14 @@ function p.rotationFarm(l)
 						.. (getBot()).world:upper()
 						.. "||"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
-						.. "\n<:rightsgy2:1018844822125150251> : FARM "
+						.. "\n:arrow_right: FARM "
 						.. j
 						.. " OF "
 						.. D
 						.. N()
-						.. "\n<:growscan:1002995962572193833> Tree Ready to Harvest: "
+						
+					" \n<:posil:989484591029026867> | Fossil : "..fossil(3918)
+						.. "\n<:pohon:988997124983234670> Tree Ready to Harvest: "
 						.. O(l.itemID + 1, f(l.itemID))
 						.. i()
 						.. z()
@@ -1620,7 +1633,7 @@ function p.rotationFarm(l)
 						.. (getBot()).world:upper()
 						.. "||"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
-						.. "\n<:rightsgy2:1018844822125150251>: FARM "
+						.. "\n:arrow_right: FARM "
 						.. j
 						.. " OF "
 						.. D
@@ -1694,7 +1707,8 @@ function p.rotationFarm(l)
 						.. (getBot()).world:upper()
 						.. "||"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
-						.. "\n<:growscan:1002995962572193833> Tree Ready to Harvest: "
+											" \n<:posil:989484591029026867> | Fossil : "..fossil(3918)
+						.. "\n<:pohon:988997124983234670> Tree Ready to Harvest: "
 						.. O(l.itemID + 1, f(l.itemID))
 						.. i()
 						.. z()
