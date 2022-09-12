@@ -1,3 +1,6 @@
+
+-- rotation-farm payy#1321
+-- GrowX
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
@@ -6,7 +9,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"Gbzek"
+			"Btfxc",
 
 		},
 		farm_world_id = "1",
@@ -18,11 +21,11 @@ CONFIG = {
 		storage_pack_id = "dgt99",
 	},
 	Break_setting = {
-		bool_break_other_world = false,
-		break_world_name = "your world break, if you set true bool_break_other_world",
-		break_world_id = "your world break id, if set true bool_break_other_world",
+		bool_break_other_world = true,
+		break_world_name = "woykaukemana8",
+		break_world_id = "1919OI",
 		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
-		tile = 2,
+		tile = 5,
 		delay_break = 200, -- millisecond
 		delay_put = 200, -- millisecond
 		auto_ban_joined = false, -- you need access world lock if wanna auto-ban-joined
@@ -30,15 +33,14 @@ CONFIG = {
 	},
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
+		url_webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB",
 		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
 		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-lisen = getBot().name:lower()
-function mainn()
+function main()
 Version = "1"
 BOT = nil
 local l = ""
@@ -249,18 +251,18 @@ function Webhook_ps(p)
 		j = H[1] .. "%%"
 		D = H[2] .. "%%"
 		p = p
-			.. "\\n**RDP Information**\\n<:cpu:1002628219964493885> CPU: "
+			.. "\\n**RDP Information**\\`n<a:warningbxb:974487949238485072> CPU: "
 			.. j
-			.. "\\n<:rampc:1002627413261434950> RAM: "
+			.. "\\`n<a:warningbxb:974487949238485072> RAM: "
 			.. D
-			.. "\\n<:ip:1002628757808488470> IP: ||"
+			.. "\\`n<a:warningbxb:974487949238485072> IP: ||"
 			.. l
 			.. "||"
-		local V = 'webhook.exe payy.send_embeds --url "'
+		local V = 'webhook.exe pay.send_embeds --url "'
 			.. t(CONFIG.Other_setting.url_webhook)
 			.. '" --message "'
 			.. p
-			.. '" --title "PAYY ROTATION LOG" --thumbnail "https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png"'
+			.. '" --title "DOGIT ROTATION LOG" --thumbnail "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"'
 		local T = io.open("webhook.bat", "w+")
 		T:write(V)
 		T:close()
@@ -1914,7 +1916,7 @@ function Get_UUIDFromSystem()
 end
 function Get_UUIDFromDatabase(l)
 	local d = GetFileName(true)
-	local H = Get_IPaddress() .. "uuid/" .. lisen .. "/" .. l
+	local H = Get_IPaddress() .. "uuid/" .. CONFIG.Main_setting.License .. "/" .. l
 	local p = "        $Url = '"
 		.. H
 		.. '\'\n        $Http = new-object -com "WinHttp.WinHttpRequest.5.1"\n        $Http.open("GET", $Url, $false)\n        $Http.send()\n        $Body = $Http.responseText\n        $Body.substring(1,$Body.length-2) | Out-File -FilePath \''
