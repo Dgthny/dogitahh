@@ -938,7 +938,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: Disconnect"
+						.. "\n<a:online2:972348740545421373> Status: Disconnect"
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks"
 						.. "\n**World Information**"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
@@ -961,7 +961,7 @@ function p.rotationFarm(l)
 						.. "\nn<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458>  Status: Reconnect"
+						.. "\n<a:online2:972348740545421373>  Status: Reconnect"
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks"
 						.. "\n**World Information**"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
@@ -1044,7 +1044,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: Disconnect"
+						.. "\n<a:online2:972348740545421373> Status: Disconnect"
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: HARVEST!!!"
 						.. "\n**World Information**"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
@@ -1067,7 +1067,7 @@ function p.rotationFarm(l)
 								.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 								.. findItem(112)
 								.. h()
-								.. "\n<:offbutton:873152764279144458> Status: Reconnect"
+								.. "\n<a:online2:972348740545421373> Status: Reconnect"
 								.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Harvesting Trees!"
 								.. "\n**World Information**"
 								.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
@@ -1140,7 +1140,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: Disconnect"
+						.. "\n<a:online2:972348740545421373> Status: Disconnect"
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: PLANT!!!"
 						.. "\n**World Information**"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
@@ -1164,7 +1164,7 @@ function p.rotationFarm(l)
 							.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 							.. findItem(112)
 							.. h()
-							.. "\n<:offbutton:873152764279144458> Status: Reconnect"
+							.. "\n<a:online2:972348740545421373> Status: Reconnect"
 							.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Planting Seeds"
 							.. "\n**World Information**"
 							.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
@@ -1482,7 +1482,7 @@ function p.rotationFarm(l)
 				.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 				.. findItem(112)
 				.. h()
-				.. " \n<:offbutton:873152764279144458> Status: "
+				.. " \n<a:online2:972348740545421373> Status: "
 				.. T()
 				.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Buying Pack Done"
 				.. "\n**World Information**"
@@ -1509,7 +1509,7 @@ function p.rotationFarm(l)
 			.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 			.. findItem(112)
 			.. h()
-			.. "\n<:offbutton:873152764279144458> Status: "
+			.. "\n<a:online2:972348740545421373> Status: "
 			.. T()
 			.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Starting Script"
 			.. "\n**World Information**"
@@ -1517,7 +1517,7 @@ function p.rotationFarm(l)
 			.. (getBot()).world:upper()
 			.. "||"
 			.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
-			.. "\n<:growscan:1002995962572193833> Tree Ready to Harvest: "
+			.. "\n<:pohon:988997124983234670> Tree Ready to Harvest: "
 			.. O(l.itemID + 1, f(l.itemID))
 			.. i()
 			.. z()
@@ -1578,7 +1578,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: "
+						.. "\n<a:online2:972348740545421373> Status: "
 						.. T()
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Harvesting Trees"
 						.. "\n**World Information**"
@@ -1586,7 +1586,7 @@ function p.rotationFarm(l)
 						.. (getBot()).world:upper()
 						.. "||"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
-						.. "\n:arrow_right: FARM "
+						.. "\n<:rightsgy2:1018844822125150251> : FARM "
 						.. j
 						.. " OF "
 						.. D
@@ -1612,7 +1612,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: "
+						.. "\n<a:online2:972348740545421373> Status: "
 						.. T()
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Planting Seeds"
 						.. "\n**World Information**"
@@ -1620,7 +1620,7 @@ function p.rotationFarm(l)
 						.. (getBot()).world:upper()
 						.. "||"
 						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
-						.. "\n:arrow_right: FARM "
+						.. "\n<:rightsgy2:1018844822125150251>: FARM "
 						.. j
 						.. " OF "
 						.. D
@@ -1664,7 +1664,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: "
+						.. "\n<a:online2:972348740545421373> Status: "
 						.. T()
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Finished world "
 						.. d
@@ -1685,7 +1685,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: "
+						.. "\n<a:online2:972348740545421373> Status: "
 						.. T()
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Entering new farm world "
 						.. l.farm_world[1]
@@ -1724,7 +1724,7 @@ function p.rotationFarm(l)
 							.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 							.. findItem(112)
 							.. h()
-							.. "\n<:offbutton:873152764279144458> Status: "
+							.. "\n<a:online2:972348740545421373> Status: "
 							.. T()
 							.. "\n<a:Nitro_boosting_level:1018918021651239002> Finished All World, Returning to First World"
 							.. i()
@@ -1740,7 +1740,7 @@ function p.rotationFarm(l)
 						.. findItem(112)
 					
 							.. h()
-							.. "\n<:offbutton:873152764279144458> Status: "
+							.. "\n<a:online2:972348740545421373> Status: "
 							.. T()
 							.. "\n<a:Nitro_boosting_level:1018918021651239002> Finished All World, Removing Bot"
 							.. i()
@@ -1790,7 +1790,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: "
+						.. "\n<a:online2:972348740545421373> Status: "
 						.. T()
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks Start"
 						.. "\n**World Information**"
@@ -1846,7 +1846,7 @@ function p.rotationFarm(l)
 						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:offbutton:873152764279144458> Status: "
+						.. "\n<a:online2:972348740545421373> Status: "
 						.. T()
 						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks End"
 						.. "\n**World Information**"
@@ -1883,7 +1883,7 @@ function p.rotationFarm(l)
 					.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 					.. findItem(112)
 					.. h()
-					.. "\n<:offbutton:873152764279144458> Status: "
+					.. "\n<a:online2:972348740545421373> Status: "
 					.. T()
 					.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Dropping Seeds"
 					.. "\n**World Information**"
