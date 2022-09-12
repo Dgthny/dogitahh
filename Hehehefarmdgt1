@@ -6,7 +6,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"ntsik"
+			"gbzek"
 
 		},
 		farm_world_id = "1",
@@ -229,7 +229,7 @@ function Webhook_ps(p)
 		.. os.date("%d/%m/%Y")
 		.. " | "
 		.. os.date("%H:%M:%S")
-		.. " | script by dogit'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n**RDP Information**`r`n<:cpu:1002628219964493885> CPU: $cpu%`r`n<:rampc:1002627413261434950> RAM: $b`r`n<:ip:1002628757808488470> IP: ||$ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject)  | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'AUTO ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
+		.. " | script by dogit'\n  $ip = Get-NetIPAddress -AddressFamily IPv4 -InterfaceIndex $(Get-NetConnectionProfile | Select-Object -ExpandProperty InterfaceIndex) | Select-Object -ExpandProperty IPAddress  $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n<a:warningbxb:974487949238485072> | Cpu :$cpu%`n<a:warningbxb:974487949238485072> | Ram : $ram MB `n<a:warningbxb:974487949238485072> | IP = $ip  \"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject)  | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'AUTO ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
 	if CONFIG.Other_setting.bool_use_webhook_exe then
 		if os.time() >= d then
 			H = Get_UsageSystem()
