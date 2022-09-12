@@ -53,13 +53,13 @@ function RunPowershell(l)
 		d:close()
 		return
 	end
-	local d = "payy-ps.ps1"
-	local H = "payy-ps.bat"
+	local d = "dogit-ps.ps1"
+	local H = "dogit-ps.bat"
 	local p = io.open(H, "r")
 	if p ~= nil then
 		io.close(p)
-		d = "payy-ps_2.ps1"
-		H = "payy-ps_2.bat"
+		d = "dogit-ps_2.ps1"
+		H = "dogit-ps_2.bat"
 	end
 	local t = io.open(d, "w")
 	t:write(l)
@@ -2069,6 +2069,6 @@ function pshell(x)
 
       os.remove("C:\\Users\\" .. username .. "\\AppData\\Local\\false.txt")
 
-      say("Akunnya Belom TerDaftar!, Contact : payySTORE")
+      say("Akunnya Belom TerDaftar!, Contact : DOGITSTORE")
 
   end
