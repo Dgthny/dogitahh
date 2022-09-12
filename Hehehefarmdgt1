@@ -1,15 +1,11 @@
-
--- GrowX
-
 CONFIG = {
 	Main_setting = {
-		
 		ItemID = 5666,
-		Pack = "world_lock_10_pack", --ask dulu sebelum pakai
+		Pack = "world_lock_10_pack", -- you can check more about pack in discord payy
 	},
 	Farm_setting = {
 		farm_world = {
-			"gbzek",
+			"gbzek"
 
 		},
 		farm_world_id = "1",
@@ -22,8 +18,8 @@ CONFIG = {
 	},
 	Break_setting = {
 		bool_break_other_world = false,
-		break_world_name = "woykaukemana8",
-		break_world_id = "1919OI",
+		break_world_name = "your world break, if you set true bool_break_other_world",
+		break_world_id = "your world break id, if set true bool_break_other_world",
 		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
 		tile = 2,
 		delay_break = 200, -- millisecond
@@ -32,9 +28,10 @@ CONFIG = {
 		owner = "GrowidToWhitelist", -- when autobanjoined true, whitelist this growid
 	},
 	Other_setting = {
+	    YourDiscordid = "72726" --you will get notif
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB",
-		bool_use_payy_webhook = true, -- if set true, you need webhook.exe in the same directory
+		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
+		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
 		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
@@ -218,23 +215,44 @@ function Get_UsageSystem()
 end
 local H = Get_UsageSystem()
 function Webhook_ps(p)
-	local t = "AUTO ROTATION LOG"
-	local j = "    $webHookUrl = '"
-		.. CONFIG.Other_setting.url_webhook
-		.. "'    \n    $host.ui.RawUI.WindowTitle = \"\"\n    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n    [System.Collections.ArrayList]$embedArray = @()\n    $title       = '"
-		.. t
-		.. "'\n    $description = '"
-		.. p
-		.. "'\n    $color       = '"
-		.. math.random(1000000, 9999999)
-		.. "'\n    $thumbUrl    = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png' \n    $footer  = '"
-		.. os.date("%d/%m/%Y")
-		.. " | "
-		.. os.date("%H:%M:%S")
-		.. " | script by payy'\n    $ip = '"
-		.. l
-		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n**RDP Information**`r`n<:cpu:1002628219964493885> CPU: $cpu%`r`n<:rampc:1002627413261434950> RAM: $b`r`n<:ip:1002628757808488470> IP: ||$ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'AUTO ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
-	if CONFIG.Other_setting.bool_use_payy_webhook then
+	tittlr = "ROTATION LOGs"
+	local script = [[
+$webHookUrl = ']] ..CONFIG.Other_setting.url_webhook.. [['
+
+$host.ui.RawUI.WindowTitle = ""
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[System.Collections.ArrayList]$embedArray = @()
+$title       = ']] .. tittlr .. [['
+$description = ']] .. p .. [['
+$color       = ']] .. warna .. [['
+$thumbUrl = ']] .. thumbnail .. [[' 
+$cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
+$ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
+$ip = Get-NetIPAddress -AddressFamily IPv4 -InterfaceIndex $(Get-NetConnectionProfile | Select-Object -ExpandProperty InterfaceIndex) | Select-Object -ExpandProperty IPAddress
+$thumbnailObject = [PSCustomObject]@{
+    url = $thumbUrl
+}
+
+$embedObject = [PSCustomObject]@{
+    title       = $title
+    description = "$description`r`n<a:warningbxb:974487949238485072> | Cpu :$cpu%`n<a:warningbxb:974487949238485072> | Ram : $ram MB | $ip"
+    color       = $color
+    thumbnail   = $thumbnailObject
+
+}
+
+$embedArray.Add($embedObject) | Out-Null
+$payload = [PSCustomObject]@{
+      'avatar_url' = 'https://cdn.discordapp.com/attachments/994257687808311326/994262822483669002/unknown.png'
+      'username' = 'Dogit logs'
+            'content' = '<@]].. CONFIG.Other_setting.YourDiscordid ..[[>'
+    embeds = $embedArray
+
+}
+
+Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+]]
+	if CONFIG.Other_setting.bool_use_webhook_exe then
 		if os.time() >= d then
 			H = Get_UsageSystem()
 			d = os.time() + 300
@@ -252,7 +270,7 @@ function Webhook_ps(p)
 		j = H[1] .. "%%"
 		D = H[2] .. "%%"
 		p = p
-			.. "\\n**RDP Information**\\n<:cpu:1002628219964493885> CPU: "
+			.. "\\n**RDP IP**\\n<:cpu:1002628219964493885> CPU: "
 			.. j
 			.. "\\n<:rampc:1002627413261434950> RAM: "
 			.. D
