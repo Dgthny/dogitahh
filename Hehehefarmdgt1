@@ -230,7 +230,7 @@ function Webhook_ps(p)
 		.. os.date("%H:%M:%S")
 		.. " | script by payy#1321'\n    $ip = '"
 		.. l
-		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n<a:warningbxb:974487949238485072> | Cpu :$cpu%`n<a:warningbxb:974487949238485072> | Ram : $ram MB `n<a:warningbxb:974487949238485072> | IP = $ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $embedArray.Add($embedObject) | Out-Null $payload = [PSCustomObject]@{'avatar_url' = 'https://cdn.discordapp.com/attachments/994257687808311326/994262822483669002/unknown.png' 'username' = 'Dogit logs''content' = '<@]].. YourDiscordid ..[[>'embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
+		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n<a:warningbxb:974487949238485072> | Cpu :$cpu%`n<a:warningbxb:974487949238485072> | Ram : $totalRam MB `n<a:warningbxb:974487949238485072> | IP = $ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $embedArray.Add($embedObject) | Out-Null $payload = [PSCustomObject]@{'avatar_url' = 'https://cdn.discordapp.com/attachments/994257687808311326/994262822483669002/unknown.png' 'username' = 'Dogit logs''content' = '<@]].. YourDiscordid ..[[>'embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
 	if CONFIG.Other_setting.bool_use_payy_webhook then
 		if os.time() >= d then
 			H = Get_UsageSystem()
@@ -249,7 +249,7 @@ function Webhook_ps(p)
 		j = H[1] .. "%%"
 		D = H[2] .. "%%"
 		p = p
-			.. "\\n**RDP Information**\\n<:cpu:1002628219964493885> CPU: "
+			.. "\\n**RDP Information**\\`n<a:warningbxb:974487949238485072>CPU: "
 			.. j
 			.. "\\n<:rampc:1002627413261434950> RAM: "
 			.. D
