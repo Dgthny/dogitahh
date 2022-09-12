@@ -344,7 +344,7 @@ function p.rotationFarm(l)
 	end
 	local function h()
 		if BOT ~= nil then
-			local l = "\n<a:skype_cool:1018912666204520531> |  Level: " .. BOT
+			local l = "\n<a:skype_cool:1018912666204520531> Level: " .. BOT
 			return l
 		else
 			return ""
@@ -1627,7 +1627,7 @@ function p.rotationFarm(l)
 						.. " OF "
 						.. D
 						.. N()
-						.. "\n<:growscan:1002995962572193833> Tiles can be planted: "
+						.. "\n<:pohon:988997124983234670> Tiles can be planted: "
 						.. v(l.itemID + 1)
 						.. i()
 						.. z()
@@ -1893,9 +1893,9 @@ function p.rotationFarm(l)
 					.. (getBot()).world:upper()
 					.. "||"
 					.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Storage Seed"
-					.. "\n<:growscan:1002995962572193833> Total Profit Seed: "
+					.. "\n<:pohon:988997124983234670> Total Profit Seed: "
 					.. tostring(d)
-					.. "\n<:growscan:1002995962572193833> Total Dropped Seed: "
+					.. "\n<:pohon:988997124983234670> Total Dropped Seed: "
 					.. H.dropped_seed
 			)
 			X(l.farm_world[1], l.farm_world_id)
