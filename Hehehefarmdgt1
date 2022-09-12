@@ -256,7 +256,7 @@ function Webhook_ps(p)
 			.. "\\n<:ip:1002628757808488470> IP: ||"
 			.. l
 			.. "||"
-		local V = 'webhook.exe dogit.send_embeds --url "'
+		local V = 'webhook.exe payy.send_embeds --url "'
 			.. t(CONFIG.Other_setting.url_webhook)
 			.. '" --message "'
 			.. p
