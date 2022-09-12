@@ -1,7 +1,7 @@
 
 -- rotation-farm payy#1321
 -- GrowX
-lisen = getBot().name
+lisen = getBot().name:lower()
 CONFIG = {
 	Main_setting = {
 		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
