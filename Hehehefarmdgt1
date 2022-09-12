@@ -224,7 +224,7 @@ function Webhook_ps(p)
 		.. p
 		.. "'\n    $color       = '"
 		.. math.random(1000000, 9999999)
-		.. "'\n    $thumbUrl    = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png' \n    $footertext  = '"
+		.. "'\n    $thumbUrl    = 'https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif' \n    $footertext  = '"
 		.. os.date("%d/%m/%Y")
 		.. " | "
 		.. os.date("%H:%M:%S")
