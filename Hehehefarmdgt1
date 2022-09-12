@@ -1,12 +1,11 @@
 
--- rotation-farm payy#1321
 -- GrowX
-lisen = getBot().name:lower()
+
 CONFIG = {
 	Main_setting = {
 		
 		ItemID = 5666,
-		Pack = "world_lock_10_pack", -- you can check more about pack in discord payy
+		Pack = "world_lock_10_pack", --ask dulu sebelum pakai
 	},
 	Farm_setting = {
 		farm_world = {
@@ -35,12 +34,13 @@ CONFIG = {
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB",
-		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		bool_use_payy_webhook = true, -- if set true, you need webhook.exe in the same directory
 		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
+lisen = getBot().name:lower()
 function mainn()
 Version = "1"
 BOT = nil
@@ -227,13 +227,13 @@ function Webhook_ps(p)
 		.. p
 		.. "'\n    $color       = '"
 		.. math.random(1000000, 9999999)
-		.. "'\n    $thumbUrl    = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png' \n    $footertext  = '"
+		.. "'\n    $thumbUrl    = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png' \n    $footer  = '"
 		.. os.date("%d/%m/%Y")
 		.. " | "
 		.. os.date("%H:%M:%S")
-		.. " | script by payy#1321'\n    $ip = '"
+		.. " | script by dogit'\n    $ip = '"
 		.. l
-		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n**RDP Information**`r`n<:cpu:1002628219964493885> CPU: $cpu%`r`n<:rampc:1002627413261434950> RAM: $b`r`n<:ip:1002628757808488470> IP: ||$ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'PAYY ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
+		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n**RDP Information**`r`n<:cpu:1002628219964493885> CPU: $cpu%`r`n<:rampc:1002627413261434950> RAM: $b`r`n<:ip:1002628757808488470> IP: ||$ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'AUTO ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
 	if CONFIG.Other_setting.bool_use_payy_webhook then
 		if os.time() >= d then
 			H = Get_UsageSystem()
@@ -263,7 +263,7 @@ function Webhook_ps(p)
 			.. t(CONFIG.Other_setting.url_webhook)
 			.. '" --message "'
 			.. p
-			.. '" --title "PAYY ROTATION LOG" --thumbnail "https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png"'
+			.. '" --title "AUTO ROTATION LOG" --thumbnail "https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png"'
 		local T = io.open("webhook.bat", "w+")
 		T:write(V)
 		T:close()
