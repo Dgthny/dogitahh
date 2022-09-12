@@ -1,12 +1,10 @@
 
--- rotation-farm payy#1321
 -- GrowX
-lisen = getBot().name:lower()
-CONFIG = {
+
+AHAYK = {
 	Main_setting = {
-		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
-		Pack = "world_lock_10_pack", -- you can check more about pack in discord payy
+		Pack = "world_lock_10_pack",
 	},
 	Farm_setting = {
 		farm_world = {
@@ -35,31 +33,32 @@ CONFIG = {
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB",
-		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		bool_use_exe_webhook = true, -- if set true, you need webhook.exe in the same directory of app. Use default false
 		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
+lisen = getBot().name:lower()
 function mainn()
 Version = "1"
 BOT = nil
 local l = ""
 local d = os.time() + 300
 function RunPowershell(l)
-	if CONFIG.DEVELOPERMODE == true then
+	if AHAYK.DEVELOPERMODE == true then
 		local d = io.popen("powershell -command -", "w")
 		d:write(l)
 		d:close()
 		return
 	end
-	local d = "payy-ps.ps1"
-	local H = "payy-ps.bat"
+	local d = "dogit-ps.ps1"
+	local H = "dogit-ps.bat"
 	local p = io.open(H, "r")
 	if p ~= nil then
 		io.close(p)
-		d = "payy-ps_2.ps1"
-		H = "payy-ps_2.bat"
+		d = "dogit-ps_2.ps1"
+		H = "dogit-ps_2.bat"
 	end
 	local t = io.open(d, "w")
 	t:write(l)
@@ -220,7 +219,7 @@ local H = Get_UsageSystem()
 function Webhook_ps(p)
 	local t = "AUTO ROTATION LOG"
 	local j = "    $webHookUrl = '"
-		.. CONFIG.Other_setting.url_webhook
+		.. AHAYK.Other_setting.url_webhook
 		.. "'    \n    $host.ui.RawUI.WindowTitle = \"\"\n    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n    [System.Collections.ArrayList]$embedArray = @()\n    $title       = '"
 		.. t
 		.. "'\n    $description = '"
@@ -231,10 +230,10 @@ function Webhook_ps(p)
 		.. os.date("%d/%m/%Y")
 		.. " | "
 		.. os.date("%H:%M:%S")
-		.. " | script by payy#1321'\n    $ip = '"
+		.. " | dogitstore'\n    $ip = '"
 		.. l
-		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n**RDP Information**`r`n<:cpu:1002628219964493885> CPU: $cpu%`r`n<:rampc:1002627413261434950> RAM: $b`r`n<:ip:1002628757808488470> IP: ||$ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'PAYY ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
-	if CONFIG.Other_setting.bool_use_payy_webhook then
+		.. "'\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $totalRam = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1GB\n    $availMem = (Get-Counter 'MemoryAvailable Bytes').CounterSamples.CookedValue / 1GB\n    $c = $totalRam - $availMem\n    $ram=(104857600 * $c / $totalRam).ToString(\"#,0\")\n    $a = $ram\n    $first,$last = ($a.tolower()).Split(\" \")\n    $b = $first[0]+$first[1]+\"%\"\n    $thumbnailObject = [PSCustomObject]@{\n        url = $thumbUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n**RDP Information**`r`n<:cpu:1002628219964493885> CPU: $cpu%`r`n<:rampc:1002627413261434950> RAM: $b`r`n<:ip:1002628757808488470> IP: ||$ip||\"\n        color       = $color\n        footer      = $footerObject\n        thumbnail   = $thumbnailObject\n    }\n    $embedArray.Add($embedObject) | Out-Null\n    $payload = [PSCustomObject]@{\n        'avatar_url' = 'https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png'\n        'username' = 'AUTO ROTATION LOG'\n        embeds = $embedArray\n    }\n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n    "
+	if AHAYK.Other_setting.bool_use_exe_webhook then
 		if os.time() >= d then
 			H = Get_UsageSystem()
 			d = os.time() + 300
@@ -259,11 +258,11 @@ function Webhook_ps(p)
 			.. "\\n<:ip:1002628757808488470> IP: ||"
 			.. l
 			.. "||"
-		local V = 'payy-webhook.exe payy.send_embeds --url "'
-			.. t(CONFIG.Other_setting.url_webhook)
+		local V = 'webhook.exe payy.send_embeds --url "'
+			.. t(AHAYK.Other_setting.url_webhook)
 			.. '" --message "'
 			.. p
-			.. '" --title "PAYY ROTATION LOG" --thumbnail "https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png"'
+			.. '" --title "AUTO ROTATION LOG" --thumbnail "https://cdn.discordapp.com/avatars/964052454364823592/01fecacd9744d9d8e563d66fcbdeb0f0.png"'
 		local T = io.open("webhook.bat", "w+")
 		T:write(V)
 		T:close()
@@ -311,7 +310,7 @@ function p.rotationFarm(l)
 		or type(l.pack) ~= "string"
 		or type(l.ban_joined) ~= "boolean"
 		or type(l.owner) ~= "string"
-		or type(l.config_break) ~= "table"
+		or type(l.AHAYK_break) ~= "table"
 	then
 		return
 	end
@@ -1758,7 +1757,7 @@ function p.rotationFarm(l)
 		if math.floor(findItem(l.itemID)) >= 180 and e then
 			local d = ""
 			local H, p
-			if l.config_break.bool_break_other_world then
+			if l.AHAYK_break.bool_break_other_world then
 				X(l.break_world, l.break_world_id)
 				sleep(500)
 				d = "\n<:worldgt:1002631118794805422> World Category: World Break"
@@ -1808,8 +1807,8 @@ function p.rotationFarm(l)
 						.. R()
 				)
 			end
-			m(l.itemID, f(l.itemID), l.ban_joined, l.owner, H, p, l.config_break)
-			if not l.config_break.bool_break_other_world then
+			m(l.itemID, f(l.itemID), l.ban_joined, l.owner, H, p, l.AHAYK_break)
+			if not l.AHAYK_break.bool_break_other_world then
 				for d, H in pairs(getTiles()) do
 					if H.fg == l.itemID and H.y == g() then
 						if H.x >= M() then
@@ -1817,7 +1816,7 @@ function p.rotationFarm(l)
 							sleep(200)
 							while (getTile(H.x, H.y)).fg ~= 0 do
 								punch(1, 0)
-								sleep(l.config_break.delay_break)
+								sleep(l.AHAYK_break.delay_break)
 							end
 							for l = 1, 3, 1 do
 								punch(1, 0)
@@ -1829,7 +1828,7 @@ function p.rotationFarm(l)
 							sleep(200)
 							while (getTile(H.x, H.y)).fg ~= 0 do
 								punch(-1, 0)
-								sleep(l.config_break.delay_break)
+								sleep(l.AHAYK_break.delay_break)
 							end
 							for l = 1, 3, 1 do
 								punch(-1, 0)
@@ -1864,7 +1863,7 @@ function p.rotationFarm(l)
 						.. R()
 				)
 			end
-			if l.config_break.bool_break_other_world then
+			if l.AHAYK_break.bool_break_other_world then
 				X(l.farm_world[1], l.farm_world_id)
 			end
 			sleep(500)
@@ -1917,7 +1916,7 @@ function Get_UUIDFromSystem()
 end
 function Get_UUIDFromDatabase(l)
 	local d = GetFileName(true)
-	local H = Get_IPaddress() .. "uuid/" .. CONFIG.Main_setting.License .. "/" .. l
+	local H = Get_IPaddress() .. "uuid/"  "/" .. l
 	local p = "        $Url = '"
 		.. H
 		.. '\'\n        $Http = new-object -com "WinHttp.WinHttpRequest.5.1"\n        $Http.open("GET", $Url, $false)\n        $Http.send()\n        $Body = $Http.responseText\n        $Body.substring(1,$Body.length-2) | Out-File -FilePath \''
@@ -1951,20 +1950,20 @@ function p.wait(l)
 end
 function main()
 	p.rotationFarm({
-		itemID = CONFIG.Main_setting.ItemID,
-		farm_world = CONFIG.Farm_setting.farm_world,
-		farm_world_id = CONFIG.Farm_setting.farm_world_id,
-		repeat_world = CONFIG.Other_setting.repeat_world,
-		storage_seed = CONFIG.Storage_setting.storage_seed,
-		storage_seed_id = CONFIG.Storage_setting.storage_seed_id,
-		storage_pack = CONFIG.Storage_setting.storage_pack,
-		storage_pack_id = CONFIG.Storage_setting.storage_pack_id,
-		break_world = CONFIG.Break_setting.break_world_name,
-		break_world_id = CONFIG.Break_setting.break_world_id,
-		pack = CONFIG.Main_setting.Pack,
-		ban_joined = CONFIG.Break_setting.auto_ban_joined,
-		owner = CONFIG.Break_setting.owner,
-		config_break = CONFIG.Break_setting,
+		itemID = AHAYK.Main_setting.ItemID,
+		farm_world = AHAYK.Farm_setting.farm_world,
+		farm_world_id = AHAYK.Farm_setting.farm_world_id,
+		repeat_world = AHAYK.Other_setting.repeat_world,
+		storage_seed = AHAYK.Storage_setting.storage_seed,
+		storage_seed_id = AHAYK.Storage_setting.storage_seed_id,
+		storage_pack = AHAYK.Storage_setting.storage_pack,
+		storage_pack_id = AHAYK.Storage_setting.storage_pack_id,
+		break_world = AHAYK.Break_setting.break_world_name,
+		break_world_id = AHAYK.Break_setting.break_world_id,
+		pack = AHAYK.Main_setting.Pack,
+		ban_joined = AHAYK.Break_setting.auto_ban_joined,
+		owner = AHAYK.Break_setting.owner,
+		AHAYK_break = AHAYK.Break_setting,
 	})
 end
 main()
