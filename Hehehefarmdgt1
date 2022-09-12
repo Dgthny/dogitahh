@@ -1,16 +1,11 @@
-
--- rotation-farm payy#1321
--- GrowX
 CONFIG = {
 	Main_setting = {
-		License = "license in payy server", -- lock hwid, 1 license 3 device. For more info join discord payy
 		ItemID = 5666,
-		Pack = "world_lock_10_pack", -- you can check more about pack in discord payy
+		Pack = "world_lock_10_pack"
 	},
 	Farm_setting = {
 		farm_world = {
-			"Btfxc",
-
+			"gbzek"
 		},
 		farm_world_id = "1",
 	},
@@ -21,11 +16,11 @@ CONFIG = {
 		storage_pack_id = "dgt99",
 	},
 	Break_setting = {
-		bool_break_other_world = true,
-		break_world_name = "woykaukemana8",
-		break_world_id = "1919OI",
+		bool_break_other_world = false,
+		break_world_name = "your world break, if you set true bool_break_other_world",
+		break_world_id = "your world break id, if set true bool_break_other_world",
 		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
-		tile = 5,
+		tile = 2,
 		delay_break = 200, -- millisecond
 		delay_put = 200, -- millisecond
 		auto_ban_joined = false, -- you need access world lock if wanna auto-ban-joined
@@ -33,14 +28,15 @@ CONFIG = {
 	},
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = "https://discord.com/api/webhooks/1007950007485354024/vqVkv_Qngm1qmCU-GltDJm6GVYxckgjmEPbKS9VoZErAx3LOxH7-5F-QD4kl5ECXQkCB",
-		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
+		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
 		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
-function main()
+lisen = getBot().name:lower()
+function mainn()
 Version = "1"
 BOT = nil
 local l = ""
@@ -341,14 +337,14 @@ function p.rotationFarm(l)
 		local l = os.time()
 		local d = math.floor((l - V) / 60)
 		local H = tostring(d)
-		return "\n:hourglass_flowing_sand: RUNNING TIME: " .. H .. " Minute"
+		return "\n<a:MinionPig_Eating:1018915472277782619> | RUNNING TIME: " .. H .. " Minute"
 	end
 	local function N()
 		return ""
 	end
 	local function h()
 		if BOT ~= nil then
-			local l = "\n:fire: Level: " .. BOT
+			local l = "\n<a:skype_cool:1018912666204520531> |  Level: " .. BOT
 			return l
 		else
 			return ""
@@ -936,19 +932,19 @@ function p.rotationFarm(l)
 			if (getBot()).state == 0 then
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: Disconnect"
-						.. "\n<:taskdo:1002630516362723479> Task: Breaking Blocks"
+						.. "\n<:offbutton:873152764279144458> Status: Disconnect"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks"
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
-						.. "\n<:worldgt:1002631118794805422> World Category: World Break"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Break"
 						.. i()
 						.. z()
 						.. P()
@@ -959,19 +955,19 @@ function p.rotationFarm(l)
 				end
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\nn<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: Reconnect"
-						.. "\n<:taskdo:1002630516362723479> Task: Breaking Blocks"
+						.. "\n<:offbutton:873152764279144458>  Status: Reconnect"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks"
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
-						.. "\n<:worldgt:1002631118794805422> World Category: World Break"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Break"
 						.. i()
 						.. z()
 						.. P()
@@ -1041,20 +1037,20 @@ function p.rotationFarm(l)
 					end
 					if (getBot()).state == 0 then
 						Webhook_ps(
-							"**Bot Information**"
-								.. "\n<:botgt:1002631836641546460> Bot Name: ||"
-								.. (getBot()).name:upper()
-								.. "||"
-								.. "\n<:gemsgt:1002635374918639736> Gems: "
-								.. findItem(112)
-								.. h()
-								.. "\n<:status:1002633641798676620> Status: Disconnect"
-								.. "\n<:taskdo:1002630516362723479> Task: Harvesting Trees!"
-								.. "\n**World Information**"
-								.. "\n<:worldgt:1002631118794805422> World Name: ||"
-								.. (getBot()).world:upper()
-								.. "||"
-								.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+					"**Bot Information**"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
+						.. (getBot()).name:upper()
+						.. "||"
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
+						.. findItem(112)
+						.. h()
+						.. "\n<:offbutton:873152764279144458> Status: Disconnect"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: HARVEST!!!"
+						.. "\n**World Information**"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
+						.. (getBot()).world:upper()
+						.. "||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Break"
 								.. i()
 								.. z()
 								.. P()
@@ -1065,19 +1061,19 @@ function p.rotationFarm(l)
 						end
 						Webhook_ps(
 							"**Bot Information**"
-								.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+								.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 								.. (getBot()).name:upper()
 								.. "||"
-								.. "\n<:gemsgt:1002635374918639736> Gems: "
+								.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 								.. findItem(112)
 								.. h()
-								.. "\n<:status:1002633641798676620> Status: Reconnect"
-								.. "\n<:taskdo:1002630516362723479> Task: Harvesting Trees!"
+								.. "\n<:offbutton:873152764279144458> Status: Reconnect"
+								.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Harvesting Trees!"
 								.. "\n**World Information**"
-								.. "\n<:worldgt:1002631118794805422> World Name: ||"
+								.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 								.. (getBot()).world:upper()
 								.. "||"
-								.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+								.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
 								.. i()
 								.. z()
 								.. P()
@@ -1137,20 +1133,20 @@ function p.rotationFarm(l)
 				end
 				if (getBot()).state == 0 then
 					Webhook_ps(
-						"**Bot Information**"
-							.. "\n<:botgt:1002631836641546460> Bot Name: ||"
-							.. (getBot()).name:upper()
-							.. "||"
-							.. "\n<:gemsgt:1002635374918639736> Gems: "
-							.. findItem(112)
-							.. h()
-							.. "\n<:status:1002633641798676620> Status: Disconnect"
-							.. "\n<:taskdo:1002630516362723479> Task: Planting Seeds"
-							.. "\n**World Information**"
-							.. "\n<:worldgt:1002631118794805422> World Name: ||"
-							.. (getBot()).world:upper()
-							.. "||"
-							.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+					"**Bot Information**"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
+						.. (getBot()).name:upper()
+						.. "||"
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
+						.. findItem(112)
+						.. h()
+						.. "\n<:offbutton:873152764279144458> Status: Disconnect"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: PLANT!!!"
+						.. "\n**World Information**"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
+						.. (getBot()).world:upper()
+						.. "||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Break"
 							.. i()
 							.. z()
 							.. P()
@@ -1162,19 +1158,19 @@ function p.rotationFarm(l)
 					end
 					Webhook_ps(
 						"**Bot Information**"
-							.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+							.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 							.. (getBot()).name:upper()
 							.. "||"
-							.. "\n<:gemsgt:1002635374918639736> Gems: "
+							.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 							.. findItem(112)
 							.. h()
-							.. "\n<:status:1002633641798676620> Status: Reconnect"
-							.. "\n<:taskdo:1002630516362723479> Task: Planting Seeds"
+							.. "\n<:offbutton:873152764279144458> Status: Reconnect"
+							.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Planting Seeds"
 							.. "\n**World Information**"
-							.. "\n<:worldgt:1002631118794805422> World Name: ||"
+							.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 							.. (getBot()).world:upper()
 							.. "||"
-							.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+							.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
 							.. i()
 							.. z()
 							.. P()
@@ -1480,20 +1476,20 @@ function p.rotationFarm(l)
 		H.dropped_pack = K(t)
 		Webhook_ps(
 			"**Bot Information**"
-				.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+				.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 				.. (getBot()).name:upper()
 				.. "||"
-				.. "\n<:gemsgt:1002635374918639736> Gems: "
+				.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 				.. findItem(112)
 				.. h()
-				.. " \n<:status:1002633641798676620> Status: "
+				.. " \n<:offbutton:873152764279144458> Status: "
 				.. T()
-				.. "\n<:taskdo:1002630516362723479> Task: Buying Pack Done"
+				.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Buying Pack Done"
 				.. "\n**World Information**"
-				.. "\n<:worldgt:1002631118794805422> World Name: ||"
+				.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 				.. (getBot()).world:upper()
 				.. "||"
-				.. "\n<:worldgt:1002631118794805422> World Category: World Storage Pack"
+				.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Storage Pack"
 				.. "\n**Item Dropped**"
 				.. "\n"
 				.. H.dropped_pack
@@ -1507,20 +1503,20 @@ function p.rotationFarm(l)
 	sleep(500)
 	Webhook_ps(
 		"**Bot Information**"
-			.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+			.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 			.. (getBot()).name:upper()
 			.. "||"
-			.. "\n<:gemsgt:1002635374918639736> Gems: "
+			.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 			.. findItem(112)
 			.. h()
-			.. "\n<:status:1002633641798676620> Status: "
+			.. "\n<:offbutton:873152764279144458> Status: "
 			.. T()
-			.. "\n<:taskdo:1002630516362723479> Task: Starting Script"
+			.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Starting Script"
 			.. "\n**World Information**"
-			.. "\n<:worldgt:1002631118794805422> World Name: ||"
+			.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 			.. (getBot()).world:upper()
 			.. "||"
-			.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+			.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
 			.. "\n<:growscan:1002995962572193833> Tree Ready to Harvest: "
 			.. O(l.itemID + 1, f(l.itemID))
 			.. i()
@@ -1576,20 +1572,20 @@ function p.rotationFarm(l)
 			if not l.short_webhook then
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: "
+						.. "\n<:offbutton:873152764279144458> Status: "
 						.. T()
-						.. "\n<:taskdo:1002630516362723479> Task: Harvesting Trees"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Harvesting Trees"
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
-						.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
 						.. "\n:arrow_right: FARM "
 						.. j
 						.. " OF "
@@ -1610,20 +1606,20 @@ function p.rotationFarm(l)
 			if not l.short_webhook then
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: "
+						.. "\n<:offbutton:873152764279144458> Status: "
 						.. T()
-						.. "\n<:taskdo:1002630516362723479> Task: Planting Seeds"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Planting Seeds"
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
-						.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
 						.. "\n:arrow_right: FARM "
 						.. j
 						.. " OF "
@@ -1662,18 +1658,18 @@ function p.rotationFarm(l)
 			if l.farm_world[1] ~= nil then
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: "
+						.. "\n<:offbutton:873152764279144458> Status: "
 						.. T()
-						.. "\n<:taskdo:1002630516362723479> Task: Finished world "
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Finished world "
 						.. d
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
 						.. i()
@@ -1683,21 +1679,21 @@ function p.rotationFarm(l)
 				V = os.time()
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: "
+						.. "\n<:offbutton:873152764279144458> Status: "
 						.. T()
-						.. "\n<:taskdo:1002630516362723479> Task: Entering new farm world "
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Entering new farm world "
 						.. l.farm_world[1]
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
-						.. "\n<:worldgt:1002631118794805422> World Category: World Farm"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Farm"
 						.. "\n<:growscan:1002995962572193833> Tree Ready to Harvest: "
 						.. O(l.itemID + 1, f(l.itemID))
 						.. i()
@@ -1722,30 +1718,31 @@ function p.rotationFarm(l)
 					I = false
 					Webhook_ps(
 						"**Bot Information**"
-							.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+							.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 							.. (getBot()).name:upper()
 							.. "||"
-							.. "\n<:gemsgt:1002635374918639736> Gems: "
+							.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 							.. findItem(112)
 							.. h()
-							.. "\n<:status:1002633641798676620> Status: "
+							.. "\n<:offbutton:873152764279144458> Status: "
 							.. T()
-							.. "\n<:taskdo:1002630516362723479> Finished All World, Returning to First World"
+							.. "\n<a:Nitro_boosting_level:1018918021651239002> Finished All World, Returning to First World"
 							.. i()
 							.. R()
 					)
 				elseif not l.repeat_world then
 					Webhook_ps(
-						"**Bot Information**"
-							.. "\n<:botgt:1002631836641546460> Bot Name: ||"
-							.. (getBot()).name:upper()
-							.. "||"
-							.. "\n<:gemsgt:1002635374918639736> Gems: "
-							.. findItem(112)
+					"**Bot Information**"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
+						.. (getBot()).name:upper()
+						.. "||"
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
+						.. findItem(112)
+					
 							.. h()
-							.. "\n<:status:1002633641798676620> Status: "
+							.. "\n<:offbutton:873152764279144458> Status: "
 							.. T()
-							.. "\n<:taskdo:1002630516362723479> Finished All World, Removing Bot"
+							.. "\n<a:Nitro_boosting_level:1018918021651239002> Finished All World, Removing Bot"
 							.. i()
 							.. R()
 					)
@@ -1760,7 +1757,7 @@ function p.rotationFarm(l)
 			if l.config_break.bool_break_other_world then
 				X(l.break_world, l.break_world_id)
 				sleep(500)
-				d = "\n<:worldgt:1002631118794805422> World Category: World Break"
+				d = "\n<a:NitroWumpus:1018917811285921832> World Category: World Break"
 				H = l.break_world
 				p = l.break_world_id
 			else
@@ -1787,17 +1784,17 @@ function p.rotationFarm(l)
 			if not l.short_webhook then
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: "
+						.. "\n<:offbutton:873152764279144458> Status: "
 						.. T()
-						.. "\n<:taskdo:1002630516362723479> Task: Breaking Blocks Start"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks Start"
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
 						.. d
@@ -1843,17 +1840,17 @@ function p.rotationFarm(l)
 			if not l.short_webhook then
 				Webhook_ps(
 					"**Bot Information**"
-						.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+						.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 						.. (getBot()).name:upper()
 						.. "||"
-						.. "\n<:gemsgt:1002635374918639736> Gems: "
+						.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 						.. findItem(112)
 						.. h()
-						.. "\n<:status:1002633641798676620> Status: "
+						.. "\n<:offbutton:873152764279144458> Status: "
 						.. T()
-						.. "\n<:taskdo:1002630516362723479> Task: Breaking Blocks End"
+						.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Breaking Blocks End"
 						.. "\n**World Information**"
-						.. "\n<:worldgt:1002631118794805422> World Name: ||"
+						.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 						.. (getBot()).world:upper()
 						.. "||"
 						.. d
@@ -1880,20 +1877,20 @@ function p.rotationFarm(l)
 			H.dropped_seed = tostring(J(l.itemID + 1))
 			Webhook_ps(
 				"**Bot Information**"
-					.. "\n<:botgt:1002631836641546460> Bot Name: ||"
+					.. "\n<a:NitroFlying:1018917588832624781> Bot Name: ||"
 					.. (getBot()).name:upper()
 					.. "||"
-					.. "\n<:gemsgt:1002635374918639736> Gems: "
+					.. "\n<a:nitro_boost_SPIN:1018918391244922962> Gems: "
 					.. findItem(112)
 					.. h()
-					.. "\n<:status:1002633641798676620> Status: "
+					.. "\n<:offbutton:873152764279144458> Status: "
 					.. T()
-					.. "\n<:taskdo:1002630516362723479> Task: Dropping Seeds"
+					.. "\n<a:Nitro_boosting_level:1018918021651239002> Task: Dropping Seeds"
 					.. "\n**World Information**"
-					.. "\n<:worldgt:1002631118794805422> World Name: ||"
+					.. "\n<a:NitroWumpus:1018917811285921832> World Name: ||"
 					.. (getBot()).world:upper()
 					.. "||"
-					.. "\n<:worldgt:1002631118794805422> World Category: World Storage Seed"
+					.. "\n<a:NitroWumpus:1018917811285921832> World Category: World Storage Seed"
 					.. "\n<:growscan:1002995962572193833> Total Profit Seed: "
 					.. tostring(d)
 					.. "\n<:growscan:1002995962572193833> Total Dropped Seed: "
@@ -1916,7 +1913,7 @@ function Get_UUIDFromSystem()
 end
 function Get_UUIDFromDatabase(l)
 	local d = GetFileName(true)
-	local H = Get_IPaddress() .. "uuid/" .. CONFIG.Main_setting.License .. "/" .. l
+	local H = Get_IPaddress() .. "uuid/" .. lisen .. "/" .. l
 	local p = "        $Url = '"
 		.. H
 		.. '\'\n        $Http = new-object -com "WinHttp.WinHttpRequest.5.1"\n        $Http.open("GET", $Url, $false)\n        $Http.send()\n        $Body = $Http.responseText\n        $Body.substring(1,$Body.length-2) | Out-File -FilePath \''
