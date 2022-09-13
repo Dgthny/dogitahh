@@ -1,40 +1,55 @@
 
+blockid = 5666
+packitemid = "world_lock_10pack"
+worldfarm = {"gbzek",}
+worldidfarm = "1"
+saveworldseed = "dgtbabu1"
+saveworldseedid = "dgt57"
+saveworldpack = "dgtbabu1"
+saveworldpackid = "99"
+breakotherworld = false 
+worldbreak = "xxx"
+worldbreakid = "x"
+breaktile = 2
+delaybreak = 200
+delayput = 200
+autobanjoin = false
+whitelistpeople = "people monitoring" 
+whileworld = false
+webhookweb = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
+webhookbypayy = false
+shortwebhook = false 
 
 CONFIG = {
 	Main_setting = {
-		ItemID = 5666,
-		Pack = "world_lock_10_pack"
+		ItemID = blockid,
+		Pack = packitemid
 	},
 	Farm_setting = {
-		farm_world = {
-			"gbzek"
-		},
-		farm_world_id = "1",
+		farm_world = worldfarm,
+		farm_world_id = worldidfarm,
 	},
 	Storage_setting = {
-		storage_seed = "dgtbabu1",
-		storage_seed_id = "dgt57",
-		storage_pack = "dgtbabu1",
-		storage_pack_id = "dgt99",
+		storage_seed = saveworldseed,
+		storage_seed_id = saveworldseedid,
+		storage_pack = saveworldpack,
+		storage_pack_id = saveworldpackid,
 	},
 	Break_setting = {
-		bool_break_other_world = false,
-		break_world_name = "your world break, if you set true bool_break_other_world",
-		break_world_id = "your world break id, if set true bool_break_other_world",
-		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
-		tile = 2,
-		delay_break = 200, -- millisecond
-		delay_put = 200, -- millisecond
-		auto_ban_joined = false, -- you need access world lock if wanna auto-ban-joined
-		owner = "GrowidToWhitelist", -- when autobanjoined true, whitelist this growid
+		bool_break_other_world = breakotherworld,
+		break_world_name = worldbreak,
+		break_world_id = worldbreakid,
+		tile = breaktile,
+		delay_break = delaybreak,
+		delay_put = delayput,
+		auto_ban_joined = autobanjoined, 
+		owner = whitelistpeople ,
 	},
 	Other_setting = {
-		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
-		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
-		short_webhook = true,
-		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
-		-- if short_webhook false -> display all tasks performed by bot
+		repeat_world = whileworld, 
+		url_webhook = webhookweb,
+		bool_use_payy_webhook = webhookbypayy,
+		short_webhook = shortwebhook,
 	},
 }
 lisen = getBot().name:lower()
