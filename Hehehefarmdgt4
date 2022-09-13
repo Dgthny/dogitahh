@@ -1,68 +1,46 @@
 --terima kasih sudah membeli sc ini :)
+--this is v.2 if you have bug message in diskord chanel dogit store 
+--growx
+--setup
+--terima kasih sudah membeli sc ini :)
 --growx
 --setup 
-blockid = 5666
-packitemid = "world_lock_10pack"
--- only support by list item
---surgical_kit
---star_supplies
---fishin_pack
---world_lock_10_pack
---vending_machine
-worldfarm = {"gbzek"}
-worldidfarm = "1"
-saveworldseed = "dgtbabu1"
-saveworldseedid = "dgt57"
-saveworldpack = "dgtbabu1"
-saveworldpackid = "99"
-
---setup world
-breakotherworld = false --true or false
-worldbreak = "xxx" --if true
-worldbreakid = "x"
-breaktile = 2
-delaybreak = 200
-delayput = 200
-autobanjoin = false --true or false
-whitelistpeople = "people monitoring " --if auto ban true
-whileworld = false --true or false if want to return first world
---webhook and webhook exe by payy
-webhookweb = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
-webhookbypayy = false --true or false webhhokk by payy exe 
-shortwebhook = true
-
 CONFIG = {
 	Main_setting = {
-		ItemID = blockid,
-		Pack = packitemid
+		ItemID = 5666,
+		Pack = "world_lock_10_pack"
 	},
 	Farm_setting = {
-		farm_world = worldfarm,
-		farm_world_id = worldidfarm,
+		farm_world = {
+			"gbzek"
+		},
+		farm_world_id = "1",
 	},
 	Storage_setting = {
-		storage_seed = saveworldseed,
-		storage_seed_id = saveworldseedid,
-		storage_pack = saveworldpack,
-		storage_pack_id = saveworldpackid,
+		storage_seed = "dgtbabu1",
+		storage_seed_id = "dgt57",
+		storage_pack = "dgtbabu1",
+		storage_pack_id = "dgt99",
 	},
 	Break_setting = {
-		bool_break_other_world = breakotherworld,
-		break_world_name = worldbreak,
-		break_world_id = worldbreakid,
-		tile = breaktile,
-		delay_break = delaybreak, -- millisecond
-		delay_put = delayput, -- millisecond
-		auto_ban_joined = autobanjoined, -- you need access world lock if wanna auto-ban-joined
-		owner = whitelistpeople, -- when autobanjoined true, whitelist this growid
+		bool_break_other_world = false,
+		break_world_name = "your world break, if you set true bool_break_other_world",
+		break_world_id = "your world break id, if set true bool_break_other_world",
+		-- you can set tile into 1,2,3,4 or 5 tile when breaking block
+		tile = 2,
+		delay_break = 200, 
+		delay_put = 200,
+		auto_ban_joined = false, 
+		owner = "owner", -- when autobanjoined true, whitelist this growid
 	},
 	Other_setting = {
-		repeat_world = whileworld, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
-		url_webhook = webhookweb,
-		bool_use_payy_webhook = webhookbypayy, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
-		short_webhook = shortwebhook,
+		repeat_world = false, --return to first world
+		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
+		bool_use_payy_webhook = false,
+		--this tool by payy webhook 
+		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
-		-- if short_webhook false -> display all tasks performed by bot
+		
 	},
 }
 lisen = getBot().name:lower()
