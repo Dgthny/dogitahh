@@ -2,7 +2,7 @@
 --growx
 --setup 
 blockid = 5666
-packid = "world_lock_10pack"
+pack = "world_lock_10pack"
 -- only support by list item
 --surgical_kit
 --star_supplies
@@ -35,7 +35,7 @@ shortwebhook = false --only start sc -- bot drop seed -- bot drop pack -- bot fi
 CONFIG = {
 	Main_setting = {
 		ItemID = blockid,
-		Pack = packid,
+		Pack = 
 	},
 	Farm_setting = {
 		farm_world = worldfarm
@@ -63,7 +63,7 @@ CONFIG = {
 		repeat_world = whileworld, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = webhookweb,
 		bool_use_payy_webhook = webhookbypayy, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
-		short_webhook = short_webhook,
+		short_webhook = shortwebhook,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
 	},
