@@ -1,50 +1,15 @@
---terima kasih sudah membeli sc ini :)
---this is v.2 if you have bug message in diskord chanel dogit store 
---growx
---setup
---terima kasih sudah membeli sc ini :)
---growx
---setup 
-blockid = 5666
-packitemid = "world_lock_10pack"
--- only support by list item
---surgical_kit
---star_supplies
---fishin_pack
---world_lock_10_pack
---vending_machine
-worldfarm = {"gbzek",}
-worldidfarm = "1"
-saveworldseed = "dgtbabu1"
-saveworldseedid = "dgt57"
-saveworldpack = "dgtbabu1"
-saveworldpackid = "99"
 
---setup world
-breakotherworld = false --true or false
-worldbreak = "xxx" --if true
-worldbreakid = "x"
-breaktile = 2
-delaybreak = 200
-delayput = 200
-autobanjoin = false --true or false
-whitelistpeople = "people monitoring " --if auto ban true
-whileworld = false --true or false if want to return first world
---webhook and webhook exe by payy
-webhookweb = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz" -- your webhook web and you can monitor
-webhookbypayy = false --true or false webhhokk by payy exe 
-shortwebhook = false --only start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 
 CONFIG = {
 	Main_setting = {
-		ItemID = blockid,
-		Pack = packitemid
+		ItemID = 5666,
+		Pack = "world_lock_10_pack"
 	},
 	Farm_setting = {
 		farm_world = {
-			worldfarm
+			"gbzek"
 		},
-		farm_world_id = worldidfarm,
+		farm_world_id = "1",
 	},
 	Storage_setting = {
 		storage_seed = "dgtbabu1",
