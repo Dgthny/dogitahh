@@ -1,5 +1,8 @@
+ 
 
+CONFIG = {
 blockid = 5666
+
 packitemid = "world_lock_10pack"
 worldfarm = {"gbzek",}
 worldidfarm = "1"
@@ -18,9 +21,7 @@ whitelistpeople = "people monitoring"
 whileworld = false
 webhookweb = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
 webhookbypayy = false
-shortwebhook = false 
-
-CONFIG = {
+shortwebhook = false
 	Main_setting = {
 		ItemID = blockid,
 		Pack = packitemid
