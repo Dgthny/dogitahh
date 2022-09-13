@@ -1,26 +1,37 @@
- blockid = 5666
+--terima kasih sudah membeli sc ini :)
+--growx
+--setup 
+blockid = 5666
 packitemid = "world_lock_10pack"
-worldfarm = {"gbzek",}
+-- only support by list item
+--surgical_kit
+--star_supplies
+--fishin_pack
+--world_lock_10_pack
+--vending_machine
+worldfarm = {"gbzek"}
 worldidfarm = "1"
 saveworldseed = "dgtbabu1"
 saveworldseedid = "dgt57"
 saveworldpack = "dgtbabu1"
 saveworldpackid = "99"
-breakotherworld = false 
-worldbreak = "xxx"
+
+--setup world
+breakotherworld = false --true or false
+worldbreak = "xxx" --if true
 worldbreakid = "x"
 breaktile = 2
 delaybreak = 200
 delayput = 200
-autobanjoin = false
-whitelistpeople = "people monitoring" 
-whileworld = false
+autobanjoin = false --true or false
+whitelistpeople = "people monitoring " --if auto ban true
+whileworld = false --true or false if want to return first world
+--webhook and webhook exe by payy
 webhookweb = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
-webhookbypayy = false
-shortwebhook = false
+webhookbypayy = false --true or false webhhokk by payy exe 
+shortwebhook = true
 
 CONFIG = {
-    
 	Main_setting = {
 		ItemID = blockid,
 		Pack = packitemid
@@ -40,16 +51,18 @@ CONFIG = {
 		break_world_name = worldbreak,
 		break_world_id = worldbreakid,
 		tile = breaktile,
-		delay_break = delaybreak,
-		delay_put = delayput,
-		auto_ban_joined = autobanjoined, 
-		owner = whitelistpeople ,
+		delay_break = delaybreak, -- millisecond
+		delay_put = delayput, -- millisecond
+		auto_ban_joined = autobanjoined, -- you need access world lock if wanna auto-ban-joined
+		owner = whitelistpeople, -- when autobanjoined true, whitelist this growid
 	},
 	Other_setting = {
-		repeat_world = whileworld, 
+		repeat_world = whileworld, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = webhookweb,
-		bool_use_payy_webhook = webhookbypayy,
+		bool_use_payy_webhook = webhookbypayy, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
 		short_webhook = shortwebhook,
+		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
+		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
 lisen = getBot().name:lower()
