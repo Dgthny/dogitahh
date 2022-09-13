@@ -2,7 +2,7 @@
 --growx
 --setup 
 blockid = 5666
-packidd = "world_lock_10pack"
+packitemid = "world_lock_10pack"
 -- only support by list item
 --surgical_kit
 --star_supplies
@@ -31,11 +31,10 @@ webhookweb = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRX
 webhookbypayy = false --true or false webhhokk by payy exe 
 shortwebhook = false --only start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 
-
 CONFIG = {
 	Main_setting = {
 		ItemID = blockid,
-		Pack = packidd,
+		Pack = packitemid,
 	},
 	Farm_setting = {
 		farm_world = worldfarm
@@ -54,18 +53,16 @@ CONFIG = {
 		break_world_name = worldbreak,
 		break_world_id = worldbreakid,
 		tile = breaktile,
-		delay_break = delaybreak, -- millisecond
-		delay_put = delayput, -- millisecond
-		auto_ban_joined = autobanjoin, -- you need access world lock if wanna auto-ban-joined
-		owner = whitelistpeople, -- when autobanjoined true, whitelist this growid
+		delay_break = delaybreak, 
+		delay_put = delayput, 
+		auto_ban_joined = autobanjoin, 
+		owner = whitelistpeople,
 	},
 	Other_setting = {
-		repeat_world = whileworld, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
+		repeat_world = whileworld, 
 		url_webhook = webhookweb,
-		bool_use_payy_webhook = webhookbypayy, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		bool_use_payy_webhook = webhookbypayy, 
 		short_webhook = shortwebhook,
-		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
-		-- if short_webhook false -> display all tasks performed by bot
 	},
 }
 lisen = getBot().name:lower()
