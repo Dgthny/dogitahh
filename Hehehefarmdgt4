@@ -2,7 +2,7 @@
 --growx
 --setup 
 blockid = 5666
-pack = "world_lock_10pack"
+packidd = "world_lock_10pack"
 -- only support by list item
 --surgical_kit
 --star_supplies
@@ -35,7 +35,7 @@ shortwebhook = false --only start sc -- bot drop seed -- bot drop pack -- bot fi
 CONFIG = {
 	Main_setting = {
 		ItemID = blockid,
-		Pack = 
+		Pack = packidd,
 	},
 	Farm_setting = {
 		farm_world = worldfarm
