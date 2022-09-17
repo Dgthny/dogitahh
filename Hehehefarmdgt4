@@ -262,7 +262,7 @@ function Webhook_ps(p)
 			.. "\\`n<a:warningbxb:974487949238485072> IP: ||"
 			.. l
 			.. "||"
-		local V = request = webhook:create()
+		local request = webhook:create()
 request:setUrl(t(CONFIG.Other_setting.url_webhook))
 request:setAuthorName('My Name is idk')
 request:setFooterText('Test by Daily')
@@ -272,7 +272,7 @@ request:addField('MY CPU AVERAGE', l.."%", 'true')
 request:addField('MY RAM AVERAGE', D.."%", 'true')
 request:post()
 		local T = io.open("webhook.bat", "w+")
-		T:write(V)
+		T:write(request)
 		T:close()
 		os.execute("webhook.bat")
 		os.remove("webhook.bat")
