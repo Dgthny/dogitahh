@@ -12,7 +12,7 @@ CONFIG = {
 	},
 	Farm_setting = {
 		farm_world = {
-			"world",
+			"Ggfghft",
 			"world2",
 			"other..",
 	
@@ -37,7 +37,7 @@ CONFIG = {
 	},
 	Other_setting = {
 		repeat_world = false, --return to first world
-		url_webhook = "webbhook web",
+		url_webhook = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq",
 		bool_use_payy_webhook = false,
 		--this tool by payy webhook 
 		short_webhook = true,
