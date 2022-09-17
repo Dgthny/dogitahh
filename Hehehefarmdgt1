@@ -38,7 +38,7 @@ CONFIG = {
 	Other_setting = {
 		repeat_world = false, --return to first world
 		url_webhook = "https://discord.com/api/webhooks/1007950432578052146/IvQYOLhQzYWv_-XFd6VXBl2H2OY3fjk2lS19EWUDdOpGoqoKkUHTZ6vB8AdjG8EV6tSq",
-		bool_use_payy_webhook = false,
+		bool_use_payy_webhook =true,
 		--this tool by payy webhook 
 		short_webhook = true,
 		
