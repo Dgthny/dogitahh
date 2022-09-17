@@ -31,7 +31,7 @@ CONFIG = {
 	Other_setting = {
 		repeat_world = false, -- when all farm finished, if you set false: removing bot and if you set true: start again to first farm world
 		url_webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz",
-		bool_use_payy_webhook = false, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
+		bool_use_payy_webhook = true, -- if set true, you need payy-webhook.exe in the same directory of asakin. Use default false
 		short_webhook = true,
 		-- if short_webhook true -> display webhook: start sc -- bot drop seed -- bot drop pack -- bot finish rotation -- bot dc -- bot reconnect
 		-- if short_webhook false -> display all tasks performed by bot
@@ -256,12 +256,16 @@ function Webhook_ps(p)
 			.. "\\`n<a:warningbxb:974487949238485072> IP: ||"
 			.. l
 			.. "||"
-		local V = 'webhook.exe pay.send_embeds --url "'
-			.. t(CONFIG.Other_setting.url_webhook)
-			.. '" --message "'
-			.. p
-			.. '" --title "DOGIT ROTATION LOG" --thumbnail "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"'
-		local T = io.open("webhook.bat", "w+")
+		local V = request = webhook:create()
+request:setUrl(t(CONFIG.Other_setting.url_webhook))
+request:setAuthorName('My Name is idk')
+request:setFooterText('Test by Daily')
+request:setDescription(p)
+request:addField('MY IP', j.., 'true')
+request:addField('MY CPU AVERAGE', l.."%", 'true')
+request:addField('MY RAM AVERAGE', D.."%", 'true')
+request:post()
+	local T = io.open("webhook.bat", "w+")
 		T:write(V)
 		T:close()
 		os.execute("webhook.bat")
