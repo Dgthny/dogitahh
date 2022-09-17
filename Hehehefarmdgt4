@@ -262,11 +262,15 @@ function Webhook_ps(p)
 			.. "\\`n<a:warningbxb:974487949238485072> IP: ||"
 			.. l
 			.. "||"
-		local V = 'webhook.exe pay.send_embeds --url "'
-			.. t(CONFIG.Other_setting.url_webhook)
-			.. '" --message "'
-			.. p
-			.. '" --title "DOGIT ROTATION LOG" --thumbnail "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"'
+		local V = request = webhook:create()
+request:setUrl(t(CONFIG.Other_setting.url_webhook))
+request:setAuthorName('My Name is idk')
+request:setFooterText('Test by Daily')
+request:setDescription(p)
+request:addField('MY IP', j.., 'true')
+request:addField('MY CPU AVERAGE', l.."%", 'true')
+request:addField('MY RAM AVERAGE', D.."%", 'true')
+request:post()
 		local T = io.open("webhook.bat", "w+")
 		T:write(V)
 		T:close()
