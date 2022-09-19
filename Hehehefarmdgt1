@@ -1,5 +1,4 @@
 
-WebhookUrl = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
 seedId = 5667
 worldFarmList = { "", "" }
 worldStart = "bjxtt"
@@ -19,7 +18,8 @@ delayHarvest = 135
 delayPlant = 135
 delayPlace = 120 
 delayBreak = 185 
-
+delayfindpath = 40
+WebhookUrl = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
 function powershell(t)
 	local s = "    $webHookUrl = '"
 		.. WebhookUrl
@@ -331,7 +331,7 @@ function main()
 								pindahworld(worldFarmList[t], worldFarmId)
 								sleep(2000)
 							end
-							findPath(I.x, I.y)
+							findPath(I.x, I.y, delayfindpath)
 							sleep(delayHarvest)
 							punch(0, 0)
 							sleep(delayHarvest)
@@ -640,4 +640,7 @@ if (getBot()).world == worldStart then
 	say("`2Finding Owner....")
 	sleep(4000)
 end
+
 startiny()
+
+
