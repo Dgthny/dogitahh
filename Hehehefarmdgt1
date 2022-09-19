@@ -1,358 +1,313 @@
+--rotasi asakin 
 
-seedId = 5667
-worldFarmList = { "", "" }
-worldStart = "bjxtt"
-worldFarmId = "1"
-worldLooping = "true"
-differentWorld = "false"
-worldSavePack = "worldsavepack"
-worldPackId = "dooridsavepack"
-worldSaveSeed = "worldsaveseed"
-worldSeedId = "dooridworldseed"
-packPosId = 5044
-seedPosId = 20
-packBuy = "world_lock"
-packPrice = 2000
-packItemId = { 242 }
-delayHarvest = 135
-delayPlant = 135
-delayPlace = 120 
-delayBreak = 185 
-delayfindpath = 40
-WebhookUrl = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
-function powershell(t)
-	local s = "    $webHookUrl = '"
-		.. WebhookUrl
-		.. "'\n    \n    $host.ui.RawUI.WindowTitle = \"\"\n    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\n    [System.Collections.ArrayList]$embedArray = @()\n    $title       = '<a:redverif:983982151307526164> **ROTATION LOGS** <a:redverif:983982151307526164>'\n    $description = '"
-		.. t
-		.. "'\n    $color       = '9442302'\n    $imageUrl = 'https://media.discordapp.net/attachments/989186989041516636/992373376347807754/overlay1.gif'\n    $footertext = \"Script by Gafi Store\"\n    $ram = (Get-Counter '\\Memory\\Available MBytes').CounterSamples.CookedValue\n    $ip = Get-NetIPAddress -AddressFamily IPv4 -InterfaceIndex $(Get-NetConnectionProfile | Select-Object -ExpandProperty InterfaceIndex) | Select-Object -ExpandProperty IPAddress\n    $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average\n    $imageObject = [PSCustomObject]@{\n        url = $imageUrl\n    }\n    $footerObject = [PSCustomObject]@{\n        text = $footertext\n    }\n    $embedObject = [PSCustomObject]@{\n        title       = $title\n        description = \"$description`r`n<a:tancep:992537261046501416> **RDP INFORMATION**`n<:CPU:996159527500120127> | Cpu : $cpu%`n<:ram:994229416165130271> | Ram : $ram MB`n:desktop: | IP : $IP\"\n        color       = $color\n        image = $imageObject\n        footer  = $footerObject\n    \n    }\n    \n    $embedArray.Add($embedObject) | Out-Null\n    $payload = [PSCustomObject]@{\n        embeds = $embedArray\n    \n    }\n    \n    Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'\n"
-	local b = io.popen("powershell -command -", "w")
-	b:write(s)
-	b:close()
+seedid,fgorbg,blockordif = 5667,"fg","no"   --write seed id , like if lgrid seed write 5667 and if item block write fg if item background write bg
+worlds = {"kxvzu"}   --rotasi world, kalo mau add tinggal tambah ,"nameworld"
+JoinWorldWithID,worldsdoorid = "false","x" --ganti jadi true kalo mau masuk pake id
+worldwhile = "false" --loop world, ubah jadi true kalo mau loop world dari awal
+delayharvest = 150
+delayplant = 150
+delayplace = 100
+delaybreak = 200
+joinstop,autoban = "true","true"
+itemtrash = {5040,5042,5044,5032,5034,5036,5038,5024,5026,5028,5030}
+itemname ="surgical_kit"     --nama pack contoh ssp_10_pack, ubah jadi gems_pack kalo mau save gems
+packgems = 12000              --harga packnya
+packitemid = {4296,1262,1266,1264,4314,4312,4318,4308,1260,1268,1258,1270,4310,4316}  --item id dari packnya misal WL itu 242
+dropitems = "true" 
+amount = 200    ---200 or 4000
+weebhook= "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
+YourDiscordid= "991204570380382218"
+owner ="dgstr" --akun owner/yg mau dipake buat control
+
+droppedworld,droppedworldid = "dgtbabu1","dgt57" 
+
+seeddropworld,seeddropworldid = "dgtbabu1","dgt99"
+
+botname,botpassword = "rddogit6","janda123@"       --botname pasword
+
+--------------WEBHOOK-------------------
+tittlr = "AUTO ROTATION" --Tittle webhook
+webhook = "https://discord.com/api/webhooks/1007950222867046522/tAgAsOZUHRrRXTSgLTZO2uIft-zqsbPTjHTG_iXR-unz1sSAmokrWvZf6W2P2X7Z3LCz"
+ --webhook url
+thumbnail = "https://c.tenor.com/M78XlBx9me8AAAAC/comiss%C3%A3o.gif"  --Thumbnail url
+warna = "3333333" --Colour embed
+----------------------------------------
+
+function powershell(message)
+local script = [[
+$webHookUrl = ']] ..webhook.. [['
+
+$host.ui.RawUI.WindowTitle = ""
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[System.Collections.ArrayList]$embedArray = @()
+$title       = ']] .. tittlr .. [['
+$description = ']] .. message .. [['
+$color       = ']] .. warna .. [['
+$thumbUrl = ']] .. thumbnail .. [[' 
+$cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
+$ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
+$ip = Get-NetIPAddress -AddressFamily IPv4 -InterfaceIndex $(Get-NetConnectionProfile | Select-Object -ExpandProperty InterfaceIndex) | Select-Object -ExpandProperty IPAddress
+$thumbnailObject = [PSCustomObject]@{
+    url = $thumbUrl
+}
+
+$embedObject = [PSCustomObject]@{
+    title       = $title
+    description = "$description`r`n<a:warningbxb:974487949238485072> | Cpu :$cpu%`n<a:warningbxb:974487949238485072> | Ram : $ram MB | $ip"
+    color       = $color
+    thumbnail   = $thumbnailObject
+
+}
+
+$embedArray.Add($embedObject) | Out-Null
+$payload = [PSCustomObject]@{
+      'avatar_url' = 'https://cdn.discordapp.com/attachments/994257687808311326/994262822483669002/unknown.png'
+      'username' = 'Dogit logs'
+            'content' = '<@]].. YourDiscordid ..[[>'
+    embeds = $embedArray
+
+}
+
+Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+]]
+
+local pipe = io.popen("powershell -command -", "w")
+  pipe:write(script)
+  pipe:close()
 end
-function ercon()
-	if (getBot()).status ~= "online" then
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Disconnected \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:offline:1007062527932379176> | Status : "
-				.. (getBot()).status
-				.. " \n "
-		)
-		sleep(5000)
-		while (getBot()).status ~= "online" do
-			sleep(10000)
-		end
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Reconnected \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:online:1007062631787544666> | Status : "
-				.. (getBot()).status
-				.. " \n <a:globe:1007060932981178442> | World : "
-				.. (getBot()).world
-				.. " \n <:gems:1006700641432895529> | Gems : "
-				.. findItem(112)
-				.. " \n"
-		)
-		sleep(10000)
-	end
+
+function main(bekleme)
+  for i=1, bekleme do
+    local function foregraund(itemid)
+      local count = 0
+      for _, tile in pairs(getTiles()) do
+        if tile.fg == itemid and getTile(tile.x, tile.y).ready then
+          count = count + 1
+        end
+      end
+      return count
+    end
+    local function tre()
+      local m=0
+      for _,til in pairs(getTiles()) do
+          if til.fg == seedid and til.ready then 
+          m = m + 1
+          end
+      end
+      return m
+    end
+local function sisa()
+for _, tile in pairs(getTiles()) do
+while tile.fg == (seedid-1) do
+findPath(tile.x,tile.y)
+punch(0,0)
+sleep(190)
+if getTile(tile.x,tile.y).fg == 0 then
+collect(2)
+break
 end
-function startiny()
-	isOwner = true
-	say("`2GASKEN COK")
-	sleep(2000)
 end
-function joinworldfarm(t, s)
-	sendPacket(3, "action|join_request/nname|" .. t:upper() .. "|" .. s:upper())
-	sleep(3000)
-	sendPacket(3, "action|join_request/nname|" .. t:upper() .. "|" .. s:upper())
-	sleep(3000)
-	say("`2Running Script!")
-	sleep(4000)
 end
-function pindahworld(t, s)
-	sendPacket(3, "action|join_request/nname|" .. t:upper() .. "|" .. s:upper())
-	sleep(3000)
-	sendPacket(3, "action|join_request/nname|" .. t:upper() .. "|" .. s:upper())
-	sleep(3000)
 end
-function growscan(t)
-	count = 0
-	for s, C in pairs(getObjects()) do
-		if C.id == t then
-			count = count + C.count
-		end
-	end
-	return count
-end
-function checkfarm(t)
-	count = 0
-	for b, C in pairs(getTiles()) do
-		if C.fg == t and (getTile(C.x, C.y)).ready then
-			count = count + 1
-		end
-	end
-	return count
-end
-function dropItem(t, s)
-	sendPacket(2, "action|drop/nitemID|" .. t)
-	sleep(500)
-	sendPacket(2, "action|dialog_return/ndialog_name|drop_item/nitemID|" .. t .. "|/ncount|" .. s)
-	sleep(1000)
-end
-function trashitem()
-	trashList = {
-		5040,
-		5042,
-		5044,
-		5032,
-		5034,
-		5036,
-		5038,
-		5024,
-		5026,
-		5028,
-		5030,
-	}
-	for s, b in pairs(trashList) do
-		if findItem(b) > 100 then
-			sendPacket(2, "action|trash\n|itemID|" .. b)
-			sleep(500)
-			sendPacket(2, "action|dialog_return/ndialog_name|trash_item/nitemID|" .. b .. "|/ncount|" .. findItem(b))
-			sleep(1000)
-		end
-	end
-end
-function saveProfit(t)
-	if t == "beda" then
-		pindahworld(worldSavePack, worldPackId)
-		sleep(2000)
-		collectSet(false)
-		sleep(2000)
-		trashitem()
-		sleep(2000)
-		for t, C in pairs(getTiles()) do
-			if C.fg == packPosId or C.bg == packPosId then
-				if findItem(112) >= packPrice then
-					while findItem(112) >= packPrice do
-						sendPacket(2, "action|buy/nitem|" .. packBuy)
-						sleep(3000)
-						for t = 1, #packItemId, 1 do
-							if findItem(packItemId[t]) > 150 then
-								abccc = t - 2
-								findPath(C.x + abccc, C.y)
-								sleep(2000)
-								dropItem(packItemId[t], findItem(packItemId[t]))
-								sleep(1000)
-								powershell(
-									"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Dropped Pack \n <a:mine:1007065522820616373> | Name : "
-										.. (getBot()).name
-										.. " \n <a:online:1007062631787544666> | Status : "
-										.. (getBot()).status
-										.. " \n <a:globe:1007060932981178442> | World : "
-										.. (getBot()).world
-										.. " \n <:gems:1006700641432895529> | Gems : "
-										.. findItem(112)
-										.. " \n"
-								)
-								sleep(3000)
-							end
-						end
-					end
-				end
-				if findItem(112) < packPrice then
-					for t = 1, #packItemId, 1 do
-						if findItem(packItemId[t]) > 0 then
-							abcccc = t - 2
-							findPath(C.x + abcccc, C.y)
-							sleep(2000)
-							dropItem(packItemId[t], findItem(packItemId[t]))
-							sleep(1000)
-							powershell(
-								"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Dropped Pack \n <a:mine:1007065522820616373> | Name : "
-									.. (getBot()).name
-									.. " \n <a:online:1007062631787544666> | Status : "
-									.. (getBot()).status
-									.. " \n <a:globe:1007060932981178442> | World : "
-									.. (getBot()).world
-									.. " \n <:gems:1006700641432895529> | Gems : "
-									.. findItem(112)
-									.. " \n"
-							)
-							sleep(3000)
-						end
-					end
-				end
-			end
-		end
-		pindahworld(worldSaveSeed, worldSeedId)
-		sleep(2000)
-		for t, C in pairs(getTiles()) do
-			if C.fg == seedPosId or C.bg == seedPosId then
-				findPath(C.x - 1, C.y)
-				sleep(2000)
-				while findItem(seedId) > 20 do
-					dropItem(seedId, findItem(seedId) - 20)
-					sleep(1200)
-					break
-				end
-				if findItem(seedId) == 20 then
-					break
-				end
-			end
-		end
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Dropped Seed \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:online:1007062631787544666> | Status : "
-				.. (getBot()).status
-				.. " \n <a:globe:1007060932981178442> | World : "
-				.. (getBot()).world
-				.. " \n <:pepperseed:996383268851171439> | Total Seed : "
-				.. growscan(seedId)
-				.. " \n <:gems:1006700641432895529> | Gems : "
-				.. findItem(112)
-				.. " \n"
-		)
-		sleep(5000)
-	end
-	if t == "sama" then
-		pindahworld(worldSaveSeed, worldSeedId)
-		sleep(2000)
-		collectSet(false)
-		sleep(2000)
-		trashitem()
-		sleep(2000)
-		for t, C in pairs(getTiles()) do
-			if C.fg == packPosId or C.bg == packPosId then
-				if findItem(112) >= packPrice then
-					while findItem(112) >= packPrice do
-						sendPacket(2, "action|buy/nitem|" .. packBuy)
-						sleep(3000)
-						for t = 1, #packItemId, 1 do
-							if findItem(packItemId[t]) > 150 then
-								abccc = t - 2
-								findPath(C.x + abccc, C.y)
-								sleep(2000)
-								dropItem(packItemId[t], findItem(packItemId[t]))
-								sleep(1000)
-							end
-						end
-					end
-				end
-				if findItem(112) < packPrice then
-					for t = 1, #packItemId, 1 do
-						if findItem(packItemId[t]) > 0 then
-							abcccc = t - 2
-							findPath(C.x + abcccc, C.y)
-							sleep(2000)
-							dropItem(packItemId[t], findItem(packItemId[t]))
-							sleep(1000)
-						end
-					end
-				end
-			end
-		end
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Dropped Pack \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:online:1007062631787544666> | Status : "
-				.. (getBot()).status
-				.. " \n <a:globe:1007060932981178442> | World : "
-				.. (getBot()).world
-				.. " \n <:gems:1006700641432895529> | Gems : "
-				.. findItem(112)
-				.. " \n"
-		)
-		sleep(5000)
-		for t, C in pairs(getTiles()) do
-			if C.fg == seedPosId or C.bg == seedPosId then
-				findPath(C.x - 1, C.y)
-				sleep(2000)
-				while findItem(seedId) > 20 do
-					dropItem(seedId, findItem(seedId) - 20)
-					sleep(1200)
-					break
-				end
-				if findItem(seedId) == 20 then
-					break
-				end
-			end
-		end
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Dropped Seed \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:online:1007062631787544666> | Status : "
-				.. (getBot()).status
-				.. " \n <a:globe:1007060932981178442> | World : "
-				.. (getBot()).world
-				.. " \n <:pepperseed:996383268851171439> | Total Seed : "
-				.. growscan(seedId)
-				.. " \n <:gems:1006700641432895529> | Gems : "
-				.. findItem(112)
-				.. " \n "
-		)
-		sleep(5000)
-	end
-end
-function main()
-	for t in pairs(worldFarmList) do
-		joinworldfarm(worldFarmList[t], worldFarmId)
-		sleep(2000)
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Starting Script \n <a:rgbload:993270101262475304> | Progess World Farm Ke "
-				.. t
-				.. " \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:online:1007062631787544666> | Status : "
-				.. (getBot()).status
-				.. " \n <a:globe:1007060932981178442> | World : "
-				.. (getBot()).world
-				.. " \n <:gems:1006700641432895529> | Gems : "
-				.. findItem(112)
-				.. " \n"
-		)
-		sleep(4000)
-		while checkfarm(seedId) > 0 do
-			if findItem(seedId - 1) < 150 then
-				collectSet(true, 2)
-				sleep(500)
-				if (getBot()).status ~= "online" then
-					ercon()
-				end
-				for s, I in pairs(getTiles()) do
-					if I.fg == seedId and findItem(seedId - 1) < 150 then
-						if (getTile(I.x, I.y)).ready then
-							if (getBot()).status ~= "online" then
-								ercon()
-							end
-							if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
-								sleep(2000)
-								pindahworld(worldFarmList[t], worldFarmId)
-								sleep(2000)
-							end
-							findPath(I.x, I.y, delayfindpath)
-							sleep(delayHarvest)
-							punch(0, 0)
-							sleep(delayHarvest)
-						end
-					end
-				end
-			end
-			if findItem(seedId - 1) > 0 then
-				if (getBot()).status ~= "online" then
-					ercon()
-				end
-				if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
-					sleep(2000)
-					pindahworld(worldFarmList[t], worldFarmId)
-					sleep(2000)
-				end
-				sleep(500)
-				findPath(1, 3)
-				sleep(1000)
-				collectSet(true, 4)
-				while findItem(seedId - 1) > 0 do
+local function fossil(id)
+      local m=0
+      for _,til in pairs(getTiles()) do
+          if til.fg == id then 
+          m = m + 1
+          end
+      end
+      return m
+    end
+    local function dropItem(itemID, count)
+      sendPacket(2, "action|drop\nitemID|" .. itemID)
+      sleep(750)
+      sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|" .. itemID .. "|\ncount|" .. count)
+
+      sleep(1000)
+    end
+    local function coptrashs(itemid)
+      local trashList = itemtrash
+      if itemid ~= nil then
+        sendPacket(2, "action|trash\n|itemID|"..itemid)
+        sleep(1500)
+        sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|"..itemid.."|\ncount|"..findItem(itemid)-184)
+        sleep(2000)
+      end
+      if itemid == nil then
+        for a, trash in ipairs(trashList) do
+          if findItem(trash) > 50 then
+              sendPacket(2, "action|trash\n|itemID|"..trash)
+              sleep(1500)
+              sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|"..trash.."|\ncount|"..findItem(trash))
+              sleep(2000)
+          end
+        end
+      end
+    end
+    local function scanseed(id)
+      local m=0
+      for _,object in pairs(getObjects()) do
+          if object.id==id then m=m + object.count end
+      end
+      return m
+    end
+    local function worldegirici(totTxt,Worldid)
+      while getBot().world:lower() ~= totTxt:lower() do
+        sendPacket(3,"action|join_request\nname|" .. totTxt)
+        sleep(8000)
+      end
+      if Worldid == nil then
+        if JoinWorldWithID == "true" then
+          sendPacket(3,"action|join_request\nname|"..totTxt.."|"..worldsdoorid:lower())
+
+          sleep(2000)
+        end
+        if JoinWorldWithID == "false" then
+          for _, tile in pairs(getTiles()) do
+            if tile.fg == 6 then
+              if tile.x <= 99 and tile.x > 6 then
+                move(-5,0)
+                sleep(500)
+                goto next
+              end 
+              if tile.x >= 0 and tile.x < 93 then
+                move(5,0)
+                sleep(500)
+              end
+            end
+          end
+          ::next::
+        end
+      end
+      if Worldid ~= nil then
+        sendPacket(3,"action|join_request\nname|" .. totTxt.."|"..Worldid)
+        sleep(2000)
+      end
+      if findItem(seedid-1) > 184 then
+        coptrashs(seedid-1)
+      end
+    end
+    local function girischeck()
+      if joinstop =="true" then
+        if #getPlayers() > 0 then
+          ::back::
+          for _, player in pairs(getPlayers()) do
+            if player.name:lower() ~= botname:lower() and player.name:lower() ~= owner:lower() then
+              if autoban =="true" then
+                say("/ban "..player.name:lower())
+              end
+              sleep(7500)
+              goto back
+            end
+          end
+        end
+      end
+    end
+    local function reconnects(world,worldids,pozx,pozy) 
+      if getBot().state ~= 5 then
+powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Disconnected \n<:offbutton:873152764279144458> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+        while getBot().state ~= 5 do
+          sleep(120000)
+        end
+        powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Reconnected \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+        if worldids ~= nil then
+          worldegirici(world:lower(),worldids:lower())
+        end
+        if worldids == nil then
+          worldegirici(world:lower())
+        end
+        if pozx ~= nil and pozy ~= nil then
+          sleep(1000)
+          findPath(pozx, pozy)
+          sleep(1000)
+        end
+      end
+    end
+    local function break_tile(pozisyonx,pozisyony)
+      if getTile(math.floor(getBot().x /32) -1,math.floor(getBot().y /32)).fg ~= 0 or getTile(math.floor(getBot().x /32) -1,math.floor(getBot().y /32)).fg ~= 0 then
+        punch(-1,0)
+        sleep(120)
+        collect(2)
+        if joinstop =="true" then
+          if #getPlayers() > 0 then
+            while girischeck() do
+              girischeck()
+            end
+          end
+        end
+        if getBot().state ~= 5 then
+          powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Disconnected \n<:offbutton:873152764279144458> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+          sleep(2000)
+        while getBot().state ~= 5 do
+          sleep(10000)
+        end
+         powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Reconnected \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+          sleep(2000)
+          worldegirici(worlds[i]:lower())
+          findPath(pozisyonx, pozisyony)
+          sleep(1000)
+        end
+      end
+    end
+    local function breakzz(blockid,pozisyonx,pozisyony)
+      if blockordif == "yes" then
+        if fgorbg == "fg" then
+          if getTile(math.floor(getBot().x /32) -1,math.floor(getBot() .y/32)).fg == 0 then
+            place(blockid,-1,0)
+            sleep(delayplace)
+            if joinstop =="true" then
+              if #getPlayers() > 0 then
+                while girischeck() do
+                  girischeck()
+                end
+              end
+            end
+            if getBot().state ~= 5 then
+              powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Disconnected \n<:offbutton:873152764279144458> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+              sleep(2000)
+              while getBot().state ~= 5 do
+                sleep(10000)
+              end
+              powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Reconnected \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+              sleep(2000)
+              worldegirici(worlds[i]:lower())
+              findPath(pozisyonx, pozisyony)
+              sleep(1000)
+            end
+          end
+        end
+        if fgorbg == "bg" then
+
+          if getTile(math.floor(getBot().x /32) -1,math.floor(getBot().y /32)).bg == 0 then
+            place(blockid,-1,0)
+            sleep(delayplace)
+            if joinstop =="true" then
+              if #getPlayers() > 0 then
+                while girischeck() do
+                  girischeck()
+                end
+              end
+            end
+            if getBot().state ~= 5 then
+         powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Disconnected \n<:offbutton:873152764279144458> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+              sleep(2000)
+              while getBot().state ~= 5 do
+                sleep(10000)
+              end
+              powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Reconnected \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+              sleep(2000)
+              worldegirici(worlds[i]:lower())
+              findPath(pozisyonx, pozisyony)
+              sleep(1000)
+            end
+          end
+        end
+        break_tile(pozisyonx,pozisyony)
+        coptrashs()
+      end
+if blockordif == "no" then
+        if fgorbg == "fg" then
+          while findItem(seedId - 1) > 0 do
 					while
 						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
 						and (
@@ -361,7 +316,7 @@ function main()
 						)
 					do
 						place(seedId - 1, -1, 2)
-						sleep(delayPlace)
+						sleep(delayplace)
 					end
 					while
 						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
@@ -371,7 +326,7 @@ function main()
 						)
 					do
 						place(seedId - 1, -1, 1)
-						sleep(delayPlace)
+						sleep(delayplace)
 					end
 					while
 						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
@@ -381,7 +336,7 @@ function main()
 						)
 					do
 						place(seedId - 1, -1, 0)
-						sleep(delayPlace)
+						sleep(delayplace)
 					end
 					while
 						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
@@ -391,7 +346,7 @@ function main()
 						)
 					do
 						place(seedId - 1, -1, -1)
-						sleep(delayPlace)
+						sleep(delayplace)
 					end
 					while
 						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
@@ -401,7 +356,7 @@ function main()
 						)
 					do
 						place(seedId - 1, -1, -2)
-						sleep(delayPlace)
+						sleep(delayplace)
 					end
 					while
 						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
@@ -412,21 +367,20 @@ function main()
 						or (getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) - 2)).fg > 0
 					do
 						punch(-1, 2)
-						sleep(delayBreak)
+						sleep(delaybreak)
 						punch(-1, 1)
-						sleep(delayBreak)
+						sleep(delaybreak)
 						punch(-1, 0)
-						sleep(delayBreak)
+						sleep(delaybreak)
 						punch(-1, -1)
-						sleep(delayBreak)
+						sleep(delaybreak)
 						punch(-1, -2)
-						sleep(delayBreak)
-						if (getBot()).status ~= "online" then
-							ercon()
-						end
+						sleep(delaybreak)
+						if (getBot()).state ~=  then
+							reconnects()
 						if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
 							sleep(2000)
-							pindahworld(worldFarmList[t], worldFarmId)
+						reconnects	(world[i])
 							sleep(2000)
 							findPath(1, 3)
 							sleep(1000)
@@ -434,213 +388,331 @@ function main()
 					end
 				end
 			end
-			if findItem(seedId) > 0 then
-				for s, I in pairs(getTiles()) do
-					if I.fg == 0 and ((getTile(I.x, I.y + 1)).fg ~= 0 and (getTile(I.x, I.y + 1)).fg ~= seedId) then
-						if (getBot()).status ~= "online" then
-							ercon()
-						end
-						if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
-							sleep(2000)
-							pindahworld(worldFarmList[t], worldFarmId)
-							sleep(2000)
-						end
-						findPath(I.x, I.y)
-						sleep(delayPlant)
-						place(seedId, 0, 0)
-						sleep(50)
-						if findItem(seedId) == 0 then
-							break
-						end
-					end
-				end
-			end
-			if findItem(seedId) >= 80 then
-				sleep(1000)
-				if differentWorld == "true" then
-					saveProfit("beda")
-					sleep(2000)
-					pindahworld(worldFarmList[t], worldFarmId)
-					sleep(4000)
-				end
-				if differentWorld == "false" then
-					saveProfit("sama")
-					sleep(2000)
-					pindahworld(worldFarmList[t], worldFarmId)
-					sleep(4000)
-				end
-			end
-		end
-		if checkfarm(seedId) < 1 then
-			if findItem(seedId - 1) > 0 then
-				if (getBot()).status ~= "online" then
-					ercon()
-				end
-				if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
-					sleep(2000)
-					pindahworld(worldFarmList[t], worldFarmId)
-					sleep(2000)
-				end
-				sleep(500)
-				findPath(1, 3)
-				sleep(1250)
-				collectSet(true, 4)
-				while findItem(seedId - 1) > 0 do
-					while
-						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
-						and (
-							(getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) + 2)).fg == 0
-							and findItem(seedId - 1) > 0
-						)
-					do
-						place(seedId - 1, -1, 2)
-						sleep(delayPlace)
-					end
-					while
-						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
-						and (
-							(getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) + 1)).fg == 0
-							and findItem(seedId - 1) > 0
-						)
-					do
-						place(seedId - 1, -1, 1)
-						sleep(delayPlace)
-					end
-					while
-						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
-						and (
-							(getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32))).fg == 0
-							and findItem(seedId - 1) > 0
-						)
-					do
-						place(seedId - 1, -1, 0)
-						sleep(delayPlace)
-					end
-					while
-						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
-						and (
-							(getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) - 1)).fg == 0
-							and findItem(seedId - 1) > 0
-						)
-					do
-						place(seedId - 1, -1, -1)
-						sleep(delayPlace)
-					end
-					while
-						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
-						and (
-							(getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) - 2)).fg == 0
-							and findItem(seedId - 1) > 0
-						)
-					do
-						place(seedId - 1, -1, -2)
-						sleep(delayPlace)
-					end
-					while
-						(getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg ~= 6
-							and (getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) + 2)).fg > 0
-						or (getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) + 1)).fg > 0
-						or (getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32))).fg > 0
-						or (getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) - 1)).fg > 0
-						or (getTile(math.floor((getBot()).x / 32) - 1, math.floor((getBot()).y / 32) - 2)).fg > 0
-					do
-						punch(-1, 2)
-						sleep(delayBreak)
-						punch(-1, 1)
-						sleep(delayBreak)
-						punch(-1, 0)
-						sleep(delayBreak)
-						punch(-1, -1)
-						sleep(delayBreak)
-						punch(-1, -2)
-						sleep(delayBreak)
-						if (getBot()).status ~= "online" then
-							ercon()
-						end
-						if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
-							sleep(2000)
-							pindahworld(worldFarmList[t], worldFarmId)
-							sleep(2000)
-						end
-					end
-				end
-			end
-			if findItem(seedId) > 0 then
-				for s, I in pairs(getTiles()) do
-					if I.fg == 0 and ((getTile(I.x, I.y + 1)).fg ~= 0 and (getTile(I.x, I.y + 1)).fg ~= seedId) then
-						if (getBot()).status ~= "online" then
-							ercon()
-						end
-						if (getTile(math.floor((getBot()).x / 32), math.floor((getBot()).y / 32))).fg == 6 then
-							sleep(2000)
-							pindahworld(worldFarmList[t], worldFarmId)
-							sleep(2000)
-						end
-						findPath(I.x, I.y)
-						sleep(delayPlant)
-						place(seedId, 0, 0)
-						sleep(50)
-						if findItem(seedId) == 0 then
-							break
-						end
-					end
-				end
-			end
-			if packBuy ~= "save_gems" then
-				if findItem(112) > packPrice or findItem(seedId) > 20 then
-					sleep(2000)
-					if differentWorld == "true" then
-						saveProfit("beda")
-						sleep(2000)
-						pindahworld(worldFarmList[t], worldFarmId)
-						sleep(4000)
-					end
-					if differentWorld == "false" then
-						saveProfit("sama")
-						sleep(2000)
-						pindahworld(worldFarmList[t], worldFarmId)
-						sleep(4000)
-					end
-				end
-			end
-		end
-		powershell(
-			"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Finished Farm "
-				.. t
-				.. " \n <a:mine:1007065522820616373> | Name : "
-				.. (getBot()).name
-				.. " \n <a:online:1007062631787544666> | Status : "
-				.. (getBot()).status
-				.. " \n <a:globe:1007060932981178442> | World : "
-				.. (getBot()).world
-				.. " \n <:gems:1006700641432895529> | Gems : "
-				.. findItem(112)
-				.. " \n"
-		)
-		sleep(4000)
-	end
+
+    local function ekici()
+ collectSet(false,3)
+  for _, tile in pairs(getTiles()) do
+        if tile.fg == 0 and getTile(tile.x,tile.y+1).fg ~= 0 and getTile(tile.x,tile.y+1).fg ~= seedid then
+            findPath(tile.x,tile.y)
+            place(seedid,0,0)
+            sleep(delayplant)
+            if findItem(seedid) == 0 then 
+                break
+            reconnects(worlds[i],x,x,x) 
+            while girischeck() do
+              girischeck()
+            end
+          end
+        end
+      end
+    end
+function dropbulucu(satinalmax)
+      if satinalmax == "packetss" then
+        worldegirici(droppedworld:lower(),droppedworldid:lower())
+        sleep(250)
+      end
+      if satinalmax == "seeddrop" then
+        worldegirici(seeddropworld:lower(),seeddropworldid:lower())
+        sleep(250)
+      end
+      for _, tile in pairs(getTiles()) do
+        if tile.fg == 6 then
+          if satinalmax == "packetss" then
+            if findItem(112) >= packgems then
+              local harcamadanoncekigems = findItem(112)
+              local alinanpacket= 0
+              local baslangicpacket = findItem(packitemid[1])
+              while findItem(112) >= packgems do
+                local botitemid = findItem(packitemid[1])
+                sleep(200)
+                sendPacket(2,"action|buy\nitem|"..itemname:lower())
+                alinanpacket = alinanpacket+1
+                sleep(1250)
+                reconnects(droppedworld:lower(),droppedworldid:lower(),x,x)
+                if alinanpacket == 1 then
+                  sonpacket = findItem(packitemid[1])
+                  kalanpacketsss = sonpacket -baslangicpacket
+                end
+                if botitemid == findItem(packitemid[1]) then
+                  sendPacket(2,"action|buy\nitem|upgrade_backpack")
+                  sleep(1000)
+                end
+                if tile.x > 99 - tile.x then
+                  for ia=1,#packitemid do
+                    if findItem(packitemid[ia]) > 150 then
+                      ::back31::
+                      local abccc = ia-2
+                      findPath(4+abccc, tile.y - math.floor(scanseed(packitemid[ia]) /amount))
+                      sleep(1000)
+                      worlddekipacktotal = math.floor(scanseed(packitemid[ia])/200)
+                      worlddekifazlalik =  (scanseed(packitemid[ia])/200) - worlddekipacktotal 
+                      if findItem(packitemid[ia]) > (200-(worlddekifazlalik *200)) then
+                        dropItem( packitemid[ia],  200-(worlddekifazlalik *200) )
+                        if findItem(packitemid[ia])> 0 then
+                          goto back31
+                        end
+                      end
+                      if findItem(packitemid[ia]) <= (200-(worlddekifazlalik *200)) then
+                        dropItem(packitemid[ia],findItem(packitemid[ia]))
+                      end
+                    end
+                    reconnects(droppedworld:lower(),droppedworldid:lower(),x,x)
+                  end
+                end
+                if tile.x <= 99 - tile.x then
+                  for ia=1,#packitemid do
+                    if findItem(packitemid[ia]) > 150 then
+                      ::back31::
+                      local abccc = ia-2
+                      findPath(tile.x +4+ abccc,tile.y- math.floor(scanseed(packitemid[ia]) /amount))
+                      sleep(1000)
+                      worlddekipacktotal = math.floor(scanseed(packitemid[ia])/200)
+                      worlddekifazlalik =  (scanseed(packitemid[ia])/200) - worlddekipacktotal 
+                      if findItem(packitemid[ia]) > (200-(worlddekifazlalik *200)) then
+
+                        dropItem( packitemid[ia],  200-(worlddekifazlalik *200) )
+                        if findItem(packitemid[ia])> 0 then
+                          goto back31
+                        end
+                      end
+                      if findItem(packitemid[ia]) <= (200-(worlddekifazlalik *200)) then
+                        dropItem(packitemid[ia],findItem(packitemid[ia]))
+                      end
+                    end
+                    reconnects(droppedworld:lower(),droppedworldid:lower(),x,x)
+                  end
+                end
+              end
+              if findItem(112) < packgems then
+                local harcanangems= harcamadanoncekigems - findItem(112)
+                powershell("<:100gems:988942738466684978> "..harcanangems.." Gems spent\n> <:growscan:925999663079915520> "..math.floor(harcanangems/packgems).."   Packages received")
+                if tile.x > 99 - tile.x then
+                  for ia=1,#packitemid do
+                    if findItem(packitemid[ia]) > 0 then
+                      ::back31::
+                      local abccc = ia-2
+                      findPath(4+abccc,tile.y - math.floor(scanseed(packitemid[ia]) /amount))
+                      sleep(1000)
+                      worlddekipacktotal = math.floor(scanseed(packitemid[ia])/200)
+                      worlddekifazlalik =  (scanseed(packitemid[ia])/200) - worlddekipacktotal 
+                      if findItem(packitemid[ia]) > (200-(worlddekifazlalik *200)) then
+                        dropItem( packitemid[ia],  200-(worlddekifazlalik *200) )
+                        if findItem(packitemid[ia])> 0 then
+                          goto back31
+                        end
+                      end
+                      if findItem(packitemid[ia]) <= (200-(worlddekifazlalik *200)) then
+                        dropItem(packitemid[ia],findItem(packitemid[ia]))
+                      end
+                    end
+                    reconnects(droppedworld:lower(),droppedworldid:lower(),x,x)
+                  end
+                end
+                if tile.x <= 99 - tile.x then
+                  for ia=1,#packitemid do
+                    if findItem(packitemid[ia]) > 0 then
+                      ::back31::
+                      local abccc = ia-2
+                      findPath(tile.x +4+ abccc,tile.y- math.floor(scanseed(packitemid[ia]) /amount))
+                      sleep(1000)
+                      worlddekipacktotal = math.floor(scanseed(packitemid[ia])/200)
+                      worlddekifazlalik =  (scanseed(packitemid[ia])/200) - worlddekipacktotal 
+                      if findItem(packitemid[ia]) > (200-(worlddekifazlalik *200)) then
+                        dropItem( packitemid[ia],  200-(worlddekifazlalik *200) )
+                        if findItem(packitemid[ia])> 0 then
+                          goto back31
+                        end
+                      end
+                      if findItem(packitemid[ia]) <= (200-(worlddekifazlalik *200)) then
+                        dropItem(packitemid[ia],findItem(packitemid[ia]))
+                      end
+                    end
+                    reconnects(droppedworld:lower(),droppedworldid:lower(),x,x)
+                  end
+                end
+                powershell("<:growscan:925999663079915520> "..scanseed(packitemid[1]) / kalanpacketsss.." Total Packet\n<:100gems:988942738466684978> Total Gems : "..findItem(112))
+              end
+            end
+          end
+          if satinalmax == "seeddrop" then
+            if tile.x - 0 > 99 - tile.x then
+              if findItem(seedid) > 20 then
+                ::back31::
+                sleep(1000)
+                findPath(2,tile.y- math.floor(scanseed(seedid)/4000))
+                sleep(1000)
+                worlddekipacktotal = math.floor(scanseed(seedid)/200)
+                worlddekifazlalik =  (scanseed(seedid)/200) - worlddekipacktotal 
+                if findItem(seedid) > (200-(worlddekifazlalik *200)) then
+                  dropItem( seedid,  200-(worlddekifazlalik *200) )
+                  goto back31
+                end
+                if findItem(seedid) <= (200-(worlddekifazlalik *200)) then
+                  dropItem(seedid,findItem(seedid))
+                end
+                powershell("<:growscan:925999663079915520> "..scanseed(seedid).." Total dropped seed\n<:100gems:988942738466684978> Total Gems : "..findItem(112))
+                reconnects(seeddropworld:lower(),seeddropworldid:lower(),x,x)
+              end
+            end
+            if tile.x - 0 <= 99 - tile.x then
+              if findItem(seedid) > 20 then
+                ::back31::
+                sleep(1000)
+                findPath(tile.x+2,tile.y - math.floor(scanseed(seedid)/4000))
+                sleep(1000)
+                worlddekipacktotal = math.floor(scanseed(seedid)/200)
+                worlddekifazlalik =  (scanseed(seedid)/200) - worlddekipacktotal 
+                if findItem(seedid) > (200-(worlddekifazlalik *200)) then
+                  dropItem( seedid,  200-(worlddekifazlalik *200) )
+                  goto back31
+                end
+                if findItem(seedid) <= (200-(worlddekifazlalik *200)) then
+                  dropItem(seedid,findItem(seedid))
+                end
+                powershell("<:growscan:925999663079915520> "..scanseed(seedid).." Total dropped seed\n<:100gems:988942738466684978> Total Gems : "..findItem(112))
+                reconnects(seeddropworld:lower(),seeddropworldid:lower(),x,x)
+              end
+            end
+          end
+        end
+      end
+      worldegirici(worlds[i]:lower())
+    end
+    local function toplayici()
+      for _, tile in pairs(getTiles()) do
+        if tile.fg == seedid and findItem(seedid-1) < 185 then
+          if getTile(tile.x, tile.y).ready then
+            findPath(tile.x, tile.y,40)
+            while getTile(tile.x, tile.y).ready do
+              punch(0,0)
+              sleep(delayharvest)
+              reconnects(worlds[i],x,tile.x ,tile.y)
+              while girischeck() do
+                girischeck()
+              end
+            end
+          end
+        end
+      end
+    end
+    local function yapimsss()
+      worldegirici(worlds[i]:lower())
+      kayitliyil =(os.date"%Y")
+      kayitligun =(os.date"%d")
+      kayitliay =(os.date"%m")
+      kayitlisaat =(os.date"%H")
+      kayitlidakika=(os.date"%M")
+      kayitlisaniye=(os.date"%S")
+      anadakika = foregraund(seedid)*0.109
+      dakikayabolme= anadakika / 60
+      saat = math.floor(dakikayabolme)
+      dakika= (dakikayabolme - saat)*60
+      tahminibitisdakika = saat
+      tahminibitissaat =  math.floor(dakika+4)
+      powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Began to Harvest the World \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world.." \n<:100gems:988942738466684978> | Gems Amount : "..findItem(112).." \n<:posil:989484591029026867> | Fossil : "..fossil(3918).." \n<:pohon:988997124983234670> | Tree Ready To Harvest : "..tre().." \n<:esti:987146037460365403> | Estimated End Time : "..tahminibitisdakika..":"..tahminibitissaat.." Hours")
+      while foregraund(seedid) > 0 do
+        while toplayici() do
+          toplayici()
+        end
+        sleep(200)
+collectSet(true,3)
+        local pozisyonx = math.floor(getBot().x /32)
+        local pozisyony = math.floor(getBot().y /32)
+        sleep(200)
+        if math.floor(getBot().x /32) == 0 then
+          move(2,0)
+          while findItem(seedid-1) > 0 do
+            breakzz(seedid-1,pozisyonx+2, pozisyony)
+          end
+          while getTile(math.floor(getBot().x /32)-2,math.floor(getBot().y /32)).fg > 0 or getTile(math.floor(getBot().x /32)-1,math.floor(getBot().y /32)).fg > 0 or getTile(math.floor(getBot().x /32)-2,math.floor(getBot().y /32)).bg > 0 or getTile(math.floor(getBot() .x /32)-1,math.floor(getBot().y /32)).bg > 0 do
+            punch(-2,0)
+            sleep(delaybreak)
+            punch(-1,0)
+            sleep(delaybreak)
+          end
+          collect(3)
+        end
+        while findItem(seedid-1) > 0 do
+          breakzz(seedid-1,pozisyonx, pozisyony)
+        end
+        while getTile(math.floor(getBot().x /32)-2,math.floor(getBot().y /32)).fg > 0 or getTile(math.floor(getBot().x /32)-1,math.floor(getBot().y /32)).fg > 0 or getTile(math.floor(getBot().x /32)-2,math.floor(getBot().y /32)).bg > 0 or getTile(math.floor(getBot().x /32)-1,math.floor(getBot().y /32)).bg > 0 do
+          punch(-2,0)
+          sleep(delaybreak)
+          punch(-1,0)
+          sleep(delaybreak)
+        end
+        collect(3)
+        sisa()
+        while ekici() do
+          ekici()
+        end
+collectSet(false,3)
+        if dropitems:lower() == "true" then
+          if itemname:lower() ~= "gems_pack" then
+            if findItem(112) >= packgems then
+              dropbulucu("packetss")
+            end
+          end
+        end
+        if findItem(seedid) > 80 then
+          sleep(2500)
+          dropbulucu("seeddrop")
+          sleep(2500)
+        end
+        if dropitems:lower() == "false" then
+          if foregraund(seedid) < 1 then
+            if itemname:lower() ~= "gems_pack" then
+              if findItem(112) >= packgems then
+                dropbulucu("packetss")
+              end
+            end
+          end
+        end
+      end
+    end
+    yapimsss()
+    sleep(2000)
+    kayitliyil1 =(os.date"%Y")
+    kayitligun1 =(os.date"%d")
+    kayitliay1 =(os.date"%m")
+    kayitlisaat1 =(os.date"%H")
+    kayitlidakika1=(os.date"%M")
+    kayitlisaniye1=(os.date"%S")
+    ilkzaman = os.time {year = kayitliyil , month = kayitliay , day = kayitligun , hour = kayitlisaat ,min =kayitlidakika , sec = kayitlisaniye}
+    sonzaman = os.time {year = kayitliyil1 , month = kayitliay1 , day = kayitligun1 , hour = kayitlisaat1 ,min =kayitlidakika1 , sec = kayitlisaniye1}
+    kalanzamansaniye = sonzaman-ilkzaman
+    adimadimtarih = (kalanzamansaniye/60)/60
+    sonsaaat= math.floor(adimadimtarih)
+    sondakika = math.floor((adimadimtarih-sonsaaat)*60)
+    powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Finished the World \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world.."  \n<:jam:987145988470898758> | Time Passed : "..sonsaaat..":"..sondakika.." Hours")
+  end
 end
-sleep(5000)
-powershell(
-	"<a:tancep:992537261046501416> **SCRIPT INFORMATION** \n <:broadcast:993135658069659699> | Information : Bot Succes Added \n <a:mine:1007065522820616373> | Name : "
-		.. (getBot()).name
-		.. " \n <a:online:1007062631787544666> | Status : "
-		.. (getBot()).status
-		.. " \n <a:globe:1007060932981178442> | World : "
-		.. (getBot()).world
-		.. " \n <:gems:1006700641432895529> | Gems : "
-		.. findItem(112)
-		.. " \n"
-)
-if (getBot()).world ~= worldStart then
-	sendPacket(3, "action|join_request/nname|" .. worldStart)
-	sleep(3000)
-end
-if (getBot()).world == worldStart then
-	say("`2Finding Owner....")
-	sleep(4000)
+function botstarts()
+  powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Script Start \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+  sleep(10000)
+  if getBot().state ~= 5 then
+    powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Disconnected \n<:offbutton:873152764279144458> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+    while getBot().state ~= 5 do
+      sleep(10000)
+    end
+    powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : Bot Reconnected \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+    sleep(2000)
+  end
+  if worldwhile == "true" then
+    while true do
+      main(#worlds)
+      sleep(2000)
+      powershell("Bot returns to world 1")
+    end
+  end
+  if worldwhile == "false" then
+    main(#worlds)
+    sleep(2000)
+    removeBot(botname:lower())
+    sleep(5000)
+    powershell("<:bot:994105499865841755> | Bot: "..getBot().name.." \n<:megagt:974487352233824308> | Information : The World Are Over, The Bot Has Removed  \n<a:online2:972348740545421373> | Status : "..getBot().state.." \n<:world:991268717667299328> | World : "..getBot().world)
+      sleep(10000)
+  end
 end
 
-startiny()
-
-
+botstarts()
